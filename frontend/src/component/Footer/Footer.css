@@ -1,0 +1,79 @@
+.footer-ctn {
+    display: flex;
+    background-color: chocolate;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+}
+
+.footer-ctn .left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.footer-ctn .left .desc {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-ctn .left .icon-ctn {
+    display: flex;
+}
+
+.footer-ctn .left .icon-ctn .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
+    margin: 20px;
+}
+
+.footer-ctn .center {
+    flex: 1;
+    padding: 20px;
+}
+
+.footer-ctn .center h2 {
+    margin-bottom: 20px;
+}
+
+.footer-ctn .center ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer-ctn .center ul li {
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.footer-ctn .center ul li a {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.footer-ctn .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 20px;
+}
+
+.footer-ctn .right h2 {
+    margin-bottom: 20px;
+}
+
+.footer-ctn .right p {
+    margin-bottom: 10px;
+}

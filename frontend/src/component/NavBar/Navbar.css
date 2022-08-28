@@ -1,0 +1,57 @@
+.navbar-ctn {
+    height: 60px;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    justify-content: space-between;
+}
+
+.left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.language {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.search-ctn {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+    border: 0.5px solid lightgray;
+}
+
+.search-ctn input {
+    border: none;
+}
+
+.center {
+    flex: 1;
+    text-align: center;
+}
+
+.logo {
+    font-weight: bold;
+}
+
+.right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.menu-items {
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 25px;
+}
+
+
+

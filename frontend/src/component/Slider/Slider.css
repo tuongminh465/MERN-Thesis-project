@@ -1,0 +1,76 @@
+.slider-ctn {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.arrow {
+    position: absolute;
+    top: 15%;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition-duration: 0.3s;
+    z-index: 2;
+}
+
+.arrow:hover {
+    opacity: 1;
+}
+
+.slider-ctn .wrapper {
+    display: flex;
+    height: 100%;
+    padding-left: 0;
+}
+
+.slider-ctn .wrapper .slide {
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 80px;
+}
+
+.slider-ctn .wrapper .img-ctn {
+    height: 80%;
+    flex: 1;
+}
+
+.slider-ctn .wrapper .img-ctn img {
+    height: 100%;
+    width: 100%;
+}
+
+.slider-ctn .wrapper .info-ctn {
+    flex: 1;
+    padding: 80px;
+}
+
+.slider-ctn .wrapper .info-ctn .title {
+    font-size: 70px;
+}
+
+.slider-ctn .wrapper .info-ctn .desc {
+    margin: 50px 0;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.slider-ctn .wrapper .info-ctn button {
+    padding: 10px;
+    font-size: 20px;
+    background-color: transparent;
+    cursor: pointer;
+}

@@ -1,0 +1,79 @@
+.pl-ctn {
+    margin: 20px;
+    text-align: center;
+}
+
+.pl-ctn .filter-ctn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pl-ctn .filter-ctn .filter {
+    margin: 20px;
+}
+
+.pl-ctn .filter-ctn .filter span {
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: 20px;
+}
+
+.pl-ctn .filter-ctn .filter select {
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.pl-ctn .products-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    height: max-content;
+    min-height: 300px;
+    padding: 10px;
+}
+
+.pl-ctn .products-list .product-ctn {
+    flex: 0 0 22%;
+    display: flex;   
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 450px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: royalblue;
+    transition-duration: 0.3s;
+}
+
+.pl-ctn .products-list .product-ctn:hover {
+    background-color: darkblue;
+}
+
+.pl-ctn .products-list .product-ctn img {
+    width: 85%;
+    height: 80%;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.pl-ctn .products-list .product-ctn .info-ctn {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: white;
+}
+
+.pl-ctn .products-list .product-ctn .info-ctn h4 {
+    margin-bottom: 10px;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.pl-ctn .products-list .product-ctn .info-ctn p {
+    font-size: 18px;
+    font-weight: 600;
+}

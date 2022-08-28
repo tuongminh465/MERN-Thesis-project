@@ -1,0 +1,12 @@
+.cat-display-ctn {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.cat-ctn {
+    margin-top: 10px;
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    background-color: steelblue;
+}
