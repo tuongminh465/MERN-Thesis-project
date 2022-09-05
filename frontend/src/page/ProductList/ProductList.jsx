@@ -22,6 +22,20 @@ function ProductList() {
     }
   }
 
+  const handleChangeSort = event => {
+    if (event.target.value === 'alpha') {
+        // const productsArray = allProducts.sort((a, b) => a.name.localeCompare(b.name))
+        // console.log(products);
+        // setProducts(productsArray);
+        console.log(products)
+        setProducts((products) => [...products.sort((a, b) => a.name.localeCompare(b.name))]);
+    }
+    else {
+        setProducts(allProducts);
+    }
+    console.log(event.target.value)
+  }
+
   return (
     <div className="pl-ctn">
         <Navbar />
@@ -44,8 +58,10 @@ function ProductList() {
             </div>
             <div className="filter">
                 <span>Sort products:</span>
-                <select name="" id="">
-                    <option value="">Alphabetical</option>
+                <select name="" id="" onChange={handleChangeSort}>
+                    <option selcted disabled value="">Sort options</option>
+                    <option value="">None</option>
+                    <option value="alpha">Alphabetical</option>
                     <option value="year-asc">Year (asc)</option>
                     <option value="year-desc">Year (desc)</option>
                     <option value="price-asc">Price (asc)</option>
