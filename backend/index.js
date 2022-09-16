@@ -1,16 +1,25 @@
-const express = require('express')
-const app = express();
-const mongoose = require("mongoose")
-const dotenv  = require('dotenv').config()
-const PORT = 3000;
+const express = require('express');
+const app = express();;
+const mongoose = require("mongoose");
+const dotenv = require('dotenv').config();
 
-const userRoute = require('./routes/user')
-const authRoute = require('./routes/auth')
+const userRoute = require('./routes/user');
+const authRoute = require('./routes/auth');
+const productRoute = require('./routes/product');
+const cartRoute = require('./routes/cart');
+const orderRoute = require('./routes/order');
 
 app.use(express.json());
 
-app.use("/api/users", userRoute)
-app.use("/api/auth", authRoute)
+app.use("/api/users", userRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/products", productRoute);
+app.use("/api/cart", cartRoute);
+app.use("/api/orders", orderRoute);
+
+app.get('/', (req, res) => {
+    res.send("Hello guest!")
+})
 
 mongoose.connect(process.env.DB_URL)
     .then(() => console.log("DB connection successful"))
@@ -19,6 +28,6 @@ mongoose.connect(process.env.DB_URL)
     })
 
 
-app.listen(PORT, () => {
-    console.log(`Server is running`)
+app.listen(process.env.APP_PORT, () => {
+    console.log(`Server is running`);
 })
