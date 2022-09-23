@@ -47,26 +47,6 @@ function Cart() {
                         
                     </div>
                     <hr style={{width: '90%', color: 'gray'}}/>
-                    <div className="product-ctn">
-                        <div className="product">
-                            <img src="/assets/products/product1.jpg" alt="" />
-                            <div className="product-details">
-                                <p><b>Name:</b> MSI RTX 3080</p>
-                                <p><b>Manufacturer:</b> MSI</p>
-                                <div className='amount-ctn'><b>Amount:</b> 
-                                    <RemoveIcon className='icon'/>
-                                    <span className="amount">1</span>
-                                    <AddIcon className='icon'/>
-                                </div>
-                                <p><b>Insurance:</b> 2 years</p>
-                            </div>
-                        </div>
-                        <div className="price-details">
-                            <p><b>Price:</b> $1799.99</p>
-                            <p><b>Total price:</b> $1799.99</p>
-                        </div>
-                        
-                    </div>
                 </div>
                 <div className="summary-ctn">
                     <h2>Order summary</h2>

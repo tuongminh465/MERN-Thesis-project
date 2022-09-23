@@ -42,10 +42,9 @@ function ProductList() {
         <Announcement />
         <div className="filter-ctn">
             <div className="filter">
-                <span>Filter products:</span>
+                <span>Filter products by manufacturer:</span>
                 <select name="" id="" onChange={handleChangeBrand}>
-                    <option selcted disabled value="">By brand</option>
-                    <option value="">All</option>
+                    <option value="" selected>All</option>
                     <option value="AMD">AMD</option>
                     <option value="ASUS">ASUS</option>
                     <option value="ASROCK">ASROCK</option>
@@ -53,7 +52,17 @@ function ProductList() {
                     <option value="HyperX">HyperX</option>
                     <option value="GIGABYTE">GIGABYTE</option>
                     <option value="Intel">Intel</option>
-                    <option value="MSI">MSI</option>
+                    <option value="MSI">MSI</option>                    
+                </select>
+            </div>
+            <div className="filter">
+                <span>Filter products by type:</span>
+                <select name="" id="" >
+                    <option value="" selected>All</option>
+                    <option value="CPU">CPU</option>
+                    <option value="GPU">GPU</option>
+                    <option value="RAM">RAM</option>
+                    <option value="Mainboard">Mainboard</option>                  
                 </select>
             </div>
             <div className="filter">

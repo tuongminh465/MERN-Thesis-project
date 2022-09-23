@@ -8,8 +8,10 @@ const productSchema = new mongoose.Schema(
         type: {type: String, require: true},
         price: {type: Number, require: true},
         releaseYear: {type: Number, default: false},
+        inStock: {type: Boolean, default: true}
     },
     { timestamps: true }
 )
 
 module.exports = mongoose.model("Product", productSchema);
+
