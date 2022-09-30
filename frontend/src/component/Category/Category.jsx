@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { categories } from '../data'
-import CatgoryItem from '../CategoryItem/CatgoryItem'
+import CatgoryItem from '../CategoryItem/CategoryItem'
 
 import './Category.css'
 

@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
+  // Link,
   Navigate
 } from "react-router-dom";
 
@@ -24,7 +24,8 @@ const App = () => {
 
         <Route exact path="/" element={<Home />} />
         <Route path="/products/" element={<ProductList />} />
-        <Route path="/products/:id" element={<SingleProduct />} />
+        <Route path="/products/:type" element={<ProductList />} />
+        <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={user ? <Navigate to="/"/> : <Login />} />
         <Route path="/register" element={<Register />} />

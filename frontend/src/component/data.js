@@ -26,17 +26,20 @@ export const categories = [
     {
         id: 1,
         img: '/assets/products/product2.jpg',
-        title: 'RAM'
+        title: 'RAM',
+        type: 'RAM',
     },
         {
         id: 2,
         img: '/assets/products/product4.jpg',
-        title: 'CPU'
+        title: 'CPU',
+        type: 'CPU',
     },
         {
         id: 3,
         img: '/assets/products/product3.jpg',
-        title: 'Motherboard'
+        title: 'Mainboard',
+        type: 'Mainboard',
     },
 ]
 
@@ -83,7 +86,7 @@ export const allProducts = [
         name: 'Mainboard GIGABYTE B450 AORUS PRO Socket AM4 ATX',
         img: '/assets/products/product3.jpg',
         manufacturer: 'GIGABYTE',
-        type: 'Motherboard',
+        type: 'Mainboard',
         price: '$129.99',
         year: '2018',
     },
@@ -128,7 +131,7 @@ export const allProducts = [
         name: 'ASRock Z690 Taichi',
         img: '/assets/products/product8.jpg',
         manufacturer: 'ASROCK',
-        type: 'RAM',
+        type: 'Mainboard',
         price: '$159.99',
         year: '2014',
     },
