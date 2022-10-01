@@ -1,7 +1,7 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 import './Navbar.css'
-
 import { Badge } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -18,17 +18,27 @@ function Navbar() {
           </div>
         </div>
         <div className='center'>
-          <h1 className="logo">FSTORE.</h1>
+          <Link style={{ textDecoration: 'none', color: 'inherit'}} to='/'>
+            <h1 className="logo">FSTORE.</h1>
+          </Link>
         </div>
         <div className='right'>
-          <div className="menu-items">PRODUCTS</div>
-          <div className="menu-items">REGISTER</div>
-          <div className="menu-items">LOG IN</div>
-          <div className="menu-items">
-            <Badge badgeContent={4} color='primary'>
-              <ShoppingCartIcon />
-            </Badge>
-          </div>
+          <Link style={{ textDecoration: 'none', color: 'inherit'}} to='/products'>
+            <div className="menu-items">PRODUCTS</div>
+          </Link>
+          <Link style={{ textDecoration: 'none', color: 'inherit'}} to='/register'>
+            <div className="menu-items">REGISTER</div>
+          </Link>
+          <Link style={{ textDecoration: 'none', color: 'inherit'}} to='/login'>
+            <div className="menu-items">LOG IN</div>
+          </Link>
+          <Link style={{ textDecoration: 'none', color: 'inherit'}} to='/cart'>
+            <div className="menu-items">
+              <Badge badgeContent={4} color='primary'>
+                <ShoppingCartIcon />
+              </Badge>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

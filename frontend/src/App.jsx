@@ -16,12 +16,11 @@ import SingleProduct from "./page/SingleProduct/SingleProduct";
 
 
 const App = () => {
-  const user = true;
+  const user = false;
 
   return (
     <Router>
       <Routes>
-
         <Route exact path="/" element={<Home />} />
         <Route path="/products/" element={<ProductList />} />
         <Route path="/products/:type" element={<ProductList />} />

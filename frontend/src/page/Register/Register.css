@@ -8,6 +8,8 @@
 }
 
 .register-ctn .wrapper {
+    display: flex;
+    flex-direction: column;
     width: 20%;
     padding: 20px;
     background-color: white;
@@ -23,8 +25,15 @@
     position: absolute;
 }
 
-.register-ctn .router-ctn button {
-    width: 120px;
+.register-ctn .home-ctn {
+    top: 2%;
+    left: 2%;
+    position: absolute;
+}
+
+.register-ctn .router-ctn button,
+.register-ctn .home-ctn button {
+    width: max-content;
     height: 50px;
     border: 1px solid black;
     border-radius: 10px;

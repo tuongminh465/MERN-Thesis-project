@@ -8,6 +8,8 @@
 }
 
 .login-ctn .wrapper {
+  display: flex;
+  flex-direction: column;
   width: 20%;
   padding: 20px;
   background-color: white;
@@ -23,8 +25,15 @@
   position: absolute;
 }
 
-.login-ctn .router-ctn button {
-  width: 120px;
+.login-ctn .home-ctn {
+  top: 2%;
+  left: 2%;
+  position: absolute;
+}
+
+.login-ctn .router-ctn button,
+.login-ctn .home-ctn button {
+  width: max-content;
   height: 50px;
   border: 1px solid black;
   border-radius: 10px;
@@ -55,6 +64,7 @@
 
 .login-ctn .wrapper form {
   height: 4%;
+  width: 90%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;

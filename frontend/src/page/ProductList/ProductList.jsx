@@ -8,7 +8,6 @@ import {
 import Navbar from '../../component/NavBar/Navbar'
 import Announcement from '../../component/Announcement/Announcement'
 import Footer from '../../component/Footer/Footer';
-// import { allProducts } from '../../component/data'
 
 import './ProductList.css'
 
@@ -24,6 +23,39 @@ function ProductList() {
   const [sort, setSort] = useState("")
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([]);
+
+  const filterHandler = () => {
+    if(filter){
+        setFilteredProducts(products.filter(product => product.manufacturer === filter))
+    } else {
+        setFilteredProducts(products)
+    }
+  }
+
+  const sortHandler = () => {
+        switch (sort){
+            case 'alpha':
+                setFilteredProducts((product) => [...product.sort((a, b) => a.name.localeCompare(b.name))])
+                break;
+            case "year-asc":
+                setFilteredProducts((product) => [...product.sort((a, b) => a.releaseYear - b.releaseYear)])
+                break;
+            case "year-desc":
+                setFilteredProducts((product) => [...product.sort((a, b) => b.releaseYear - a.releaseYear)])
+                break;
+            case "price-asc":
+                setFilteredProducts((product) => [...product.sort((a, b) => a.price - b.price)])
+                break;
+            case "price-desc":
+                setFilteredProducts((product) => [...product.sort((a, b) => b.price - a.price)])
+                break;
+            case "none":
+                setFilteredProducts((product) => [...product.sort((a, b) => a._id.localeCompare(b._id))])
+                break;
+            default:
+                setFilteredProducts((product) => [...product.sort((a, b) => a._id.localeCompare(b._id))])
+        }
+  }
 
   //Get products on render
   useEffect(() => {
@@ -51,27 +83,8 @@ function ProductList() {
   }, [type])
 
   useEffect(() => {
-    // type && setFilteredProducts(
-    //     products.filter((product) =>)
-    // )
-    console.log(filter)
-    console.log(sort)
-
-    if(filter){
-        setFilteredProducts(products.filter(product => product.manufacturer === filter))
-    } else {
-        setFilteredProducts(products)
-    }
-
-    if(sort) {
-        switch(sort){
-            case 'alpha':
-                setFilteredProducts((product) => [...product.sort((a, b) => a.name.localeCompare(b.name))])
-                break;
-            default:
-                setFilteredProducts(products);
-        }
-    }
+    filterHandler();
+    sortHandler();
   }, [sort, filter, type])
 
   const handleChangeType = event => {
@@ -86,7 +99,7 @@ function ProductList() {
             <div className="filter">
                 <span>Filter products by manufacturer:</span>
                 <select name="manu" id="" onChange={(e) => setFilter(e.target.value)}>
-                    <option value="" selected>All</option>
+                    <option value="">All</option>
                     <option value="AMD">AMD</option>
                     <option value="ASUS">ASUS</option>
                     <option value="ASRock">ASRock</option>
@@ -100,18 +113,17 @@ function ProductList() {
             <div className="filter">
                 <span>Filter products by type:</span>
                 <select name="" id="" onChange={handleChangeType}>
-                    <option value="" selected>All</option>
-                    <option value="CPU">CPU</option>
-                    <option value="GPU">GPU</option>
-                    <option value="RAM">RAM</option>
-                    <option value="Mainboard">Mainboard</option>                  
+                    { type === undefined || type === '' ? <option value="" selected>All</option> : <option value="">All</option> }
+                    { type === "CPU" ? <option value="CPU" selected>CPU</option> : <option value="CPU" >CPU</option> }
+                    { type === "GPU" ? <option value="GPU" selected>GPU</option> : <option value="GPU">GPU</option> }
+                    { type === "RAM" ? <option value="RAM" selected>RAM</option> : <option value="RAM">RAM</option> }
+                    { type === "Mainboard" ? <option value="Mainboard" selected>Mainboard</option> : <option value="Mainboard">Mainboard</option> }               
                 </select>
             </div>
             <div className="filter">
                 <span>Sort products:</span>
-                <select name="sort" id="" onChange={(e) => setSort(e.target.value)}>
-                    <option selcted disabled value="">Sort options</option>
-                    <option value="">None</option>
+                <select name="none" id="" onChange={(e) => setSort(e.target.value)}>
+                    <option value="none">None</option>
                     <option value="alpha">Alphabetical</option>
                     <option value="year-asc">Year (asc)</option>
                     <option value="year-desc">Year (desc)</option>
