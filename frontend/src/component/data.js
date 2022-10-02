@@ -45,19 +45,19 @@ export const categories = [
 
 export const popularProducts = [
     {
-        id: 1,
+        _id: "632a70cca0bc469992bc4068",
         img: '/assets/products/product1.jpg',
     },
     {
-        id: 2,
+        _id: '632a7126a0bc469992bc406c',
         img: '/assets/products/product3.jpg',
     },
     {
-        id: 3,
+        _id: '632a718ca0bc469992bc4070',
         img: '/assets/products/product5.jpg',
     },
     {
-        id: 4,
+        _id: '632a72a5a0bc469992bc4074',
         img: '/assets/products/product7.jpg',
     },
 ]

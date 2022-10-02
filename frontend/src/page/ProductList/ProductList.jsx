@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import {
     useLocation,
-    useNavigate
+    useNavigate,
+    Link
 } from 'react-router-dom'
 
 import Navbar from '../../component/NavBar/Navbar'
@@ -74,6 +75,8 @@ function ProductList() {
             setProducts(res.data)
             setFilteredProducts(res.data);
 
+            console.log(res.data)
+
         } catch (error) {
             console.log(error);
         }
@@ -136,13 +139,15 @@ function ProductList() {
         <div className="products-list">
             {
                 filteredProducts.map(product => (
-                    <div className="product-ctn" key={product.id}>
-                        <img src={product.img} alt="" />
-                        <div className="info-ctn">
-                            <h4 className='product-name'>{product.name}</h4>
-                            <p className="product-price">${product.price}</p>
-                        </div>
+                <Link style={{textDecoration: 'none'}} to={`/product/${product._id}`}>
+                    <div className="product-ctn" key={product._id}>
+                            <img src={product.img} alt="" />
+                            <div className="info-ctn">
+                                <h4 className='product-name'>{product.name}</h4>
+                                <p className="product-price">${product.price}</p>
+                            </div>
                     </div>
+                </Link>
                 ))
             }           
         </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom"
 
 import './SingleProduct.css'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -14,7 +15,9 @@ function SingleProduct({item}) {
           <AddShoppingCartIcon />
         </div>
         <div className="icon-ctn">
-          <SearchIcon />
+          <Link to={`/product/${item._id}`}>
+            <SearchIcon />
+          </Link>
         </div>
         <div className="icon-ctn">
           <FavoriteBorderIcon />

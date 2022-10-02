@@ -1,4 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import {
+    useLocation,
+} from 'react-router-dom'
+import { publicRequest } from '../../requestMethods'
 
 import './SingleProduct.css'
 import Navbar from '../../component/NavBar/Navbar'
@@ -11,7 +15,25 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 function SingleProduct() {
 
+  const location = useLocation();
+  const id = location.pathname.split('/')[2];
+
+  const [product, setProduct] = useState({})
   const [amount, setAmount] = useState(1)  
+
+  useEffect(() => {
+    const getProduct = async () => {
+        try {
+            const res = await publicRequest.get(`/products/find/${id}`)
+            console.log(res)
+            setProduct(res.data)
+        } catch(err){
+            console.log(err)
+        }
+    }
+
+    getProduct()
+  }, [id])
   
   const handleChangeAmount = (input) => {
     let newAmount = amount
@@ -32,17 +54,17 @@ function SingleProduct() {
     <div>
         <Navbar />
         <Annoucement />
-        <div className="sp-ctn">
+        <div className="spd-ctn">
             <div className="wrapper">
                 <div className="img-ctn">
-                    <img src="/assets/products/product1.jpg" alt="" />
+                    <img src={product.img} alt="" />
                 </div>
                 <div className="info-ctn">
-                    <h1>MSI Geforce RTX™ 3080 GAMING Z TRIO 10GB GDDR6X (LHR)</h1>
+                    <h1>{product.name}</h1>
                     <p className="type">GPU</p>
                     <p className="desc"><b>Description:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate nam sit vero libero atque laudantium, totam hic inventore maiores at? Consectetur dolorem soluta placeat commodi inventore voluptatibus perspiciatis. Dicta, aut!</p>
-                    <p className="year"><b>Release year:</b> 2021</p>
-                    <p className="price">$1799.99</p>
+                    <p className="year"><b>Release year:</b> {product.releaseYear}</p>
+                    <p className="price">${product.price}</p>
                     <p className="stock"><b>Stock:</b> 10</p>
                     <div className="input-ctn">
                         <div className="amount-ctn">
