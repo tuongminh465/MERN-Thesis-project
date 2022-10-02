@@ -12,8 +12,12 @@ import Footer from '../../component/Footer/Footer'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { addProduct } from '../../redux/cartSlice'
+import { useDispatch } from 'react-redux'
 
 function SingleProduct() {
+
+  const dispatch = useDispatch()
 
   const location = useLocation();
   const id = location.pathname.split('/')[2];
@@ -25,7 +29,7 @@ function SingleProduct() {
     const getProduct = async () => {
         try {
             const res = await publicRequest.get(`/products/find/${id}`)
-            console.log(res)
+
             setProduct(res.data)
         } catch(err){
             console.log(err)
@@ -50,6 +54,10 @@ function SingleProduct() {
     }
   }
 
+  const addToCart = () => {
+    dispatch(addProduct({ ...product, amount}))
+  }
+
   return (
     <div>
         <Navbar />
@@ -72,7 +80,7 @@ function SingleProduct() {
                             <span className="amount">{amount}</span>
                             <AddIcon className='icon' onClick={() => handleChangeAmount('add')}/>
                         </div>
-                        <button>
+                        <button onClick={() => addToCart()}>
                             <AddShoppingCartIcon style={{marginRight: 10}} />
                             Add to cart
                         </button>
