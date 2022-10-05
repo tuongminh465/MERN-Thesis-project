@@ -1,0 +1,17 @@
+.scp-btn {
+    display: flex;
+    align-items: center;
+    background-color: limegreen;
+    color: white;
+    font-size: 20;
+    font-weight: bold;
+    width: max-content;
+    border: hidden;
+    border-radius: 10px;
+    transition-duration: 0.3s;
+}
+
+.scp-btn:hover {
+    border: 1px solid black;
+    background-color: green;
+}

@@ -1,14 +1,62 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import StripeCheckout from "react-stripe-checkout"
+import { userRequest } from '../../requestMethods'
 
 import Announcement from '../../component/Announcement/Announcement'
 import Footer from '../../component/Footer/Footer'
 import Navbar from '../../component/NavBar/Navbar'
 import './Cart.css'
 
-import RemoveIcon from '@mui/icons-material/Remove';
-import AddIcon from '@mui/icons-material/Add';
+import { useNavigate } from 'react-router-dom'
+import { removeProduct } from '../../redux/cartSlice'
 
 function Cart() {
+
+  const KEY = "pk_test_51Lj02zFJySGvyCoSjWVG5uSB96KXgN8nErn1GdKHCjqWDpAzItECyLEPtHREprBI6WYT7RgBudS7zlsZXQUiV6Ym00q33dhdQ8";
+
+  const cartState = useSelector(state => state.cart)  
+
+  const [stripeToken, SetStripeToken] = useState(null)
+
+  const navigate = useNavigate()
+
+  const dispatch = useDispatch();
+  
+  const onToken = (token) => {
+    SetStripeToken(token)
+  }
+
+  const handleRemoveProduct = (_id, amount, price) => {
+    const removedProduct = {
+        _id,
+        amount, 
+        price,
+    }
+    dispatch(removeProduct(removedProduct));
+
+    console.log(cartState.products)
+  }
+
+  useEffect(() => {
+    const makeReq = async () => {
+        try{
+            const res = await userRequest.post("/checkout/payment", {
+                tokenId: stripeToken.id,
+                amount: cartState.total*100,
+            })
+            navigate("/success", {state: { 
+                stripeData: res.data,
+                products: cartState, 
+            }})
+        } catch(error) {
+            console.log(error)
+        }
+    }
+
+    stripeToken && cartState.total > 0 && makeReq();
+  }, [stripeToken, cartState.products, navigate, cartState])
+
   return (
     <div>
         <Announcement />
@@ -19,34 +67,47 @@ function Cart() {
             <div className="top">
                 <button>Continue shopping</button>
                 <div className="text-ctn">
-                    <span>Shopping bag(2)</span>
+                    <span>Shopping bag({cartState.quantity})</span>
                     <span>Your wishlist(0)</span>
                 </div>
-                <button>Checkout now!</button>
+                <StripeCheckout
+                    name="FStore"
+                    image="assets/img/logo.png"
+                    billingAddress
+                    shippingAddress
+                    description={`Your total is $${cartState.total}`}
+                    token={onToken}
+                    stripeKey={KEY}
+                >
+                    <button>Checkout now!</button>
+                </StripeCheckout>
             </div>
             <div className="bottom">
                 <div className="info-ctn">
-                    <div className="product-ctn">
-                        <div className="product">
-                            <img src="/assets/products/product1.jpg" alt="" />
-                            <div className="product-details">
-                                <p><b>Name:</b> MSI RTX 3080</p>
-                                <p><b>Manufacturer:</b> MSI</p>
-                                <div className='amount-ctn'><b>Amount:</b> 
-                                    <RemoveIcon className='icon'/>
-                                    <span className="amount">1</span>
-                                    <AddIcon className='icon'/>
+                    {cartState.products.map(product => (
+                        <>
+                            <div className="product-ctn">
+                                <div className="product">
+                                    <img src={product.img} alt="" />
+                                    <div className="product-details">
+                                        <p><b>Name:</b> {product.name}</p>
+                                        <p><b>Manufacturer:</b> {product.manufacturer}</p>
+                                        <div className='amount-ctn'><b>Amount:</b> 
+                                            <span className="amount">{product.amount}</span>
+                                        </div>
+                                        <p><b>Insurance:</b> 2 years</p>
                                 </div>
-                                <p><b>Insurance:</b> 2 years</p>
+                                </div>
+                                <div className="price-details">
+                                    <p><b>Price:</b> ${product.price}</p>
+                                    <p><b>Total price:</b> ${product.price*product.amount}</p>
+                                    <button onClick={() => handleRemoveProduct(product._id, product.amount, product.price)}>Remove from cart</button>
+                                </div>
                             </div>
-                        </div>
-                        <div className="price-details">
-                            <p><b>Price:</b> $1799.99</p>
-                            <p><b>Total price:</b> $1799.99</p>
-                        </div>
-                        
-                    </div>
-                    <hr style={{width: '90%', color: 'gray'}}/>
+                            <hr style={{width: '90%', color: 'gray'}}/>
+                        </>
+                    ))
+                }    
                 </div>
                 <div className="summary-ctn">
                     <h2>Order summary</h2>
@@ -55,7 +116,7 @@ function Cart() {
                             Subtotal:
                         </span>
                         <span className="item-price">
-                            $2599.98
+                            ${cartState.total}
                         </span>
                     </div>
                     <div className="item-ctn">
@@ -79,7 +140,7 @@ function Cart() {
                             <b>Total:</b> 
                         </span>
                         <span className="item-price">
-                            $2599.98$
+                            ${cartState.total}
                         </span>
                     </div>
                 </div>

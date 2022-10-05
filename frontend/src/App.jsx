@@ -13,6 +13,7 @@ import Register from "./page/Register/Register";
 import Home from "./page/Home/Home.jsx";
 import ProductList from "./page/ProductList/ProductList";
 import SingleProduct from "./page/SingleProduct/SingleProduct";
+import Success from "./page/Success/Success";
 
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={user ? <Navigate to="/"/> : <Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/success" element={<Success />} />
         <Route
           path="*"
           element={<Navigate to="/" replace />}
