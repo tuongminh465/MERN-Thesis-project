@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {
-    useLocation,
+    useLocation, useNavigate,
 } from 'react-router-dom'
 import { publicRequest } from '../../requestMethods'
 
@@ -12,6 +12,7 @@ import Footer from '../../component/Footer/Footer'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { addProduct } from '../../redux/cartSlice'
 import { useDispatch } from 'react-redux'
 
@@ -21,6 +22,8 @@ function SingleProduct() {
 
   const location = useLocation();
   const id = location.pathname.split('/')[2];
+
+  const navigate = useNavigate();
 
   const [product, setProduct] = useState({})
   const [amount, setAmount] = useState(1)  
@@ -63,6 +66,10 @@ function SingleProduct() {
         <Navbar />
         <Annoucement />
         <div className="spd-ctn">
+            <button className='back-btn' onClick={() => navigate("/products")}>
+                <ShoppingBagIcon style={{marginRight: 10}}/>
+                Back to products page
+            </button>
             <div className="wrapper">
                 <div className="img-ctn">
                     <img src={product.img} alt="" />

@@ -65,9 +65,9 @@ function Cart() {
         <div className="cart-ctn">
             <h1>Your cart</h1>
             <div className="top">
-                <button>Continue shopping</button>
+                <button onClick={() => navigate("/products")}>Continue shopping</button>
                 <div className="text-ctn">
-                    <span>Shopping bag({cartState.quantity})</span>
+                    <span>Shopping cart({cartState.quantity})</span>
                     <span>Your wishlist(0)</span>
                 </div>
                 <StripeCheckout
