@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import StripeCheckout from "react-stripe-checkout"
 import { userRequest } from '../../requestMethods'
+import { useNavigate } from 'react-router-dom'
+import { removeProduct } from '../../redux/cartSlice'
 
 import Announcement from '../../component/Announcement/Announcement'
 import Footer from '../../component/Footer/Footer'
 import Navbar from '../../component/NavBar/Navbar'
 import './Cart.css'
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
-import { useNavigate } from 'react-router-dom'
-import { removeProduct } from '../../redux/cartSlice'
+
 
 function Cart() {
 
@@ -65,7 +67,10 @@ function Cart() {
         <div className="cart-ctn">
             <h1>Your cart</h1>
             <div className="top">
-                <button onClick={() => navigate("/products")}>Continue shopping</button>
+                <button onClick={() => navigate("/products")}>
+                    <ShoppingBagIcon style={{marginRight: 10}} />
+                    Continue shopping
+                </button>
                 <div className="text-ctn">
                     <span>Shopping cart({cartState.quantity})</span>
                     <span>Your wishlist(0)</span>

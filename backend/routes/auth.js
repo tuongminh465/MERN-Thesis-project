@@ -34,34 +34,37 @@ router.get("/login", async (req, res) => {
 })
 
 router.post("/login", async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    !user && res.status(401).json("Incorrect username or password!");
 
-    try {
-        const user = await User.findOne({ username: req.body.username })
-        !user && res.status(401).json("Incorrect username or password!")
-        
-        const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_KEY);
+    const hashedPassword = CryptoJS.AES.decrypt(
+      user.password,
+      process.env.PASS_KEY
+    );
+    const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
-        const decryptedPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
-        decryptedPassword !== req.body.password && res.status(401).send("Incorrect username or password!")
+    OriginalPassword !== req.body.password &&
+      res.status(401).json("Incorrect username or password!");
 
-        const accessToken = jwt.sign(
-            {
-                id: user._id, 
-                isAdmin: user.isAdmin,
-            }, 
-            process.env.JWT_KEY,
-            {
-                expiresIn: "3d"
-            },
-        );
+    const accessToken = jwt.sign(
+      {
+        id: user._id,
+        isAdmin: user.isAdmin,
+      },
+      process.env.JWT_KEY,
+      {expiresIn:"3d"}
+    );
 
-        const { password, ...public } = user._doc;
+    const { password, ...others } = user._doc;
 
-        res.status(200).json({public, accessToken});
+    res.status(200).json({...others, accessToken});
 
-    } catch (err) {
-        res.status(500).json(err)
-    }
-})
+    return
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
