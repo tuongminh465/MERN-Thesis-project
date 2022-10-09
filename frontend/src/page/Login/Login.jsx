@@ -14,7 +14,7 @@ function Login() {
 
   const dispatch = useDispatch()
 
-  const [userName, setUserName] = useState("")
+  const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
 
@@ -22,7 +22,7 @@ function Login() {
     e.preventDefault()
 
     const user = {
-      userName,
+      username,
       password,
     }
 
@@ -57,7 +57,7 @@ function Login() {
             <form action="">
                 <label htmlFor="username">Username:</label>
                 <input type="text" name='username' placeholder='Enter your username...'
-                  onChange={(e) => setUserName(e.target.value)}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
                 <label htmlFor="username">Password:</label>
                 <input  name='password' placeholder='Enter your password...'
