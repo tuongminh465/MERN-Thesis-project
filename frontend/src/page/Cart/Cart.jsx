@@ -34,8 +34,6 @@ function Cart() {
         price,
     }
     dispatch(removeProduct(removedProduct));
-
-    console.log(cartState.products)
   }
 
   const handleRemoveAllProduct = () => {
@@ -116,7 +114,7 @@ function Cart() {
                     ))}    
                     <button 
                         className='rma-btn' 
-                        style={{ position: 'absolute', bottom: 0, left: '2.5%' }}
+                        style={{ position: 'relative', bottom: 0, left: '2.5%', marginTop: 20 }}
                         onClick={() => handleRemoveAllProduct()}
                     >
                         Remove all products
