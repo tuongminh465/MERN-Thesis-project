@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { useAsyncError, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import './Register.css'
 import HomeIcon from '@mui/icons-material/Home';
@@ -85,10 +85,11 @@ function Register() {
                   placeholder='Confirm your password...'
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
+                { error ? <p style={{color: 'red', fontSize: 16}}>{error}</p> : ""}
+                <button onClick={(e) => handleRegister(e)}>Join now!</button>
                 <p>
                   By creating an account, you accept our <a href="google.com">Terms of Service</a> and <a href="google.com">Privacy Policy</a>.
                 </p>
-                <button onClick={(e) => handleRegister(e)}>Join now!</button>
             </form>
         </div>
     </div>

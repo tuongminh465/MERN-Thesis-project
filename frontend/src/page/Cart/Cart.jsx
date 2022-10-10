@@ -3,15 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import StripeCheckout from "react-stripe-checkout"
 import { userRequest } from '../../requestMethods'
 import { useNavigate } from 'react-router-dom'
-import { removeProduct } from '../../redux/cartSlice'
+import { removeProduct, removeAllProduct } from '../../redux/cartSlice'
 
 import Announcement from '../../component/Announcement/Announcement'
 import Footer from '../../component/Footer/Footer'
 import Navbar from '../../component/NavBar/Navbar'
 import './Cart.css'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-
-
 
 function Cart() {
 
@@ -38,6 +36,10 @@ function Cart() {
     dispatch(removeProduct(removedProduct));
 
     console.log(cartState.products)
+  }
+
+  const handleRemoveAllProduct = () => {
+    dispatch(removeAllProduct());
   }
 
   useEffect(() => {
@@ -109,10 +111,16 @@ function Cart() {
                                     <button onClick={() => handleRemoveProduct(product._id, product.amount, product.price)}>Remove from cart</button>
                                 </div>
                             </div>
-                            <hr style={{width: '90%', color: 'gray'}}/>
+                                <hr style={{width: '90%', color: 'gray'}}/>
                         </>
-                    ))
-                }    
+                    ))}    
+                    <button 
+                        className='rma-btn' 
+                        style={{ position: 'absolute', bottom: 0, left: '2.5%' }}
+                        onClick={() => handleRemoveAllProduct()}
+                    >
+                        Remove all products
+                    </button>
                 </div>
                 <div className="summary-ctn">
                     <h2>Order summary</h2>
@@ -145,7 +153,7 @@ function Cart() {
                             <b>Total:</b> 
                         </span>
                         <span className="item-price">
-                            ${cartState.total}
+                            ${Math.round(cartState.total * 100) / 100}
                         </span>
                     </div>
                 </div>

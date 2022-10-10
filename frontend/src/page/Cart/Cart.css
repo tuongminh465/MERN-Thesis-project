@@ -44,6 +44,7 @@
 
 .cart-ctn .bottom .info-ctn {
     flex: 2;
+    position: relative;
 }
 
 .cart-ctn .bottom .info-ctn .product-ctn{
@@ -108,7 +109,8 @@
     margin-bottom: 20px;
 }
 
-.cart-ctn .bottom .info-ctn .product-ctn .price-details button {
+.cart-ctn .bottom .info-ctn .product-ctn .price-details button, 
+.cart-ctn .bottom .info-ctn .rma-btn {
     width: max-content;
     height: 32px;
     background-color: red;
