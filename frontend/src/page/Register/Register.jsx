@@ -1,13 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import { useNavigate } from "react-router-dom";
+import { useAsyncError, useNavigate } from "react-router-dom";
 
 import './Register.css'
 import HomeIcon from '@mui/icons-material/Home';
+import { publicRequest } from '../../requestMethods';
 
 function Register() {
 
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+  const [error, setError] = useState("")
+
   const navigate = useNavigate();
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setError("Password does not match!")
+      return;
+    }
+
+    const newUser = {
+      username,
+      email,
+      password,
+    }
+
+    try {
+      const res = await publicRequest.post("auth/register", newUser)
+      console.log(res)
+    } catch (err) {
+      console.log(err)
+    }
+
+    console.log("Register")
+  }
 
   return (
     <div className="register-ctn">
@@ -27,17 +58,37 @@ function Register() {
             <h1>Create an account</h1>
             <form action="">
                 <label htmlFor="username">Username:</label>
-                <input type="text" name='username' placeholder='Enter your username...'/>
+                <input 
+                  type="text" 
+                  name='username' 
+                  placeholder='Enter your username...'
+                  onChange={(e) => setUsername(e.target.value)}
+                />
                 <label htmlFor="email">Email:</label>
-                <input type="text" name='email' placeholder='Enter your email...'/>
+                <input 
+                  type="email" 
+                  name='email' 
+                  placeholder='Enter your email...'
+                  onChange={(e) => setEmail(e.target.value)}
+                />
                 <label htmlFor="username">Password:</label>
-                <input type="password" name='password' placeholder='Enter your password...'/>
+                <input 
+                  type="password" 
+                  name='password' 
+                  placeholder='Enter your password...'
+                  onChange={(e) => setPassword(e.target.value)}
+                />
                 <label htmlFor="confirm-password">Confirm password:</label>
-                <input type="password" name='confirm-password' placeholder='Confirm your password...'/>
+                <input 
+                  type="password" 
+                  name='confirm-password' 
+                  placeholder='Confirm your password...'
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
                 <p>
                   By creating an account, you accept our <a href="google.com">Terms of Service</a> and <a href="google.com">Privacy Policy</a>.
                 </p>
-                <button>Join now!</button>
+                <button onClick={(e) => handleRegister(e)}>Join now!</button>
             </form>
         </div>
     </div>
