@@ -21,6 +21,9 @@ const userSlice = createSlice({
             state.error = true
             console.log("Login failed")
         },
+        logout: (state) => {
+            state.currentUser = null;
+        }
     }
 })
 
@@ -28,6 +31,6 @@ export const {
     loginStart, 
     loginSuccess, 
     loginFailure,
-
+    logout,
 } = userSlice.actions
 export default userSlice.reducer;
