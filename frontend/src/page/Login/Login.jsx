@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
 
 import './Login.css'
 import LoginIcon from '@mui/icons-material/Login';
 import HomeIcon from '@mui/icons-material/Home';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { loginFailure, loginStart, loginSuccess } from '../../redux/userSlice';
 import { userRequest } from '../../requestMethods';
 
@@ -14,9 +16,12 @@ function Login() {
 
   const dispatch = useDispatch()
 
+  const isFetching = useSelector(state => state.user.isFetching)
+
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -30,10 +35,11 @@ function Login() {
     try {
       const res = await userRequest.post("auth/login", user)
       dispatch(loginSuccess(res.data))
+      setError("")
     } catch (err) {
+      dispatch(loginFailure());
       let errorMessage = err.response.data
       console.log(errorMessage)
-      dispatch(loginFailure);
       setError(errorMessage)
     }
   }
@@ -56,21 +62,48 @@ function Login() {
             <h1>Hello there!</h1>
             <form action="">
                 <label htmlFor="username">Username:</label>
-                <input type="text" name='username' placeholder='Enter your username...'
-                  onChange={(e) => setUsername(e.target.value)}
-                />
+                <div>
+                  <input 
+                    type="text" 
+                    name='username' 
+                    placeholder='Enter your username...'
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
                 <label htmlFor="username">Password:</label>
-                <input  name='password' placeholder='Enter your password...'
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <div>
+                  <input  
+                    type={ showPassword ? "text" : "password" }
+                    name='password' 
+                    placeholder='Enter your password...'
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  { 
+                    showPassword ? 
+                    <VisibilityOffIcon
+                      onClick={() => setShowPassword(false)} 
+                      className="vis-icon" 
+                      style={{position: 'absolute', top: '18%', right: 0}}
+                    /> :
+                    <VisibilityIcon 
+                      onClick={() => setShowPassword(true)} 
+                      className="vis-icon" 
+                      style={{position: 'absolute', top: '18%', right: 0}}
+                    />
+                  }
+                </div>
                 { error ? <p style={{color: 'red', fontSize: 16}}>{error}</p> : ""}
-                <button onClick={(e) => handleLogin(e)}>
-                  <LoginIcon style={{position: 'relative', marginRight: 15, top: 5}} />
-                  Shop now!
-                </button>
-                <p>
+                <div>
+                  <button 
+                    onClick={(e) => handleLogin(e)}
+                  >
+                    <LoginIcon style={{position: 'relative', marginRight: 15, top: 5}} />
+                    Shop now!
+                  </button>
+                </div>
+                {/* <p>
                   Don't remember your password? Click <a href="google.com">here</a>!.
-                </p>
+                </p> */}
             </form>
         </div>
     </div>

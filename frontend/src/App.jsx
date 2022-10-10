@@ -14,10 +14,11 @@ import Home from "./page/Home/Home.jsx";
 import ProductList from "./page/ProductList/ProductList";
 import SingleProduct from "./page/SingleProduct/SingleProduct";
 import Success from "./page/Success/Success";
+import { useSelector } from "react-redux";
 
 
 const App = () => {
-  const user = false;
+  const user = useSelector(state => state.user.currentUser);
 
   return (
     <Router>

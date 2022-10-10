@@ -84,6 +84,15 @@
   font-weight: 600;
 }
 
+.login-ctn .wrapper form div {
+  position: relative;
+}
+
+.login-ctn .wrapper form .vis-icon:hover {
+  color: purple;
+  cursor: pointer;
+}
+
 .login-ctn .wrapper form p {
   font-size: 16px;
   margin: 10px 0px;
@@ -94,12 +103,24 @@
 }
 
 .login-ctn .wrapper form button {
-  width: 100%;
-  border: none;
+  margin-top: 10px;
+  width: 102%;
+  border: hidden;
+  border-radius: 10px;
   padding: 15px 20px;
   background-color: steelblue;
   color: white;
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+.login-ctn .wrapper form button:hover {
+  border: 1px solid black;
+  background-color: darkblue;
+}
+
+.login-ctn .wrapper form button:disabled {
+  opacity: 0.5;
 }
