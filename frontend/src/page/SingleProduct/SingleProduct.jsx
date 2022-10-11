@@ -14,11 +14,13 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { addProduct } from '../../redux/cartSlice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 function SingleProduct() {
 
   const dispatch = useDispatch()
+
+  const userState = useSelector(state => state.user.currentUser)
 
   const location = useLocation();
   const id = location.pathname.split('/')[2];
@@ -58,7 +60,12 @@ function SingleProduct() {
   }
 
   const addToCart = () => {
-    dispatch(addProduct({ ...product, amount}))
+    if (userState) {
+        dispatch(addProduct({ ...product, amount}))
+    } else {
+        window.alert("You must be logged in to add product to cart!")
+    }
+    
   }
 
   return (

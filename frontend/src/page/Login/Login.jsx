@@ -26,9 +26,12 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault()
 
+    if (password == "" || username == "") {
+      setError("Fields cannot be empty!")
+    }
     const user = {
-      username,
-      password,
+      username: username.trim(),
+      password: password.trim(),
     }
 
     dispatch(loginStart())
@@ -61,7 +64,7 @@ function Login() {
         <div className="wrapper">
             <h1>Hello there!</h1>
             <form action="">
-                <label htmlFor="username">Username:</label>
+                <label htmlFor="username">Username: <span style={{ color: "red"}}>*</span></label>
                 <div>
                   <input 
                     type="text" 
@@ -70,7 +73,7 @@ function Login() {
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
-                <label htmlFor="username">Password:</label>
+                <label htmlFor="username">Password: <span style={{ color: "red"}}>*</span></label>
                 <div>
                   <input  
                     type={ showPassword ? "text" : "password" }
