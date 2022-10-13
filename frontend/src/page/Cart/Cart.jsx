@@ -49,7 +49,7 @@ function Cart() {
             })
             navigate("/success", {state: { 
                 stripeData: res.data,
-                products: cartState, 
+                cart: cartState, 
             }})
         } catch(error) {
             console.log(error)
@@ -151,7 +151,7 @@ function Cart() {
                             <b>Total:</b> 
                         </span>
                         <span className="item-price">
-                            ${Math.round(cartState.total * 100) / 100}
+                            ${cartState.total}
                         </span>
                     </div>
                 </div>

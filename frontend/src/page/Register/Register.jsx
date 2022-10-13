@@ -19,7 +19,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if(username === "" || email === "" || password === "" || confirmPassword == "") {
+    if(username === "" || email === "" || password === "" || confirmPassword === "") {
       setError("Fields cannot be empty!")
       return;
     }
@@ -49,7 +49,7 @@ function Register() {
     } catch (err) {
       console.log(err.response.data.code)
       const errCode = err.response.data.code
-      if (errCode == 11000) {
+      if (errCode === 11000 || errCode === "11000") {
         setError("Username or email already registered for an account!")
       }
     }

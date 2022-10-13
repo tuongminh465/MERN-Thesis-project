@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { useSelector } from 'react-redux'
 
 import Announcement from '../../component/Announcement/Announcement'
@@ -10,9 +9,10 @@ import Products from '../../component/Products/Products'
 import Footer from '../../component/Footer/Footer'
 
 function Home() {
-  const userState = useSelector(state => state.user)
+  
+  const cartState = useSelector(state => state.user.currentUser)
 
-  console.log(userState.currentUser)
+  console.log(cartState)
   
   return (
     <div>

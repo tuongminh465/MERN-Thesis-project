@@ -26,7 +26,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault()
 
-    if (password == "" || username == "") {
+    if (password === "" || username === "") {
       setError("Fields cannot be empty!")
     }
     const user = {
