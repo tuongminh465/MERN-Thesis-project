@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { store } from "../../redux/store";
 
 import Announcement from '../../component/Announcement/Announcement'
 import Navbar from '../../component/NavBar/Navbar'

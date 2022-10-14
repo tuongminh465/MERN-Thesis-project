@@ -40,6 +40,7 @@ function Cart() {
     dispatch(removeAllProduct());
   }
 
+  //create order
   useEffect(() => {
     const makeReq = async () => {
         try{

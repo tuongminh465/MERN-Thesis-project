@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {
     useLocation, useNavigate,
 } from 'react-router-dom'
-import { publicRequest } from '../../requestMethods'
+import { publicRequest, userRequest } from '../../requestMethods'
 
 import './SingleProduct.css'
 import Navbar from '../../component/NavBar/Navbar'
@@ -59,8 +59,41 @@ function SingleProduct() {
     }
   }
 
-  const addToCart = () => {
+  const addToCart = async () => {
     if (userState) {
+        const checkCart = await userRequest.get(`/cart/find/${userState._id}`)
+        console.log(checkCart.data)
+        if (checkCart.data) {
+            const newProduct = {
+                productId: id,
+                name: product.name,
+                img: product.img,
+                manufacturer: product.manufacturer,
+                price: product.price,
+                quantity: amount
+            }
+            const cartProducts = checkCart.data.product
+            cartProducts.push(newProduct);
+            
+            const updateCart = await userRequest.put(`/cart/${userState._id}`, cartProducts)
+            console.log(updateCart)
+        } else {
+            const newCart = {
+                userId: userState._id,
+                product: [
+                    {
+                        productId: id,
+                        name: product.name,
+                        img: product.img,
+                        manufacturer: product.manufacturer,
+                        price: product.price,
+                        quantity: amount
+                    }
+                ]
+            }
+            const res =  await userRequest.post("/cart", newCart)
+            console.log(res)
+        }
         dispatch(addProduct({ ...product, amount}))
     } else {
         window.alert("You must be logged in to add product to cart!")
@@ -87,7 +120,7 @@ function SingleProduct() {
                     <p className="desc"><b>Description:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate nam sit vero libero atque laudantium, totam hic inventore maiores at? Consectetur dolorem soluta placeat commodi inventore voluptatibus perspiciatis. Dicta, aut!</p>
                     <p className="year"><b>Release year:</b> {product.releaseYear}</p>
                     <p className="price">${product.price}</p>
-                    <p className="stock"><b>Stock:</b> 10</p>
+                    <p className="stock"><b>Status:</b> In stock</p>
                     <div className="input-ctn">
                         <div className="amount-ctn">
                             <RemoveIcon className='icon' onClick={() => handleChangeAmount('remove')}/>
