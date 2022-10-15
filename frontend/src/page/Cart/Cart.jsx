@@ -16,6 +16,7 @@ function Cart() {
   const KEY = "pk_test_51Lj02zFJySGvyCoSjWVG5uSB96KXgN8nErn1GdKHCjqWDpAzItECyLEPtHREprBI6WYT7RgBudS7zlsZXQUiV6Ym00q33dhdQ8";
 
   const cartState = useSelector(state => state.cart)  
+  const userState = useSelector(state => state.user)
 
   const [stripeToken, SetStripeToken] = useState(null)
 
@@ -36,7 +37,9 @@ function Cart() {
     dispatch(removeProduct(removedProduct));
   }
 
-  const handleRemoveAllProduct = () => {
+  const handleRemoveAllProduct = async () => {
+    const res = await userRequest.delete(`/cart/${userState.currentUser._id}`)
+    console.log(res.data)
     dispatch(removeAllProduct());
   }
 
@@ -99,14 +102,14 @@ function Cart() {
                                         <p><b>Name:</b> {product.name}</p>
                                         <p><b>Manufacturer:</b> {product.manufacturer}</p>
                                         <div className='amount-ctn'><b>Amount:</b> 
-                                            <span className="amount">{product.amount}</span>
+                                            <span className="amount">{product.quantity}</span>
                                         </div>
                                         <p><b>Insurance:</b> 2 years</p>
                                 </div>
                                 </div>
                                 <div className="price-details">
                                     <p><b>Price:</b> ${product.price}</p>
-                                    <p><b>Total price:</b> ${product.price*product.amount}</p>
+                                    <p><b>Total price:</b> ${product.price*product.quantity}</p>
                                     <button onClick={() => handleRemoveProduct(product._id, product.amount, product.price)}>Remove from cart</button>
                                 </div>
                             </div>

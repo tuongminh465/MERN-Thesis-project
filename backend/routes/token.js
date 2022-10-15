@@ -19,10 +19,11 @@ const verifyToken = (req, res, next) => {
 }
 
 const verifyTokenAndAuthorization = (req, res, next) => {
-    console.log(req.headers.userid)
-    console.log(req.params)
+    // console.log(req.headers.userid)
+    // console.log(req.body.userId)
+    // console.log(req.params.id)
     verifyToken(req, res, () => {
-        if(req.headers.userid === req.params.userId || req.user.isAdmin) {
+        if(req.headers.userid === req.params.userId || req.headers.userid === req.params.id || req.headers.userid === req.body.userId || req.user.isAdmin) {
             next();
         } else {
             res.status(403).json("Invalid authorization")

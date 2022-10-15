@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import {
     useLocation,
     useNavigate,
     Link
 } from 'react-router-dom'
+
+import { userRequest } from '../../requestMethods'
+import { getUserCartStatus } from '../../redux/cartSlice'
 
 import Navbar from '../../component/NavBar/Navbar'
 import Announcement from '../../component/Announcement/Announcement'
@@ -14,6 +18,23 @@ import './ProductList.css'
 
 
 function ProductList() {
+  
+  const dispatch = useDispatch()
+
+  const userState = useSelector(state => state.user.currentUser)
+  
+  useEffect(() => {
+    const fetchUserCartStatus = async () => {
+      const res =  await userRequest.get(`/cart/find/${userState._id}`)
+      if (res.data) {
+        dispatch(getUserCartStatus(true))
+      } else {
+        dispatch(getUserCartStatus(false))
+      }
+    }
+
+    fetchUserCartStatus();
+  }, )
 
   const navigate = useNavigate();
 

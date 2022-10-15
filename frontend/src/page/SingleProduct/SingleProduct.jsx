@@ -13,7 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import { addProduct } from '../../redux/cartSlice'
+import { addProduct, getUserCartStatus } from '../../redux/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 function SingleProduct() {
@@ -21,6 +21,7 @@ function SingleProduct() {
   const dispatch = useDispatch()
 
   const userState = useSelector(state => state.user.currentUser)
+  const cartState = useSelector(state => state.cart)
 
   const location = useLocation();
   const id = location.pathname.split('/')[2];
@@ -61,9 +62,7 @@ function SingleProduct() {
 
   const addToCart = async () => {
     if (userState) {
-        const checkCart = await userRequest.get(`/cart/find/${userState._id}`)
-        console.log(checkCart.data)
-        if (checkCart.data) {
+        if (cartState.status) {
             const newProduct = {
                 productId: id,
                 name: product.name,
@@ -72,11 +71,19 @@ function SingleProduct() {
                 price: product.price,
                 quantity: amount
             }
-            const cartProducts = checkCart.data.product
-            cartProducts.push(newProduct);
-            
-            const updateCart = await userRequest.put(`/cart/${userState._id}`, cartProducts)
-            console.log(updateCart)
+            const cartProducts = [...cartState.products, newProduct]
+
+            const updatedCart = {
+                userId: userState._id,
+                product: cartProducts,
+                quantity: cartState.quantity + amount,
+                total: cartState.total + (product.price*amount)
+            }
+
+            const res = await userRequest.put(`/cart/${userState._id}`, updatedCart)
+            console.log(res.data)
+
+            dispatch(addProduct(newProduct))
         } else {
             const newCart = {
                 userId: userState._id,
@@ -89,12 +96,17 @@ function SingleProduct() {
                         price: product.price,
                         quantity: amount
                     }
-                ]
+                ],
+                quantity: amount,
+                total: product.price*amount
             }
             const res =  await userRequest.post("/cart", newCart)
-            console.log(res)
+            console.log(res.data)
+            if (res) {
+                dispatch(getUserCartStatus(true))
+            }
+            dispatch(addProduct(newCart.product[0]))
         }
-        dispatch(addProduct({ ...product, amount}))
     } else {
         window.alert("You must be logged in to add product to cart!")
     }
