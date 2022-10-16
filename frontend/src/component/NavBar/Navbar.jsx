@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../redux/userSlice';
+import  { removeAllProduct } from '../../redux/cartSlice'
 
 import './Navbar.css'
 import { Badge } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
@@ -20,6 +20,7 @@ function Navbar() {
   const handleLogOut = () => {
     if(window.confirm("Are you sure you want to log out?") === true) {
       dispatch(logout())
+      dispatch(removeAllProduct())
     } else {
       console.log(userState)
     }
@@ -31,8 +32,11 @@ function Navbar() {
         <div className='left'>
           <span className='language'>EN</span>
           <div className="search-ctn">
-            <input type="text" />
-            <SearchIcon style={{color: 'grey', fontSize: 20}} />
+            {
+              userState ?
+              <h2>Hello there, {userState.username}!</h2> :
+              <h2>Hello there!</h2>
+            }
           </div>
         </div>
         <div className='center'>

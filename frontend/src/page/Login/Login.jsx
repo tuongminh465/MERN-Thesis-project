@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { loginFailure, loginStart, loginSuccess } from '../../redux/userSlice';
-import { userRequest } from '../../requestMethods';
+import { publicRequest } from '../../requestMethods';
 
 function Login() {
   
@@ -18,25 +18,28 @@ function Login() {
 
   const isFetching = useSelector(state => state.user.isFetching)
 
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+  const usernameRef = useRef();
+  const passwordRef = useRef();
+
   const [error, setError] = useState("")
   const [showPassword, setShowPassword] = useState(false)
 
   const handleLogin = async (e) => {
     e.preventDefault()
 
-    if (password === "" || username === "") {
+    if (usernameRef.current.value === "" || passwordRef.current.value === "") {
       setError("Fields cannot be empty!")
     }
     const user = {
-      username: username.trim(),
-      password: password.trim(),
+      username: usernameRef.current.value.trim(),
+      password: passwordRef.current.value.trim(),
     }
+
+    console.log(user)
 
     dispatch(loginStart())
     try {
-      const res = await userRequest.post("auth/login", user)
+      const res = await publicRequest.post("auth/login", user)
       dispatch(loginSuccess(res.data))
       setError("")
     } catch (err) {
@@ -70,7 +73,7 @@ function Login() {
                     type="text" 
                     name='username' 
                     placeholder='Enter your username...'
-                    onChange={(e) => setUsername(e.target.value)}
+                    ref={usernameRef}
                   />
                 </div>
                 <label htmlFor="username">Password: <span style={{ color: "red"}}>*</span></label>
@@ -79,7 +82,7 @@ function Login() {
                     type={ showPassword ? "text" : "password" }
                     name='password' 
                     placeholder='Enter your password...'
-                    onChange={(e) => setPassword(e.target.value)}
+                    ref={passwordRef}
                   />
                   { 
                     showPassword ? 
@@ -99,7 +102,7 @@ function Login() {
                 <div>
                   <button 
                     onClick={(e) => handleLogin(e)}
-                    disabled={isFetching}
+                    // disabled={isFetching}
                   >
                     <LoginIcon style={{position: 'relative', marginRight: 15, top: 5}} />
                     Shop now!

@@ -28,18 +28,31 @@ function Cart() {
     SetStripeToken(token)
   }
 
-  const handleRemoveProduct = (_id, amount, price) => {
+  const handleRemoveProduct = async (productId, amount, price) => {
     const removedProduct = {
-        _id,
+        productId,
         amount, 
         price,
     }
+    const updatedTotal = cartState.total - (removedProduct.price*removedProduct.amount)
+
+    const updatedCart = {
+        userId: userState.currentUser._id,
+        products: cartState.products.filter(
+            product => product.productId !== removedProduct.productId
+        ),
+        quantity: cartState.quantity - removedProduct.amount,
+        total: updatedTotal.toFixed(2)
+    }
+
+    const res = await userRequest.put(`/cart/${userState.currentUser._id}`, updatedCart)
+    console.log(res)
+    
     dispatch(removeProduct(removedProduct));
   }
 
   const handleRemoveAllProduct = async () => {
-    const res = await userRequest.delete(`/cart/${userState.currentUser._id}`)
-    console.log(res.data)
+    await userRequest.delete(`/cart/${userState.currentUser._id}`)
     dispatch(removeAllProduct());
   }
 
@@ -110,7 +123,7 @@ function Cart() {
                                 <div className="price-details">
                                     <p><b>Price:</b> ${product.price}</p>
                                     <p><b>Total price:</b> ${product.price*product.quantity}</p>
-                                    <button onClick={() => handleRemoveProduct(product._id, product.amount, product.price)}>Remove from cart</button>
+                                    <button onClick={() => handleRemoveProduct(product.productId, product.quantity, product.price)}>Remove from cart</button>
                                 </div>
                             </div>
                                 <hr style={{width: '90%', color: 'gray'}}/>

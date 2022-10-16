@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { getUserCartStatus } from '../../redux/cartSlice'
+import { userRequest } from '../../requestMethods'
+import { fetchProduct } from '../../redux/cartSlice'
 
 import Announcement from '../../component/Announcement/Announcement'
 import Navbar from '../../component/NavBar/Navbar'
@@ -7,8 +10,7 @@ import Slider from '../../component/Slider/Slider'
 import Category from '../../component/Category/Category'
 import Products from '../../component/Products/Products'
 import Footer from '../../component/Footer/Footer'
-import { getUserCartStatus } from '../../redux/cartSlice'
-import { userRequest } from '../../requestMethods'
+
 
 function Home() {
   
@@ -19,17 +21,19 @@ function Home() {
   console.log(userState)
   
   useEffect(() => {
-    const fetchUserCartStatus = async () => {
+    if(userState) {
+      const fetchUserCartStatus = async () => {
       const res =  await userRequest.get(`/cart/find/${userState._id}`)
       
-      if (res.data) {
-        dispatch(getUserCartStatus(true))
-      } else {
-        dispatch(getUserCartStatus(false))
+        if (res.data) {
+          dispatch(getUserCartStatus(true))
+          dispatch(fetchProduct(res.data))
+        } else {
+          dispatch(getUserCartStatus(false))
+        }
       }
+      fetchUserCartStatus();
     }
-
-    fetchUserCartStatus();
   }, )
   
   

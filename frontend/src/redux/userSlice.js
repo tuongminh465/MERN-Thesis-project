@@ -7,7 +7,7 @@ const userSlice = createSlice({
             accessToken: ""
         },
         isFetching: false,
-        error: false
+        error: false,
     },
     reducers:{
         loginStart: (state) => {

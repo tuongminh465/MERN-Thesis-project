@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 import { useNavigate } from "react-router-dom";
 
@@ -8,10 +8,11 @@ import { publicRequest } from '../../requestMethods';
 
 function Register() {
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const usernameRef = useRef()
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const confirmPasswordRef = useRef()
+
   const [error, setError] = useState("")
 
   const navigate = useNavigate();
@@ -19,25 +20,28 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if(username === "" || email === "" || password === "" || confirmPassword === "") {
+    if(usernameRef.current.value === "" || 
+       emailRef.current.value === "" || 
+       passwordRef.current.value === "" || 
+       confirmPasswordRef.current.value === "") {
       setError("Fields cannot be empty!")
       return;
     }
 
-    if (password.trim().length < 6) {
+    if (passwordRef.current.value.trim().length < 6) {
       setError("Password must be at least 6 characters!")
       return;
     }
 
-    if (password !== confirmPassword) {
+    if (passwordRef.current.value !== confirmPasswordRef.current.value) {
       setError("Password does not match!")
       return;
     }
 
     const newUser = {
-      username: username.trim(),
-      email: email.trim(),
-      password: password.trim(),
+      username: usernameRef.current.value.trim(),
+      email: emailRef.current.value.trim(),
+      password: passwordRef.current.value.trim(),
     }
 
     try {
@@ -77,28 +81,28 @@ function Register() {
                   type="text" 
                   name='username' 
                   placeholder='Enter your username...'
-                  onChange={(e) => setUsername(e.target.value)}
+                  ref={usernameRef}
                 />
                 <label htmlFor="email">Email: <span style={{ color: "red"}}>*</span></label>
                 <input 
                   type="email" 
                   name='email' 
                   placeholder='Enter your email...'
-                  onChange={(e) => setEmail(e.target.value)}
+                  ref={emailRef}
                 />
-                <label htmlFor="username">Password: <span style={{ color: "red"}}>*</span></label>
+                <label htmlFor="password">Password: <span style={{ color: "red"}}>*</span></label>
                 <input 
                   type="password" 
                   name='password' 
                   placeholder='Enter your password...'
-                  onChange={(e) => setPassword(e.target.value)}
+                  ref={passwordRef}
                 />
                 <label htmlFor="confirm-password">Confirm password: <span style={{ color: "red"}}>*</span></label>
                 <input 
                   type="password" 
                   name='confirm-password' 
                   placeholder='Confirm your password...'
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  ref={confirmPasswordRef}
                 />
                 { error ? <p style={{color: 'red', fontSize: 16}}>{error}</p> : ""}
                 <button onClick={(e) => handleRegister(e)}>Join now!</button>

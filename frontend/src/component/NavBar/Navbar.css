@@ -24,7 +24,6 @@
     display: flex;
     align-items: center;
     margin-left: 25px;
-    border: 0.5px solid lightgray;
 }
 
 .search-ctn input {

@@ -46,48 +46,50 @@ function SingleProduct() {
   }, [id])
   
   const handleChangeAmount = (input) => {
-    let newAmount = amount
-    if (input === 'add') {
-        newAmount++;
-        setAmount(newAmount);
-    }
-    else if (input === 'remove' && amount > 1) {
-        newAmount--;
-        setAmount(newAmount--);
-    }
-    else {
-        console.log(amount);
-    }
+    setAmount(prev => {
+        return prev + input;
+    })
   }
 
   const addToCart = async () => {
     if (userState) {
         if (cartState.status) {
             const newProduct = {
-                productId: id,
-                name: product.name,
-                img: product.img,
-                manufacturer: product.manufacturer,
-                price: product.price,
-                quantity: amount
+                    productId: id,
+                    name: product.name,
+                    img: product.img,
+                    manufacturer: product.manufacturer,
+                    price: product.price,
+                    quantity: amount
+                }
+            //Check if product already exist in cart
+            const index = cartState.products.findIndex(product => product.productId === id) 
+            let updatedCart = {}  
+            if (index === -1) { //if no, add new
+                updatedCart = {
+                    userId: userState._id,
+                    products: [...cartState.products, newProduct],
+                    quantity: cartState.quantity + amount,
+                    total: cartState.total + (product.price*amount)
+                }
+            } else { //if yes, increase quantity of that product
+                let newProducts = JSON.parse(JSON.stringify(cartState.products))
+                newProducts[index].quantity += amount
+
+                updatedCart = {
+                    userId: userState._id,
+                    products: newProducts,
+                    quantity: cartState.quantity + amount,
+                    total: cartState.total + (product.price*amount)
+                }
             }
-            const cartProducts = [...cartState.products, newProduct]
 
-            const updatedCart = {
-                userId: userState._id,
-                product: cartProducts,
-                quantity: cartState.quantity + amount,
-                total: cartState.total + (product.price*amount)
-            }
-
-            const res = await userRequest.put(`/cart/${userState._id}`, updatedCart)
-            console.log(res.data)
-
+            await userRequest.put(`/cart/${userState._id}`, updatedCart)
             dispatch(addProduct(newProduct))
         } else {
             const newCart = {
                 userId: userState._id,
-                product: [
+                products: [
                     {
                         productId: id,
                         name: product.name,
@@ -101,11 +103,10 @@ function SingleProduct() {
                 total: product.price*amount
             }
             const res =  await userRequest.post("/cart", newCart)
-            console.log(res.data)
             if (res) {
                 dispatch(getUserCartStatus(true))
             }
-            dispatch(addProduct(newCart.product[0]))
+            dispatch(addProduct(newCart.products[0]))
         }
     } else {
         window.alert("You must be logged in to add product to cart!")
@@ -135,9 +136,9 @@ function SingleProduct() {
                     <p className="stock"><b>Status:</b> In stock</p>
                     <div className="input-ctn">
                         <div className="amount-ctn">
-                            <RemoveIcon className='icon' onClick={() => handleChangeAmount('remove')}/>
+                            <RemoveIcon className='icon' onClick={() => handleChangeAmount(-1)}/>
                             <span className="amount">{amount}</span>
-                            <AddIcon className='icon' onClick={() => handleChangeAmount('add')}/>
+                            <AddIcon className='icon' onClick={() => handleChangeAmount(1)}/>
                         </div>
                         <button onClick={() => addToCart()}>
                             <AddShoppingCartIcon style={{marginRight: 10}} />
