@@ -102,7 +102,7 @@ function Login() {
                 <div>
                   <button 
                     onClick={(e) => handleLogin(e)}
-                    // disabled={isFetching}
+                    disabled={isFetching}
                   >
                     <LoginIcon style={{position: 'relative', marginRight: 15, top: 5}} />
                     Shop now!

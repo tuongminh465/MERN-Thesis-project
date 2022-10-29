@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../redux/userSlice';
 import  { removeAllProduct } from '../../redux/cartSlice'
@@ -17,10 +17,13 @@ function Navbar() {
 
   const dispatch = useDispatch()
 
+  const navigate = useNavigate()
+
   const handleLogOut = () => {
     if(window.confirm("Are you sure you want to log out?") === true) {
       dispatch(logout())
       dispatch(removeAllProduct())
+      navigate('/login')
     } else {
       console.log(userState)
     }

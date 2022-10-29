@@ -56,6 +56,7 @@
 
 .spd-ctn .wrapper .info-ctn p {
     font-size: 20px;
+    font-weight: bold;
     margin-bottom: 10px;
 }
 
@@ -63,6 +64,15 @@
 .spd-ctn .wrapper .info-ctn .type {
     font-size: 32px;
     font-weight: 600;
+}
+
+.spd-ctn .wrapper .info-ctn ul {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.spd-ctn .wrapper .info-ctn li {
+    font-size: 18px;
 }
 
 .spd-ctn .wrapper .info-ctn .input-ctn {
