@@ -126,7 +126,7 @@ function ProductList() {
                     <option value="ASUS">ASUS</option>
                     <option value="ASRock">ASRock</option>
                     <option value="Corsair">Corsair</option>
-                    <option value="HyperX">HyperX</option>
+                    <option value="Kingston">Kingston</option>
                     <option value="GIGABYTE">GIGABYTE</option>
                     <option value="Intel">Intel</option>
                     <option value="MSI">MSI</option>                    
