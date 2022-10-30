@@ -15,6 +15,7 @@ import Announcement from '../../component/Announcement/Announcement'
 import Footer from '../../component/Footer/Footer';
 
 import './ProductList.css'
+import SearchIcon from '@mui/icons-material/Search';
 
 
 function ProductList() {
@@ -42,7 +43,8 @@ function ProductList() {
   const type = location.pathname.split('/')[2];
   
   const [filter, setFilter] = useState("");
-  const [sort, setSort] = useState("")
+  const [sort, setSort] = useState("");
+  const [search, setSearch] = useState("")
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -75,8 +77,16 @@ function ProductList() {
                 setFilteredProducts((product) => [...product.sort((a, b) => a._id.localeCompare(b._id))])
                 break;
             default:
-                setFilteredProducts((product) => [...product.sort((a, b) => a._id.localeCompare(b._id))])
+                setFilteredProducts((product) => [...product])
         }
+  }
+
+  const searchHandler = () => {
+    if (search) {
+        setFilteredProducts((product) => [...product.filter(product => product.name.includes(search))])
+    } else {
+        setFilteredProducts((product) => [...product])
+    }
   }
 
   //Get products on render
@@ -107,7 +117,8 @@ function ProductList() {
   useEffect(() => {
     filterHandler();
     sortHandler();
-  }, [sort, filter, type])
+    searchHandler()
+  }, [sort, filter, type, search])
 
   const handleChangeType = event => {
         navigate(`/products/${event.target.value}`);
@@ -153,6 +164,15 @@ function ProductList() {
                     <option value="price-desc">Price (desc)</option>
                 </select>
             </div>
+        </div>
+        <div className="search-ctn">
+            <span>Search by name: </span>
+            <input 
+                className='search' 
+                type="text" 
+                onChange={(e) => setSearch(e.target.value)}
+            />
+            <SearchIcon className='search-icon' />
         </div>
         <hr />
         <div className="products-list">
