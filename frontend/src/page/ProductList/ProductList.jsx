@@ -83,7 +83,11 @@ function ProductList() {
 
   const searchHandler = () => {
     if (search) {
-        setFilteredProducts((product) => [...product.filter(product => product.name.includes(search))])
+        setFilteredProducts((product) => [...product.filter(product => 
+            product.name.includes(search) || 
+            product.name.includes(search.toUpperCase()) || 
+            product.name.includes(search.toLowerCase()) 
+        )])
     } else {
         setFilteredProducts((product) => [...product])
     }
