@@ -34,7 +34,9 @@ function ProductList() {
       }
     }
 
-    fetchUserCartStatus();
+    if (userState) {
+        fetchUserCartStatus();
+    }
   }, )
 
   const navigate = useNavigate();

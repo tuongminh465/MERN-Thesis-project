@@ -90,7 +90,6 @@ function Cart() {
                 </button>
                 <div className="text-ctn">
                     <span>Shopping cart({cartState.quantity})</span>
-                    <span>Your wishlist(0)</span>
                 </div>
                 <StripeCheckout
                     name="FStore"
@@ -101,7 +100,7 @@ function Cart() {
                     token={onToken}
                     stripeKey={KEY}
                 >
-                    <button>Checkout now!</button>
+                    <button>Go to checkout</button>
                 </StripeCheckout>
             </div>
             <div className="bottom">
