@@ -36,7 +36,6 @@ router.get("/login", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
-    // !user && res.status(401).json("Incorrect username or password!");
 
     if (!user) {
       res.status(401).json("Incorrect username or password!");
@@ -48,8 +47,7 @@ router.post("/login", async (req, res) => {
       process.env.PASS_KEY
     );
     const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
-    // OriginalPassword !== req.body.password &&
-    //   res.status(401).json("Incorrect username or password!");
+
     if (OriginalPassword !== req.body.password) {
       res.status(401).json("Incorrect username or password!");
       return;
@@ -61,7 +59,7 @@ router.post("/login", async (req, res) => {
         isAdmin: user.isAdmin,
       },
       process.env.JWT_KEY,
-      {expiresIn:"3d"}
+      {expiresIn:"3h"}
     );
 
     const { password, ...others } = user._doc;

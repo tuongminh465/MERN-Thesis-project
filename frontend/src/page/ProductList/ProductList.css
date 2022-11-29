@@ -1,9 +1,9 @@
 .pl-ctn {
-    margin: 20px;
     text-align: center;
 }
 
 .pl-ctn .filter-ctn {
+    border-top: 1px solid black;
     display: flex;
     justify-content: space-between;
 }

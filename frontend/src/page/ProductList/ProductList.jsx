@@ -132,8 +132,8 @@ function ProductList() {
 
   return (
     <div className="pl-ctn">
-        <Navbar />
         <Announcement />
+        <Navbar />
         <div className="filter-ctn">
             <div className="filter">
                 <span>Filter products by manufacturer:</span>

@@ -27,8 +27,9 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault()
 
-    if (usernameRef.current.value === "" || passwordRef.current.value === "") {
+    if (!usernameRef.current.value || !passwordRef.current.value) {
       setError("Fields cannot be empty!")
+      return;
     }
     const user = {
       username: usernameRef.current.value.trim(),

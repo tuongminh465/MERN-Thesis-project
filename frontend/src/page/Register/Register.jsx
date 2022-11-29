@@ -20,16 +20,16 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if(usernameRef.current.value === "" || 
-       emailRef.current.value === "" || 
-       passwordRef.current.value === "" || 
-       confirmPasswordRef.current.value === "") {
+    if( !usernameRef.current.value || 
+       !emailRef.current.value || 
+       !passwordRef.current.value || 
+       !confirmPasswordRef.current.value) {
       setError("Fields cannot be empty!")
       return;
     }
 
     if (passwordRef.current.value.trim().length < 6) {
-      setError("Password must be at least 6 characters!")
+      setError("Password must contains at least 6 characters!")
       return;
     }
 
