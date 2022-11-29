@@ -62,7 +62,7 @@ function Cart() {
         try{
             const res = await userRequest.post("/checkout/payment", {
                 tokenId: stripeToken.id,
-                amount: cartState.total*100,
+                amount: Math.round(cartState.total*100),
             })
             navigate("/success", {state: { 
                 stripeData: res.data,

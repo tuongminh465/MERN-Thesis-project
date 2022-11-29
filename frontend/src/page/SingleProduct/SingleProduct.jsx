@@ -116,8 +116,8 @@ function SingleProduct() {
 
   return (
     <div>
-        <Navbar />
         <Annoucement />
+        <Navbar />  
         <div className="spd-ctn">
             <button className='back-btn' onClick={() => navigate("/products")}>
                 <ShoppingBagIcon style={{marginRight: 10}}/>

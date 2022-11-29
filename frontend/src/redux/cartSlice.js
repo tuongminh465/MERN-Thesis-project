@@ -18,7 +18,7 @@ const cartSlice = createSlice({
             }
             state.quantity += action.payload.quantity;
             state.total += action.payload.price * action.payload.quantity;
-            state.total = Math.round(state.total * 100) / 100
+            state.total = state.total.toFixed(2)
         },
         removeProduct: (state, action) => {
             const total = state.total - (action.payload.price * action.payload.amount)

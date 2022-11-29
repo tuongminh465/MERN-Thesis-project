@@ -3,6 +3,7 @@
 }
 
 .pl-ctn .filter-ctn {
+    margin-top: 20px;
     border-top: 1px solid black;
     display: flex;
     justify-content: space-between;

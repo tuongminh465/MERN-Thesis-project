@@ -11,9 +11,11 @@ router.post("/payment", (req, res) => {
     (stripeErr, stripeRes) => {
         if(stripeErr) { 
             res.status(500).json(stripeErr); 
+            return;
         }
         else if(stripeRes) { 
             res.status(200).json(stripeRes); 
+            return;
         }
     })
 })

@@ -52,7 +52,7 @@ function ProductList() {
 
   const filterHandler = () => {
     if(filter){
-        setFilteredProducts(products.filter(product => product.manufacturer === filter))
+        setFilteredProducts((product) => [...products.filter(product => product.manufacturer === filter)])
     } else {
         setFilteredProducts(products)
     }
