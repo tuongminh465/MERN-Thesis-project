@@ -24,6 +24,7 @@ function Cart() {
 
   const dispatch = useDispatch();
   
+  //set stripe token when stripe grant a token for payment
   const onToken = (token) => {
     SetStripeToken(token)
   }
@@ -56,7 +57,7 @@ function Cart() {
     dispatch(removeAllProduct());
   }
 
-  //create order
+  //create payment when receive token
   useEffect(() => {
     const makeReq = async () => {
         try{
@@ -91,6 +92,7 @@ function Cart() {
                 <div className="text-ctn">
                     <span>Shopping cart({cartState.quantity})</span>
                 </div>
+                {/* Form configuration */}
                 <StripeCheckout
                     name="FStore"
                     image="assets/img/logo.png"
