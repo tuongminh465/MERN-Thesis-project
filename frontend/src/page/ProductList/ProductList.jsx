@@ -151,7 +151,7 @@ function ProductList() {
             </div>
             <div className="filter">
                 <span>Filter products by type:</span>
-                <select name="" id="" onChange={handleChangeType}>
+                <select name="" id="" onChange={handleChangeType} defaultValue="">
                     { type === undefined || type === '' ? <option value="" selected>All</option> : <option value="">All</option> }
                     { type === "CPU" ? <option value="CPU" selected>CPU</option> : <option value="CPU" >CPU</option> }
                     { type === "GPU" ? <option value="GPU" selected>GPU</option> : <option value="GPU">GPU</option> }
