@@ -70,7 +70,7 @@ function SingleProduct() {
                     userId: userState._id,
                     products: [...cartState.products, newProduct],
                     quantity: cartState.quantity + amount,
-                    total: cartState.total + (product.price*amount)
+                    total: parseFloat(cartState.total) + parseFloat((product.price*amount))
                 }
             } else { //if yes, increase quantity of that product
                 let newProducts = JSON.parse(JSON.stringify(cartState.products))
@@ -80,12 +80,13 @@ function SingleProduct() {
                     userId: userState._id,
                     products: newProducts,
                     quantity: cartState.quantity + amount,
-                    total: cartState.total + (product.price*amount)
+                    total: parseFloat(cartState.total) + parseFloat((product.price*amount))
                 }
             }
 
             await userRequest.put(`/cart/${userState._id}`, updatedCart)
             dispatch(addProduct(newProduct))
+            console.log(updatedCart)
         } else {
             const newCart = {
                 userId: userState._id,
