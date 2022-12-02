@@ -52,12 +52,12 @@
 }
 
 .pl-ctn .products-list .product-ctn {
-    flex: 0 0 22%;
     display: flex;   
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 450px;
+    width: 400px;
     border: 1px solid black;
     border-radius: 10px;
     margin: 10px;
@@ -71,8 +71,8 @@
 }
 
 .pl-ctn .products-list .product-ctn img {
-    width: 85%;
-    height: 80%;
+    width: 380px;
+    height: 350px;
     border: 1px solid black;
     border-radius: 20px;
     margin-bottom: 10px;
