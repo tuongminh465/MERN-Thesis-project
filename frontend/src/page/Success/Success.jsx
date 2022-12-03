@@ -27,9 +27,7 @@ const Success = () => {
   useEffect(() => {
     const createOrder = async () => {
       try {
-        console.log(cart)
-        console.log(data)
-        const res = await userRequest.post("/orders", {
+        const newOrder = {
           userId: currentUser._id,
           products: cart.products.map((item) => ({
             productId: item._id,
@@ -38,13 +36,17 @@ const Success = () => {
           })),
           total: cart.total,
           address: data.billing_details.address,
-        });
+        }
+        
+        const res = await userRequest.post("/orders", newOrder);
         setOrderId(res.data._id);
         console.log(res)
-      } catch {}
+      } catch(error) {
+        console.log(error);
+      }
     };
     data && createOrder();
-  }, [cart, data]);
+  }, [cart, data, currentUser._id]);
 
   const handleReturn = async () => {
     await userRequest.delete(`/cart/${currentUser._id}`)
@@ -66,7 +68,7 @@ const Success = () => {
       <CheckCircleOutlineIcon style={{color: 'green', fontSize: 50}} />
       {orderId
         ? `Order has been created successfully. Your order ID is: ${orderId}`
-        : `Successful! Your order is being prepared...`}
+        : `Your order is being prepared...`}
       <button class="scp-btn" style={{ padding: 10, marginTop: 20 }} onClick={() => handleReturn()}>
         <HomeIcon style={{marginRight: 15}}/>
         Go to Homepage

@@ -12,6 +12,9 @@ const orderSchema = new mongoose.Schema(
                     type: Number,
                     default: 1,
                 },
+                name: {
+                    type: String
+                }
             },
         ],
         total: { type: Number, required: true },
