@@ -52,7 +52,7 @@ function SingleProduct() {
   }
 
   const addToCart = async () => {
-    if (userState) {
+    if (userState.accessToken) {
         if (cartState.status) {
             const newProduct = {
                     productId: id,
@@ -110,7 +110,7 @@ function SingleProduct() {
             dispatch(addProduct(newCart.products[0]))
         }
     } else {
-        window.alert("You must be logged in to add product to cart!")
+        window.alert("You are not logged in or your session has expired. Please try again!")
     }
     
   }

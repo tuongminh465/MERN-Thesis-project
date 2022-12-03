@@ -52,7 +52,8 @@ router.post("/login", async (req, res) => {
       res.status(401).json("Incorrect username or password!");
       return;
     }
-
+    //encrypt a string that contain userid and user admin status (wrapped in an object)
+    //use the encrypted string as a token and assign in to a user's login session
     const accessToken = jwt.sign(
       {
         id: user._id,
