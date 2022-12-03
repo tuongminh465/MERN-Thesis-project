@@ -12,7 +12,7 @@ function Category() {
       <div className='cat-ctn'>
         {
           categories.map(item => 
-            <CatgoryItem item={item}/>    
+            <CatgoryItem item={item} key={item.id}/>    
           )
         }
       </div>

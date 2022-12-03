@@ -12,7 +12,7 @@ function Products() {
       <div className='prod-ctn'>
         {
             popularProducts.map(item => (
-                <SingleProduct item={item}/> 
+                <SingleProduct item={item} key={item._id}/> 
             ))
         }
       </div>
