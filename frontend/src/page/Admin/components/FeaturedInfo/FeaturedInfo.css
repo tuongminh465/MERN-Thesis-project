@@ -1,0 +1,45 @@
+.featured {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.featured .item {
+    flex: 1;
+    margin: 0px 20px;
+    padding: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1);
+}
+
+.featured .item .title {
+    font-size: 20px;
+}
+
+.featured .item .revenue-ctn{
+    display: flex;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.featured .item .revenue-ctn .money {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.featured .item .revenue-ctn .rate {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.featured .item .revenue-ctn .icon {
+    font-size: 14px;
+    margin-left: 5px;
+    color: green;
+}
+
+.featured .item .revenue-ctn .icon.negative {
+    color: red;
+}

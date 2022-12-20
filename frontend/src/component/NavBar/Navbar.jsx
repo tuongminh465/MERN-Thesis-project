@@ -48,6 +48,12 @@ function Navbar() {
           </Link>
         </div>
         <div className='right'>
+          {
+            userState.isAdmin ?
+            <Link style={{ textDecoration: 'none', color: 'inherit'}} to='/admin'>
+              <div className="menu-items">DASBOARD</div>
+            </Link> : ""
+          }
           <Link style={{ textDecoration: 'none', color: 'inherit'}} to='/products'>
             <div className="menu-items">PRODUCTS</div>
           </Link>

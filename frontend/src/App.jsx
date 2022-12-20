@@ -14,6 +14,7 @@ import Home from "./page/Home/Home.jsx";
 import ProductList from "./page/ProductList/ProductList";
 import SingleProduct from "./page/SingleProduct/SingleProduct";
 import Success from "./page/Success/Success";
+import Admin from "./page/Admin/Admin";
 import { useSelector } from "react-redux";
 
 
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/login" element={user ? <Navigate to="/"/> : <Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/success" element={<Success />} />
+        <Route path="/admin" element={<Admin />} />
         <Route
           path="*"
           element={<Navigate to="/" replace />}

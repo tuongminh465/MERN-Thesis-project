@@ -1,0 +1,9 @@
+.admin-ctn {
+    display: flex;
+}
+
+.admin-ctn .others {
+    margin-top: 10px;
+    flex: 6;
+    background-color: white;
+}

@@ -1,0 +1,40 @@
+.topbar {
+    position: 'sticky';
+    top: 0;
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    border-bottom: 1px solid black;
+    z-index: 999;
+}
+
+.topbar .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0px 20px;
+
+}
+
+.topbar .wrapper .logo {
+    color: purple;
+    cursor: pointer;
+}
+
+.topbar .wrapper .right {
+    display: flex;
+    align-items: center;
+
+}
+
+.topbar .wrapper .right .icon-ctn {
+    margin-right: 15px;
+}
+
+.topbar .wrapper .right img {
+    width: 25px;
+    height: 25px;
+    border-radius: 20px;
+    margin-left: 20px;
+}
