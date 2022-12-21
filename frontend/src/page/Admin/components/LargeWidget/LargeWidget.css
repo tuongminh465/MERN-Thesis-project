@@ -1,0 +1,57 @@
+.lg-widget {
+    flex: 3;
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1);
+    padding: 20px;
+    margin-left: 20px;
+}
+
+.lg-widget .title {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.lg-widget table {
+    width: 100%;
+    border-spacing: 20px;
+}
+
+.lg-widget th {
+    text-align: left;
+}
+
+.lg-widget .user {
+    display: flex;
+    align-items: center;
+}
+
+.lg-widget .user span {
+    font-weight: 600;
+    margin-left: 120px;
+}
+
+.lg-widget img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.lg-widget .status button{
+    padding: 5px 7px;
+    border: hidden;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+}
+
+.lg-widget .status .approved-btn {
+    background-color: limegreen;
+}
+
+.lg-widget .status .declined-btn {
+    background-color: red;
+}
+
+.lg-widget .status .pending-btn {
+    background-color: steelblue;
+}

@@ -48,14 +48,17 @@
 
 .menu-items {
     font-size: 14px;
+    font-weight: 400;
     cursor: pointer;
     margin-left: 25px;
     transition-duration: 0.3s;
+    
 }
 
 .menu-items:hover {
     color: blue;
     font-weight: bold;
+    font-size: 16px;
 }
 
 

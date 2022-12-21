@@ -51,7 +51,7 @@ function Navbar() {
           {
             userState.isAdmin ?
             <Link style={{ textDecoration: 'none', color: 'inherit'}} to='/admin'>
-              <div className="menu-items">DASBOARD</div>
+              <div className="menu-items" style={{ color: "purple" }}>DASBOARD</div>
             </Link> : ""
           }
           <Link style={{ textDecoration: 'none', color: 'inherit'}} to='/products'>

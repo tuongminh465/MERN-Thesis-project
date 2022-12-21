@@ -1,16 +1,23 @@
 import React from 'react'
 import Chart from '../../components/Chart/Chart'
 import FeaturedInfo from '../../components/FeaturedInfo/FeaturedInfo'
+import LargeWidget from '../../components/LargeWidget/LargeWidget'
+import SmallWidget from '../../components/SmallWidget/SmallWidget'
+import { data } from '../../mockData'
 
 import './Home.css'
 
-function Main() {
+function Home() {
   return (
     <div className="admin-home">
       <FeaturedInfo />
-      <Chart />
+      <Chart data = {data} title="Sales Analytics" dataKey={"amt"} grid/>
+      <div className="widgets">
+        <SmallWidget />
+        <LargeWidget />
+      </div>
     </div>
   )
 }
 
-export default Main
+export default Home

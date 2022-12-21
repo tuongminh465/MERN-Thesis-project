@@ -1,0 +1,56 @@
+.sm-widget {
+    flex: 1;
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1);
+    padding: 20px;
+}
+
+.sm-widget .title {
+    font-size: 32px;
+    font-weight: bold;
+
+}
+
+.sm-widget img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.sm-widget ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sm-widget li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0px;
+}
+
+.sm-widget .user-ctn {
+    display: flex;
+    flex-direction: column;
+}
+
+.sm-widget .user-ctn .name {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.sm-widget .user-ctn .email {
+    font-weight: 300;
+}
+
+.sm-widget .display-btn {
+    display: flex;
+    align-items: center;
+    border: hidden;
+    border-radius: 10px;
+    padding: 7px 10px;
+    background-color: #eeeef7;
+    color: grey;
+    cursor: pointer;
+}
