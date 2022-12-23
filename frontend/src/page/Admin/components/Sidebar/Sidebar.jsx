@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, useLocation } from 'react-router-dom';
 
 import './Sidebar.css'
 import LineStyleIcon from '@mui/icons-material/LineStyle';
@@ -15,6 +16,10 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import ReportIcon from '@mui/icons-material/Report';
 
 function Sidebar() {
+
+  const location = useLocation();
+  const active = location.pathname.split('/')[2];
+  
   return (
     <div className="sidebar">
         <div className="wrapper">
@@ -23,10 +28,16 @@ function Sidebar() {
                     Dashboard
                 </h3>
                 <ul>
-                    <li>
-                        <LineStyleIcon className='icon'/>
-                        Home
-                    </li>
+                    <Link 
+                        style={{textDecoration: 'none', color: 'black'}} 
+                        to={`/admin`}
+                    >
+                        <li className={!active ? 'active' : ''}>
+                        
+                            <LineStyleIcon className='icon'/>
+                            Home
+                        </li>
+                    </Link>
                     <li>
                         <TimelineIcon className='icon'/>
                         Analytics
@@ -42,10 +53,15 @@ function Sidebar() {
                     Quick menu
                 </h3>
                 <ul>
-                    <li>
-                        <PersonIcon className='icon'/>
-                        Users
-                    </li>
+                    <Link 
+                        style={{textDecoration: 'none', color: 'black'}} 
+                        to={`/admin/users`}
+                    >
+                        <li className={active === 'users' ? 'active' : ''}>
+                            <PersonIcon className='icon'/>
+                            Users   
+                        </li>
+                    </Link>
                     <li>
                         <StoreMallDirectoryIcon className='icon'/>
                         Products

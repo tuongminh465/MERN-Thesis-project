@@ -42,3 +42,36 @@ export const data = [
       amt: 2100,
     },
   ];
+
+export const userRows = [
+  { 
+    id: 1, username: 'Jeff Leonard',
+    img: "http://cdn.onlinewebfonts.com/svg/img_264570.png", 
+    email: 'mysticmine69@gmail.com', 
+    transaction: '$299.99',
+  },
+  { 
+    id: 2, username: 'Jeff Leonard',
+    img: "http://cdn.onlinewebfonts.com/svg/img_264570.png", 
+    email: 'mysticmine69@gmail.com', 
+    transaction: '$299.99',
+  },
+  { 
+    id: 3, username: 'Jeff Leonard',
+    img: "http://cdn.onlinewebfonts.com/svg/img_264570.png", 
+    email: 'mysticmine69@gmail.com', 
+    transaction: '$299.99',
+  },
+  { 
+    id: 4, username: 'Jeff Leonard',
+    img: "http://cdn.onlinewebfonts.com/svg/img_264570.png", 
+    email: 'mysticmine69@gmail.com', 
+    transaction: '$299.99',
+  },
+  { 
+    id: 5, username: 'Jeff Leonard',
+    img: "http://cdn.onlinewebfonts.com/svg/img_264570.png", 
+    email: 'mysticmine69@gmail.com', 
+    transaction: '$299.99',
+  },
+]; 

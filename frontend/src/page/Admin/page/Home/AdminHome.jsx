@@ -5,9 +5,9 @@ import LargeWidget from '../../components/LargeWidget/LargeWidget'
 import SmallWidget from '../../components/SmallWidget/SmallWidget'
 import { data } from '../../mockData'
 
-import './Home.css'
+import './AdminHome.css'
 
-function Home() {
+function AdminHome() {
   return (
     <div className="admin-home">
       <FeaturedInfo />
@@ -20,4 +20,4 @@ function Home() {
   )
 }
 
-export default Home
+export default AdminHome

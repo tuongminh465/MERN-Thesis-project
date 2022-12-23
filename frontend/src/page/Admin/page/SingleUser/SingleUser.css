@@ -1,0 +1,138 @@
+.single-user {
+    padding: 20px;
+}
+
+.single-user .title-ctn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.single-user .title-ctn button {
+    width: 80px;
+    border: hidden;
+    padding: 5px;
+    background-color: rgb(0, 172, 172);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    transition-duration: 0.3s;
+}
+
+.single-user .title-ctn button:hover {
+    border: 1px solid black;
+    background-color: teal;
+}
+
+.single-user .user-info {
+    display: flex;
+    margin-top: 20px;
+}
+
+.single-user .user-info .show {
+    flex: 1;
+    padding: 20px;
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1);
+}
+
+.single-user .user-info p {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: gray;
+}
+
+.single-user .user-info .top {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-evenly; */
+}
+
+.single-user .user-info .top img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.single-user .user-info .top .info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.single-user .user-info .top .info span {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.single-user .user-info .top .info .username {
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.single-user .user-info .update {
+    flex: 3;
+    padding: 20px;
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1);
+}
+
+.single-user .user-info .update form {
+    display: flex;
+}
+
+.single-user .user-info .update .left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.single-user .user-info .update .left .field {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.single-user .user-info .update .left .field label {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.single-user .user-info .update .left .field input {
+    padding: 5px;
+    font-size: 16px;
+    width: 400px;
+    border: none;
+    border-bottom: 1px solid lightgrey;
+    transition-duration: 0.3s;
+}
+
+.single-user .user-info .update .left .field input:focus {
+    outline: none;
+    border-bottom: 1px solid black;
+}
+
+.single-user .user-info .update .right {
+    display: flex;
+    align-items: flex-end;
+}
+
+.single-user .user-info .update .right button {
+    height: 40px;
+    width: max-content;
+    min-width: 120px;
+    background-color: limegreen;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    border: hidden;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.single-user .user-info .update .right button:hover {
+    background-color: green;
+    border: 1px solid black
+}
