@@ -45,11 +45,11 @@ function UserList() {
         <h2>Users list</h2>
         <div style={{ height: '85vh', width: '100%' }}>
             <DataGrid
-                rows={data}
-                columns={columns}
-                pageSize={10}
-                rowsPerPageOptions={[5]}
-                checkboxSelection
+              rows={data}
+              columns={columns}
+              pageSize={10}
+              rowsPerPageOptions={[5]}
+              checkboxSelection
             />
         </div>
     </div>

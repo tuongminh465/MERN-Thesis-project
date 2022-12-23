@@ -18,7 +18,9 @@ import Success from "./page/Success/Success";
 import Admin from "./page/Admin/Admin";
 import UserList from "./page/Admin/page/UserList/UserList";
 import SingleUser from "./page/Admin/page/SingleUser/SingleUser";
-import AdminHome from "./page/Admin/page/Home/AdminHome";
+import AdminHome from "./page/Admin/page/AdminHome/AdminHome";
+import NewUser from "./page/Admin/page/NewUser/NewUser";
+import AdminProduct from "./page/Admin/page/AdminProduct/AdminProduct";
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
@@ -38,11 +40,10 @@ const App = () => {
           <Route path="/admin" element={<AdminHome />}/>
           <Route path="/admin/users" element={<UserList />} />
           <Route path="/admin/users/:id" element={<SingleUser />} />
+          <Route path="/admin/users/newUser" element={<NewUser />} />
+          <Route path="/admin/products" element={<AdminProduct />} />
         </Route>
-        <Route
-          path="*"
-          element={<Navigate to="/" replace />}
-        />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );

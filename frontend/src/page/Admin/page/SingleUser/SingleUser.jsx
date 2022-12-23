@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import './SingleUser.css'
 
@@ -14,7 +14,9 @@ function SingleUser() {
     <div className="single-user">
         <div className="title-ctn">
           <h1>Edit User</h1>
-          <button>Create</button>
+          <Link to={`/admin/users/newUser`}>
+            <button>Create</button>
+          </Link>
         </div>
         <div className='user-info'>
           <div className="show">

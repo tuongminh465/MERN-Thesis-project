@@ -62,10 +62,15 @@ function Sidebar() {
                             Users   
                         </li>
                     </Link>
-                    <li>
-                        <StoreMallDirectoryIcon className='icon'/>
-                        Products
-                    </li>
+                    <Link 
+                        style={{textDecoration: 'none', color: 'black'}} 
+                        to={`/admin/products`}
+                    >
+                        <li className={active === 'products' ? 'active' : ''}>
+                            <StoreMallDirectoryIcon className='icon'/>
+                            Products
+                        </li>
+                    </Link>
                     <li>
                         <ReceiptIcon className='icon'/>
                         Transaction

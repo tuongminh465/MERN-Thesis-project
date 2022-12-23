@@ -75,3 +75,21 @@ export const userRows = [
     transaction: '$299.99',
   },
 ]; 
+
+export const productRows = [
+  { 
+    id: 1,
+    name: "CPU Intel Core i9-11900K",
+    img: "https://phucanhcdn.com/media/product/42984_core_9.jpg",
+    manufacturer: "Intel",
+    type: "CPU",
+    info: [
+        "8 cores",
+        "16 threads",
+        "Frequency: 3.5-5.3 GHz.",
+        "GPU clock: 2300 MHz"
+    ],
+    price: 369.99,
+    releaseYear: 2022
+  },
+]

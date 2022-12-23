@@ -1,0 +1,56 @@
+.admin-products {
+    padding: 20px;
+}
+
+.admin-products h2 {
+    margin-bottom: 10px;
+}
+
+.admin-products img {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+}
+
+.admin-products .action {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.admin-products .action .edit {
+    height: 30px;
+    width: 60px;
+    background-color: limegreen;
+    color: white;
+    border: hidden;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.admin-products .action .edit:hover {
+    background-color: green;
+    border: 1px solid black;
+}
+
+.admin-products .action .delete {
+    height: 30px;
+    width: 60px;
+    background-color: red;
+    color: white;
+    border: hidden;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.admin-products .action .delete:hover {
+    background-color: crimson;
+    border: 1px solid black;
+}
