@@ -5,6 +5,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 
 import './AdminProduct.css'
+import AddIcon from '@mui/icons-material/Add';
 
 function AdminProduct() {
 
@@ -43,7 +44,7 @@ function AdminProduct() {
       field: 'action', headerName: 'Actions', flex: 1, renderCell: (params) => {
         return (
           <div className='action'>
-            <Link to={`/admin/users/${params.row.id}`}>
+            <Link to={`/admin/products/${params.row.id}`}>
               <button className='edit'>Edit</button>
             </Link>
             <button onClick={() => onDelete(params.row.id)} className='delete'>Delete</button>
@@ -59,7 +60,15 @@ function AdminProduct() {
 
   return (
     <div className="admin-products">
-        <h2>Products list</h2>
+        <div className="title-ctn">
+          <h2>Products list</h2>
+          <Link style={{textDecoration: 'none'}} to={`/admin/products/newProduct`}>
+            <button>
+              <AddIcon />
+              Add new product
+            </button>
+          </Link>
+        </div>
         <div style={{ height: '85vh', width: '100%' }}>
             <DataGrid
               rows={data}

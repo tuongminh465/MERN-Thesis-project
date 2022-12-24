@@ -5,6 +5,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { userRows } from '../../mockData';
 
 import './UserList.css'
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 function UserList() {
 
@@ -42,16 +43,24 @@ function UserList() {
 
   return (
     <div className="user-list">
+      <div className="title-ctn">
         <h2>Users list</h2>
-        <div style={{ height: '85vh', width: '100%' }}>
-            <DataGrid
-              rows={data}
-              columns={columns}
-              pageSize={10}
-              rowsPerPageOptions={[5]}
-              checkboxSelection
-            />
-        </div>
+        <Link style={{textDecoration: 'none'}} to={`/admin/users/newUser`}>
+          <button>
+            <PersonAddIcon />
+            Add new user
+          </button>
+        </Link>
+      </div>
+      <div style={{ height: '85vh', width: '100%' }}>
+          <DataGrid
+            rows={data}
+            columns={columns}
+            pageSize={10}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+          />
+      </div>
     </div>
   )
 }

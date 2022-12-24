@@ -1,88 +1,92 @@
-.single-user {
+.edit-product {
     padding: 20px;
 }
 
-.single-user .title-ctn{
+.edit-product .title-ctn {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.single-user .user-info {
+.edit-product .product-info {
     display: flex;
     margin-top: 20px;
 }
 
-.single-user .user-info .show {
+.edit-product .product-info .show {
     flex: 1;
     padding: 20px;
     box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1);
 }
 
-.single-user .user-info p {
+.edit-product .product-info p {
     margin-bottom: 20px;
     font-size: 20px;
     color: gray;
 }
 
-.single-user .user-info .top {
+.edit-product .product-info .top {
     display: flex;
     align-items: center;
-    /* justify-content: space-evenly; */
 }
 
-.single-user .user-info .top img {
-    width: 60px;
-    height: 60px;
+.edit-product .product-info .top img {
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.single-user .user-info .top .info {
+.edit-product .product-info .top .info {
     display: flex;
     flex-direction: column;
     margin-left: 20px;
 }
 
-.single-user .user-info .top .info span {
+.edit-product .product-info .top .info span {
     margin-bottom: 10px;
     font-size: 20px;
 }
 
-.single-user .user-info .top .info .username {
-    font-weight: 600;
-    font-size: 24px;
+/* .edit-product .product-info .top .info ul {
+    margin-bottom: 10px;
+} */
+
+.edit-product .product-info .top .info ul p {
+    font-size: 18px;
+    color: black;
+    margin-bottom: 10px;
 }
 
-.single-user .user-info .update {
-    flex: 3;
+.edit-product .product-info .update {
+    flex: 1.5;
     padding: 20px;
     box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1);
 }
 
-.single-user .user-info .update form {
+.edit-product .product-info .update form {
     display: flex;
 }
 
-.single-user .user-info .update .left {
+.edit-product .product-info .update .left {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.single-user .user-info .update .left .field {
+.edit-product .product-info .update .left .field {
     display: flex;
     flex-direction: column;
     margin-top: 10px;
 }
 
-.single-user .user-info .update .left .field label {
+.edit-product .product-info .update .left .field label {
     margin-bottom: 10px;
     font-size: 18px;
     font-weight: 600;
 }
 
-.single-user .user-info .update .left .field input {
+.edit-product .product-info .update .left .field input {
     padding: 5px;
     font-size: 16px;
     width: 400px;
@@ -91,17 +95,12 @@
     transition-duration: 0.3s;
 }
 
-.single-user .user-info .update .left .field input:focus {
+.edit-product .product-info .update .left .field input:focus {
     outline: none;
     border-bottom: 1px solid black;
 }
 
-.single-user .user-info .update .right {
-    display: flex;
-    align-items: flex-end;
-}
-
-.single-user .user-info .update .right button {
+.edit-product .product-info .update .right button {
     height: 40px;
     width: max-content;
     min-width: 120px;
@@ -115,7 +114,22 @@
     transition-duration: 0.3s;
 }
 
-.single-user .user-info .update .right button:hover {
+.edit-product .product-info .update .right button:hover {
     background-color: green;
     border: 1px solid black
+}
+
+.edit-product form .right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.edit-product form .right label {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

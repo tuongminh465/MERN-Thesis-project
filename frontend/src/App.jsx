@@ -21,6 +21,8 @@ import SingleUser from "./page/Admin/page/SingleUser/SingleUser";
 import AdminHome from "./page/Admin/page/AdminHome/AdminHome";
 import NewUser from "./page/Admin/page/NewUser/NewUser";
 import AdminProduct from "./page/Admin/page/AdminProduct/AdminProduct";
+import NewProduct from "./page/Admin/page/NewProduct/NewProduct";
+import EditProduct from "./page/Admin/page/EditProduct/EditProduct";
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
@@ -42,6 +44,8 @@ const App = () => {
           <Route path="/admin/users/:id" element={<SingleUser />} />
           <Route path="/admin/users/newUser" element={<NewUser />} />
           <Route path="/admin/products" element={<AdminProduct />} />
+          <Route path="/admin/products/newProduct" element={<NewProduct />} />
+          <Route path="/admin/products/:id" element={<EditProduct />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

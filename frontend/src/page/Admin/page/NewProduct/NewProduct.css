@@ -1,0 +1,73 @@
+.new-product {
+    padding: 20px;
+}
+
+.new-product h1 {
+    margin-bottom: 20px;
+}
+
+.new-product form {
+    display: flex;
+}
+
+.new-product form .left,
+.new-product form .right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.new-product .field {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.new-product .field label {
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.new-product .field input {
+    height: 26px;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.new-product form .left {
+    display: flex;
+    flex-direction: column;
+}
+
+.new-product button {
+    width: 25%;
+    height: 40px;
+    background-color: rgb(0, 172, 172);
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    border: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.new-product button:hover {
+    border: 1px solid black;
+    background-color: teal;
+}
+
+.new-product form .right img {
+    width: 450px;
+    height: 450px;
+}
+
+.new-product form .right label {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+}
