@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import './TopBar.css'
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -18,7 +19,9 @@ function TopBar() {
                   <SettingsIcon />
                 </div>
                 <div className="icon-ctn">
-                  <HomeIcon />
+                  <Link style={{ color: 'black' }} to={'/'}>
+                    <HomeIcon />
+                  </Link>
                 </div>
                 <div className="icon-ctn">
                   <Badge badgeContent="2"color='primary'>

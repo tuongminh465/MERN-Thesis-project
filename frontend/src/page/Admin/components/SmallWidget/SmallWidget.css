@@ -32,7 +32,14 @@
 
 .sm-widget .user-ctn {
     display: flex;
+    align-items: center;
+}
+
+.sm-widget .user-info {
+    display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    padding-left: 20px; 
 }
 
 .sm-widget .user-ctn .name {
