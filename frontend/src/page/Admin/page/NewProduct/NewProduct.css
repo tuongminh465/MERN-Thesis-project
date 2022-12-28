@@ -31,10 +31,12 @@
     font-size: 20px;
 }
 
-.new-product .field input {
+.new-product .field input,
+.new-product .field select {
     height: 26px;
     font-size: 18px;
     margin-bottom: 5px;
+    padding-left: 5px;
 }
 
 .new-product form .left {
@@ -43,6 +45,7 @@
 }
 
 .new-product button {
+    margin-bottom: 10px;
     width: 25%;
     height: 40px;
     background-color: rgb(0, 172, 172);
@@ -70,4 +73,10 @@
     align-items: center;
     font-size: 20px;
     font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.new-product #error {
+    color: red;
+    font-size: 20px;
 }

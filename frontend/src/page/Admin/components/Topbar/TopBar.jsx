@@ -16,16 +16,16 @@ function TopBar() {
             </div>
             <div className="right">
                 <div className="icon-ctn">
-                  <SettingsIcon />
+                  <SettingsIcon className='icon'/>
                 </div>
                 <div className="icon-ctn">
                   <Link style={{ color: 'black' }} to={'/'}>
-                    <HomeIcon />
+                    <HomeIcon className='icon'/>
                   </Link>
                 </div>
                 <div className="icon-ctn">
                   <Badge badgeContent="2"color='primary'>
-                    <NotificationsIcon /> 
+                    <NotificationsIcon className='icon'/> 
                   </Badge>
                 </div>
                 <img src="http://cdn.onlinewebfonts.com/svg/img_264570.png" alt="" />
