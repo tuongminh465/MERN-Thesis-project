@@ -105,6 +105,7 @@
     height: 40px;
     width: max-content;
     min-width: 120px;
+    margin-bottom: 10px;
     background-color: limegreen;
     color: white;
     font-size: 18px;
@@ -118,4 +119,9 @@
 .single-user .user-info .update .right button:hover {
     background-color: green;
     border: 1px solid black
+}
+
+.single-user #error {
+    font-size: 20px;
+    color: red;
 }

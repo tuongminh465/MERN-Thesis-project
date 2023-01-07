@@ -39,7 +39,7 @@ function NewProduct() {
         !yearRef.current.value ||
         !imgRef.current.value ) 
     {
-      setError("Fields cannot be empty");
+      setError("Fields cannot be empty!");
       return;
     }
 

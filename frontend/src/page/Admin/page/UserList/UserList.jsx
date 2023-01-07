@@ -1,45 +1,48 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import { DataGrid } from '@mui/x-data-grid';
-import { userRows } from '../../mockData';
+// import { userRows } from '../../mockData';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUsers, deleteUsers } from '../../../../redux/apiCalls';
 
 import './UserList.css'
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 function UserList() {
 
-  const [data, setData] = useState(userRows)
+  const dispatch = useDispatch();
+  const users = useSelector(state => state.adminUsers.users)
+
+  useEffect(() => {
+    getUsers(dispatch)
+  }, [dispatch])
 
   const columns = [
-    { field: 'id', headerName: 'ID', flex: 0.5 },
-    { field: 'user', headerName: 'User', flex: 1, renderCell: (params) => {
+    { field: '_id', headerName: 'ID', flex: 0.5 },
+    { field: 'username', headerName: 'Username', flex: 1, renderCell: (params) => {
       return (
         <div className='user'>
-           <img className='pfp-pic' src={params.row.img} alt=""/>
+           <img className='pfp-pic' src="http://cdn.onlinewebfonts.com/svg/img_264570.png" alt=""/>
            {params.row.username}
         </div>
       )
     }},
     { field: 'email', headerName: 'Email', flex: 1 },
-    { field: 'transaction', headerName: 'Transaction', flex: 1 },
+    { field: 'isAdmin', headerName: 'Admin status', flex: 1 },
     {
       field: 'action', headerName: 'Actions', flex: 1, renderCell: (params) => {
         return (
           <div className='action'>
-            <Link to={`/admin/users/${params.row.id}`}>
+            <Link to={`/admin/users/${params.row._id}`}>
               <button className='edit'>Edit</button>
             </Link>
-            <button onClick={() => onDelete(params.row.id)} className='delete'>Delete</button>
+            <button onClick={() => deleteUsers(params.row._id, dispatch)} className='delete'>Delete</button>
           </div>
         )
-      }},
+      }
+    },
   ];
-
-  const onDelete = (id) => {
-    const newData = data.filter((user) => user.id !== id)
-    return setData(newData)
-  }
 
   return (
     <div className="user-list">
@@ -54,9 +57,10 @@ function UserList() {
       </div>
       <div style={{ height: '85vh', width: '100%' }}>
           <DataGrid
-            rows={data}
+            rows={users}
             columns={columns}
             pageSize={10}
+            getRowId={(row) => row._id}
             rowsPerPageOptions={[5]}
             checkboxSelection
           />

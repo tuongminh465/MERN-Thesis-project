@@ -5,7 +5,10 @@ const jwt = require("jsonwebtoken")
 
 //Register
 router.post("/register", async (req, res) => {
-
+    let isAdmin = false
+    if (req.body.isAdmin) {
+      isAdmin = true
+    }
     const newUser = new User({
         username: req.body.username,
         email: req.body.email,
@@ -14,6 +17,7 @@ router.post("/register", async (req, res) => {
             process.env.PASS_KEY,
         )
         .toString(),
+        isAdmin,
     })
 
     try {

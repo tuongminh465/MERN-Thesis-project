@@ -23,7 +23,8 @@ function Register() {
     if( !usernameRef.current.value || 
        !emailRef.current.value || 
        !passwordRef.current.value || 
-       !confirmPasswordRef.current.value) {
+       !confirmPasswordRef.current.value) 
+    {
       setError("Fields cannot be empty!")
       return;
     }
