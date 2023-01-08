@@ -8,6 +8,7 @@ function SingleUser() {
 
   const [userData, setUserData] = useState("")
   const [error, setError] = useState()
+  const [isLoading, setIsLoading] = useState(true)
 
   const location = useLocation();
   const id = location.pathname.split('/')[3];
@@ -17,6 +18,7 @@ function SingleUser() {
       try {
         const res = await userRequest(`users/find/${id}`);
         setUserData(res.data)
+        setIsLoading(false)
       } catch (err) {
         console.log(err);
       }
@@ -56,41 +58,47 @@ function SingleUser() {
 
   return (
     <div className="single-user">
-        <div className="title-ctn">
-          <h1>Edit User</h1>
-        </div>
-        <div className='user-info'>
-          <div className="show">
-            <p>Account details</p>
-            <div className="top">
-              <img src="http://cdn.onlinewebfonts.com/svg/img_264570.png" alt="" />
-              <div className="info">
-                <span className="username">{userData.username}</span>
-                <span>{userData.email}</span>
-                <span>ID: {id}</span>
+        {
+          isLoading ? 
+          <h1>Fetching data...</h1> :
+          <div>
+            <div className="title-ctn">
+              <h1>Edit User</h1>
+            </div>
+            <div className='user-info'>
+              <div className="show">
+                <p>Account details</p>
+                <div className="top">
+                  <img src="http://cdn.onlinewebfonts.com/svg/img_264570.png" alt="" />
+                  <div className="info">
+                    <span className="username">{userData.username}</span>
+                    <span>{userData.email}</span>
+                    <span>ID: {id}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="update">
+                  <p>Edit</p>
+                  <form action="">
+                    <div className="left">
+                      <div className="field">
+                        <label>Username:</label>
+                        <input type="text" defaultValue={userData.username} ref={usernameRef}/>
+                      </div>
+                      <div className="field">
+                        <label>Email:</label>
+                        <input type="text" defaultValue={userData.email} ref={emailRef}/>
+                      </div>
+                    </div>
+                    <div className="right">
+                      <button onClick={() => updateUser()}>Update</button>
+                      <p id='error'>{error}</p>
+                    </div>
+                  </form>
               </div>
             </div>
           </div>
-          <div className="update">
-              <p>Edit</p>
-              <form action="">
-                <div className="left">
-                  <div className="field">
-                    <label>Username:</label>
-                    <input type="text" defaultValue={userData.username} ref={usernameRef}/>
-                  </div>
-                  <div className="field">
-                    <label>Email:</label>
-                    <input type="text" defaultValue={userData.email} ref={emailRef}/>
-                  </div>
-                </div>
-                <div className="right">
-                  <button onClick={() => updateUser()}>Update</button>
-                  <p id='error'>{error}</p>
-                </div>
-              </form>
-          </div>
-        </div>
+        }
     </div>
   )
 }

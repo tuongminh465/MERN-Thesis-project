@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { DataGrid } from '@mui/x-data-grid';
@@ -13,9 +13,19 @@ function UserList() {
 
   const dispatch = useDispatch();
   const users = useSelector(state => state.adminUsers.users)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    getUsers(dispatch)
+    const fetchData = () => {
+      try {
+        getUsers(dispatch)
+        setIsLoading(false)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    fetchData();
   }, [dispatch])
 
   const columns = [
@@ -46,25 +56,31 @@ function UserList() {
 
   return (
     <div className="user-list">
-      <div className="title-ctn">
-        <h2>Users list</h2>
-        <Link style={{textDecoration: 'none'}} to={`/admin/users/newUser`}>
-          <button>
-            <PersonAddIcon />
-            Add new user
-          </button>
-        </Link>
-      </div>
-      <div style={{ height: '85vh', width: '100%' }}>
-          <DataGrid
-            rows={users}
-            columns={columns}
-            pageSize={10}
-            getRowId={(row) => row._id}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-          />
-      </div>
+      {
+        isLoading ? 
+        <h1>Fetching data...</h1> :
+        <div>
+          <div className="title-ctn">
+            <h2>Users list</h2>
+            <Link style={{textDecoration: 'none'}} to={`/admin/users/newUser`}>
+              <button>
+                <PersonAddIcon />
+                Add new user
+              </button>
+            </Link>
+          </div>
+          <div style={{ height: '85vh', width: '100%' }}>
+              <DataGrid
+                rows={users}
+                columns={columns}
+                pageSize={10}
+                getRowId={(row) => row._id}
+                rowsPerPageOptions={[5]}
+                checkboxSelection
+              />
+          </div>
+        </div>
+      }
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { productRows } from "../../mockData"
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
@@ -12,9 +12,19 @@ function AdminProduct() {
   // const [data, setData] = useState(productRows);
   const dispatch = useDispatch();
   const products = useSelector(state => state.adminProduct.products)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    getProducts(dispatch)
+    const fetchData = () => {
+      try {
+        getProducts(dispatch)
+        setIsLoading(false)
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    fetchData();
   }, [dispatch])
 
   const columns = [
@@ -60,26 +70,32 @@ function AdminProduct() {
 
   return (
     <div className="admin-products">
-        <div className="title-ctn">
-          <h2>Products list</h2>
-          <Link style={{textDecoration: 'none'}} to={`/admin/products/newProduct`}>
-            <button>
-              <AddIcon />
-              Add new product
-            </button>
-          </Link>
-        </div>
-        <div style={{ height: '85vh', width: '100%' }}>
-            <DataGrid
-              rows={products}
-              columns={columns}
-              pageSize={10}
-              getRowId={(row) => row._id}
-              rowsPerPageOptions={[10]}
-              checkboxSelection
-              getRowHeight={() => 'auto'}
-            />
-        </div>
+        {
+          isLoading ? 
+          <h1>Fetching data...</h1> :
+          <div>
+            <div className="title-ctn">
+              <h2>Products list</h2>
+              <Link style={{textDecoration: 'none'}} to={`/admin/products/newProduct`}>
+                <button>
+                  <AddIcon />
+                  Add new product
+                </button>
+              </Link>
+            </div>
+            <div style={{ height: '85vh', width: '100%' }}>
+                <DataGrid
+                  rows={products}
+                  columns={columns}
+                  pageSize={10}
+                  getRowId={(row) => row._id}
+                  rowsPerPageOptions={[10]}
+                  checkboxSelection
+                  getRowHeight={() => 'auto'}
+                />
+            </div>
+          </div>
+        }
     </div>
   )
 }
