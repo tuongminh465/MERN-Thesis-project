@@ -19,8 +19,8 @@ function EditProduct() {
         const res = await userRequest.get(`/products/find/${id}`)
         console.log(res.data)
         setProductData(res.data)
-        setIsLoading(false)
         setCurrentImg(res.data.img)
+        setIsLoading(false)
       } catch (err) {
         console.log(err)
       }
