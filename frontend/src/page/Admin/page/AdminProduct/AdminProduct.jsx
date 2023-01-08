@@ -49,7 +49,7 @@ function AdminProduct() {
     { field: 'action', headerName: 'Actions', flex: 0.5, renderCell: (params) => {
       return (
         <div className='action'>
-          <Link to={`/admin/products/${params.row.id}`}>
+          <Link to={`/admin/products/${params.row._id}`}>
             <button className='edit'>Edit</button>
           </Link>
           <button onClick={() => deleteProducts(params.row._id, dispatch)} className='delete'>Delete</button>

@@ -33,7 +33,6 @@
 .edit-product .product-info .top img {
     width: 250px;
     height: 250px;
-    border-radius: 50%;
     object-fit: cover;
 }
 
@@ -78,6 +77,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 10px;
+    width: 100%;
 }
 
 .edit-product .product-info .update .left .field label {
@@ -86,13 +86,15 @@
     font-weight: 600;
 }
 
-.edit-product .product-info .update .left .field input {
+.edit-product .product-info .update .left .field input,
+.edit-product .product-info .update .right input{
     padding: 5px;
     font-size: 16px;
-    width: 400px;
+    width: 90%;
     border: none;
     border-bottom: 1px solid lightgrey;
     transition-duration: 0.3s;
+    margin-bottom: 10px;
 }
 
 .edit-product .product-info .update .left .field input:focus {
@@ -123,6 +125,12 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+}
+
+.edit-product form .right img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
 }
 
 .edit-product form .right label {

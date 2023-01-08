@@ -1,82 +1,123 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import './EditProduct.css'
-import FileUploadIcon from '@mui/icons-material/FileUpload';
+
+import { userRequest } from '../../../../requestMethods';
 
 function EditProduct() {
   const location = useLocation();
   const id = location.pathname.split('/')[3];
 
+  const [productData, setProductData] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
+  const [currentImg, setCurrentImg] = useState("")
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await userRequest.get(`/products/find/${id}`)
+        console.log(res.data)
+        setProductData(res.data)
+        setIsLoading(false)
+        setCurrentImg(res.data.img)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    
+    getProduct();
+  }, [id])
+
+  const onImgChange = (e) => {
+    setCurrentImg(e.target.value)
+  }
+
   return (
     <div className="edit-product">
-        <div className="title-ctn">
-          <h1>Edit Product</h1>
-        </div>
-        <div className='product-info'>
-          <div className="show">
-            <p>Product details</p>
-            <div className="top">
-              <img src="https://phucanhcdn.com/media/product/42984_core_9.jpg" alt="" />
-              <div className="info">
-                <span>ID: {id}</span>
-                <span>Name: CPU Intel Core i9-11900K</span>
-                <span>Manufacturer: Intel</span>
-                <span>Type: CPU</span>
-                <span>Information:</span>
-                <ul>
-                  <li><p>8 cores</p></li>
-                  <li><p>16 threads</p></li>
-                  <li><p>Frequency: 3.5-5.3 GHz</p></li>
-                  <li><p>GPU clock: 2300 MHz</p></li>
-                </ul>
-                <span>Price: $369.99</span>
-                <span>Release year: 2022</span>
+        { !isLoading ? 
+          <div>
+            <div className="title-ctn">
+              <h1>Edit Product</h1>
+            </div>
+            <div className='product-info'>
+              <div className="show">
+                <p>Product details</p>
+                <div className="top">
+                  <img src={productData.img} alt="" />
+                  <div className="info">
+                    <span>ID: {id}</span>
+                    <span>Name: {productData.name}</span>
+                    <span>Manufacturer: {productData.manufacturer}</span>
+                    <span>Type: {productData.type}</span>
+                    <span>Information:</span>
+                    <ul>
+                      {
+                        productData.info.map((item) => {
+                          return (
+                            <li><p>{item}</p></li>
+                          )
+                        })
+                      }
+                    </ul>
+                    <span>Price: ${productData.price}</span>
+                    <span>Release year: {productData.releaseYear}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="update">
+                  <p>Edit</p>
+                  <form action="">
+                    <div className="left">
+                      <div className="field">
+                        <label>Name:</label>
+                        <input type="text" defaultValue={productData.name}/>
+                      </div>
+                      <div className="field">
+                        <label>Manufacturer:</label>
+                        <input type="text" defaultValue={productData.manufacturer}/>
+                      </div>
+                      <div className="field">
+                        <label>Information:</label>
+                        <input type="text" defaultValue={productData.info[0]}/>
+                        <input type="text" defaultValue={productData.info[1]}/>
+                        <input type="text" defaultValue={productData.info[2]}/>
+                        <input type="text" defaultValue={productData.info[3]}/>
+                      </div>
+                      <div className="field">
+                        <label>Price (in USD):</label>
+                        <input type="number" defaultValue={productData.price}/>
+                      </div>
+                      <div className="field">
+                        <label>Release year:</label>
+                        <input type="number" defaultValue={productData.releaseYear}/>
+                      </div>
+                    </div>
+                    <div className="right">
+                      <img 
+                        src={
+                          currentImg ? 
+                          currentImg : 
+                          "https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png"
+                        } 
+                        alt="" 
+                      />
+                      <label htmlFor="product-img-upload">
+                        {/* <FileUploadIcon style={{marginRight: 10}}/>
+                        Upload product image: */}
+                        Input image URL:
+                      </label>
+                      <input type="text" id="product-img-upload" onChange={(e) => onImgChange(e)}/>
+                      <div>
+                        <button>Update</button>
+                      </div>
+                    </div>
+                  </form>
               </div>
             </div>
-          </div>
-          <div className="update">
-              <p>Edit</p>
-              <form action="">
-                <div className="left">
-                  <div className="field">
-                    <label>Name:</label>
-                    <input type="text" defaultValue={'CPU Intel Core i9-11900K'}/>
-                  </div>
-                  <div className="field">
-                    <label>Manufacturer:</label>
-                    <input type="text" defaultValue={'Intel'}/>
-                  </div>
-                  <div className="field">
-                    <label>Information:</label>
-                    <input type="text" defaultValue={'8 cores'}/>
-                    <input type="text" defaultValue={'16 threads'}/>
-                    <input type="text" defaultValue={'Frequency: 3.5-5.3 GHz.'}/>
-                    <input type="text" defaultValue={'GPU clock: 2300 MHz'}/>
-                  </div>
-                  <div className="field">
-                    <label>Price:</label>
-                    <input type="number" defaultValue={'369.99'}/>
-                  </div>
-                  <div className="field">
-                    <label>Release year:</label>
-                    <input type="number" defaultValue={'2022'}/>
-                  </div>
-                </div>
-                <div className="right">
-                  <img src="https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png" alt="" />
-                  <label htmlFor="product-img-upload">
-                    <FileUploadIcon style={{marginRight: 10}}/>
-                    Upload product image:
-                  </label>
-                  <input type="file" id="product-img-upload" style={{display: 'none'}}/>
-                  <div>
-                    <button>Update</button>
-                  </div>
-                </div>
-              </form>
-          </div>
-        </div>
+          </div> :
+          <h1>Fetching data...</h1>
+        }
     </div>
   )
 }
