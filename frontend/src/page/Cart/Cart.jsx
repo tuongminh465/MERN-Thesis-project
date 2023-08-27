@@ -56,7 +56,6 @@ function Cart() {
     await userRequest.delete(`/cart/${userState.currentUser._id}`)
     dispatch(removeAllProduct());
   }
-  //create payment when receive token
 
   //create payment when receive token
   useEffect(() => {

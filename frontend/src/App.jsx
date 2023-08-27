@@ -23,6 +23,11 @@ import NewUser from "./page/Admin/page/NewUser/NewUser";
 import AdminProduct from "./page/Admin/page/AdminProduct/AdminProduct";
 import NewProduct from "./page/Admin/page/NewProduct/NewProduct";
 import EditProduct from "./page/Admin/page/EditProduct/EditProduct";
+import AllProductList from "./page/ProductList/components/AllProductList";
+import CPUProductList from "./page/ProductList/components/CPUProductList";
+import GPUProductList from "./page/ProductList/components/GPUProductList";
+import RAMProductList from "./page/ProductList/components/RAMProductList";
+import MainboardProductList from "./page/ProductList/components/MainboardProductList";
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
@@ -31,8 +36,13 @@ const App = () => {
     <Router>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/products/" element={<ProductList />} />
-        <Route path="/products/:type" element={<ProductList />} />
+        <Route path="/products" element={<ProductList />}>
+          <Route path="/products" element={<AllProductList />} />
+          <Route path="/products/CPU" element={<CPUProductList />} />
+          <Route path="/products/GPU" element={<GPUProductList />} />
+          <Route path="/products/RAM" element={<RAMProductList />} />
+          <Route path="/products/Mainboard" element={<MainboardProductList/>} />
+        </Route>
         <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={user ? <Navigate to="/"/> : <Login />} />

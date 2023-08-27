@@ -3,14 +3,24 @@
 }
 
 .pl-ctn .filter-ctn {
-    margin-top: 20px;
     border-top: 1px solid black;
     display: flex;
+    margin: 0px 0 20px 0;
+    padding: 0 10px 0 10px;
     justify-content: space-between;
 }
 
 .pl-ctn .filter-ctn .filter {
-    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.pl-ctn .filter-ctn .filter .manu-ctn,
+.pl-ctn .filter-ctn .filter .search-ctn {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .pl-ctn .filter-ctn .filter span,
@@ -23,11 +33,6 @@
 .pl-ctn .filter-ctn .filter select {
     padding: 10px;
     margin-right: 20px;
-}
-
-.pl-ctn .search-ctn {
-    display: flex;
-    margin-bottom: 20px;
 }
 
 .pl-ctn .search-ctn .search {
@@ -48,7 +53,7 @@
     justify-content: flex-start;
     height: max-content;
     min-height: 300px;
-    padding: 10px;
+    background-color: darkblue;
 }
 
 .pl-ctn .products-list .product-ctn {
@@ -56,24 +61,25 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 450px;
-    width: 400px;
+    margin: 10px 5px 10px 5px;
+    height: 440px;
+    width: 390px;
     border: 1px solid black;
     border-radius: 10px;
-    margin: 10px;
+    background-color: white;
+    color: black;
     padding: 10px;
-    background-color: royalblue;
-    transition-duration: 0.3s;
+    transition-duration: 0.5s;
 }
 
 .pl-ctn .products-list .product-ctn:hover {
-    background-color: darkblue;
+    background-color: royalblue;
+    color: white;
 }
 
 .pl-ctn .products-list .product-ctn img {
-    width: 380px;
-    height: 350px;
-    border: 1px solid black;
+    width: 370px;
+    height: 340px;
     border-radius: 20px;
     margin-bottom: 10px;
 }
@@ -83,7 +89,6 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    color: white;
 }
 
 .pl-ctn .products-list .product-ctn .info-ctn h4 {

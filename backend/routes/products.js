@@ -57,21 +57,54 @@ router.get("/find/:id", async (req, res) => {
     
 })
 
-//get Product by query
+//get Product
 router.get("/", async (req, res) => {
-    const newQuery = req.query.new 
-    const typeQuery = req.query.type
 
     try {
-        let products = [];
+        // let products = [];
         
-        if (newQuery) { products = await Product.find().sort({ createdAt: -1 }).limit(1); }
-        else if (typeQuery) { products =  await Product.find({type: typeQuery}); } 
-        else { products = await Product.find(); }
+        // if (req.query) { 
+        //     products =  await Product.find(req.query); 
+        // }
+        // else {
+        //     products = await Product.find();
+        // } 
+
+        const queryObj = { ...req.query }
+        const excludedFields = ['pageIndex', 'pageSize', 'sortBy', 'sortOrder']
+
+        excludedFields.forEach(ef => delete queryObj[ef])
+
+        let products = await Product.find(queryObj);
+
+        if (req.query.sortBy) {
+            const sortOrder = req.query.sortOrder === "desc" ? -1 : 1;
+
+            products.sort((a, b) => {
+                const propA = a[req.query.sortBy];
+                const propB = b[req.query.sortBy];
+                
+                if (propA < propB) return -1 * sortOrder;
+                if (propA > propB) return 1 * sortOrder;
+                return 0;
+            });
+        }
+
+        const searchString = req.query.search
+        console.log(searchString)
+
+        if (searchString) {
+            products = products.filter(product => 
+                product.name.includes(searchString) || 
+                product.name.includes(searchString.toUpperCase()) || 
+                product.name.includes(searchString.toLowerCase()) 
+            )
+        }
 
         res.status(200).json(products);
-    } catch {
+    } catch (err) {
         res.status(500).json(err)
+        console.log(err)
     }
 })
 

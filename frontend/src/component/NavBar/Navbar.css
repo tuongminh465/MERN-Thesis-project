@@ -20,12 +20,6 @@
     cursor: pointer;
 }
 
-.search-ctn {
-    display: flex;
-    align-items: center;
-    margin-left: 25px;
-}
-
 .search-ctn input {
     border: none;
 }

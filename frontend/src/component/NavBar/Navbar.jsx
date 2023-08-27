@@ -34,13 +34,11 @@ function Navbar() {
       <div className="wrapper">
         <div className='left'>
           <span className='language'>EN</span>
-          <div className="search-ctn">
             {
               userState ?
-              <h2>Hello there, {userState.username}!</h2> :
-              <h2>Hello there!</h2>
+              <h2 style={{marginLeft: 15}}>Hello there, {userState.username}!</h2> :
+              <h2 style={{marginLeft: 15}}>Hello there!</h2>
             }
-          </div>
         </div>
         <div className='center'>
           <Link style={{ textDecoration: 'none', color: 'inherit'}} to='/'>

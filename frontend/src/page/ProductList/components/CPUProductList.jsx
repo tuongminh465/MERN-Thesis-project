@@ -2,7 +2,7 @@ import React from 'react'
 import { useOutletContext } from 'react-router-dom'
 import ProductDisplay from './ProductDisplay'
 
-function RAMProductList() {
+function CPUProductList() {
   const [filteredProducts, setFilteredProducts] = useOutletContext()
 
   return (
@@ -12,4 +12,4 @@ function RAMProductList() {
   )
 }
 
-export default RAMProductList
+export default CPUProductList
