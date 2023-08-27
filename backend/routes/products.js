@@ -91,7 +91,6 @@ router.get("/", async (req, res) => {
         }
 
         const searchString = req.query.search
-        console.log(searchString)
 
         if (searchString) {
             products = products.filter(product => 
