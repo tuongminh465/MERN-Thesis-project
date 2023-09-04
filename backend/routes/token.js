@@ -23,9 +23,13 @@ const verifyToken = (req, res, next) => {
 
 const verifyTokenAndAuthorization = (req, res, next) => {
     verifyToken(req, res, () => {
-        if(req.user._id === req.params.userId || req.user._id === req.params.id || req.user._id === req.body.userId || req.user.isAdmin) {
+        if (req.user._id === req.params.userId || 
+            req.user._id === req.params.id || 
+            req.user.isAdmin) 
+        {
             next();
-        } else {
+        } 
+        else {
             res.status(403).json("Invalid authorization")
         }
     })

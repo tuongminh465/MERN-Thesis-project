@@ -30,9 +30,10 @@ const Success = () => {
         const newOrder = {
           userId: currentUser._id,
           products: cart.products.map((item) => ({
-            productId: item._id,
-            quantity: item.quantity,
             name: item.name,
+            img: item.img,
+            quantity: item.quantity,
+            subtotal: item.quantity * item.price
           })),
           total: cart.total,
           address: data.billing_details.address,

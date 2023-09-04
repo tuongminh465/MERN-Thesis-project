@@ -4,7 +4,8 @@ const userSlice = createSlice({
     name: "user",
     initialState: {
         currentUser: {
-            accessToken: ""
+            accessToken: "",
+            isAdmin: false
         },
         isFetching: false,
         error: false,
@@ -24,7 +25,10 @@ const userSlice = createSlice({
             console.log("Login failed")
         },
         logout: (state) => {
-            state.currentUser = null;
+            state.currentUser = {
+                accessToken: "",
+                isAdmin: false
+            };
         }
     }
 })

@@ -35,7 +35,7 @@ function Navbar() {
         <div className='left'>
           <span className='language'>EN</span>
             {
-              userState ?
+              userState.accessToken ?
               <h2 style={{marginLeft: 15}}>Hello there, {userState.username}!</h2> :
               <h2 style={{marginLeft: 15}}>Hello there!</h2>
             }
@@ -58,8 +58,11 @@ function Navbar() {
           <Link style={{ textDecoration: 'none', color: 'inherit'}} to='/register'>
             <div className="menu-items">REGISTER</div>
           </Link>
+          <Link style={{ textDecoration: 'none', color: 'inherit'}} to='/order'>
+            <div className="menu-items">MY ORDER</div>
+          </Link>
           {
-            userState ?
+            userState.accessToken ?
             <div className="menu-items" onClick={() => handleLogOut()}>LOG OUT</div> :
             <Link style={{ textDecoration: 'none', color: 'inherit'}} to='/login'>
               <div className="menu-items">LOG IN</div>

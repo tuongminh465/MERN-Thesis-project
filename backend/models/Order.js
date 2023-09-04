@@ -5,15 +5,18 @@ const orderSchema = new mongoose.Schema(
         userId: { type: String, require: true},
         products: [
             {
-                productId: {
+                name: {
+                    type: String
+                },
+                img: {
                     type: String
                 },
                 quantity: {
                     type: Number,
                     default: 1,
                 },
-                name: {
-                    type: String
+                subtotal: {
+                    type: Number
                 }
             },
         ],

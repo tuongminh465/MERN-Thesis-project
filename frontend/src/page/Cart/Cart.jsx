@@ -55,7 +55,7 @@ function Cart() {
   const handleRemoveAllProduct = async () => {
     await userRequest.delete(`/cart/${userState.currentUser._id}`)
     dispatch(removeAllProduct());
-  }
+  } 
 
   //create payment when receive token
   useEffect(() => {
@@ -122,8 +122,12 @@ function Cart() {
                                 </div>
                                 </div>
                                 <div className="price-details">
-                                    <p><b>Price:</b> ${product.price}</p>
-                                    <p><b>Total price:</b> ${product.price*product.quantity}</p>
+                                    <p>
+                                        <b>Price:</b> ${product.price}
+                                    </p>
+                                    <p>
+                                        <b>Total price:</b> ${parseFloat(product.price*product.quantity).toFixed(2)}
+                                    </p>
                                     <button onClick={() => handleRemoveProduct(product.productId, product.quantity, product.price)}>Remove from cart</button>
                                 </div>
                             </div>
@@ -145,7 +149,7 @@ function Cart() {
                             Subtotal:
                         </span>
                         <span className="item-price">
-                            ${cartState.total}
+                            ${parseFloat(cartState.total).toFixed(2)}
                         </span>
                     </div>
                     <div className="item-ctn">
@@ -169,7 +173,7 @@ function Cart() {
                             <b>Total:</b> 
                         </span>
                         <span className="item-price">
-                            ${cartState.total}
+                            ${parseFloat(cartState.total).toFixed(2)}
                         </span>
                     </div>
                 </div>
