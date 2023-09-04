@@ -1,9 +1,11 @@
 import React from "react";
+
+import './App.css'
+
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  // Link,
   Navigate
 } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -28,6 +30,7 @@ import CPUProductList from "./page/ProductList/components/CPUProductList";
 import GPUProductList from "./page/ProductList/components/GPUProductList";
 import RAMProductList from "./page/ProductList/components/RAMProductList";
 import MainboardProductList from "./page/ProductList/components/MainboardProductList";
+import Order from "./page/Order/Order";
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
@@ -45,10 +48,11 @@ const App = () => {
         </Route>
         <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={user ? <Navigate to="/"/> : <Login />} />
+        <Route path="/order" element={user.accessToken ? <Order /> : <Navigate to="/login"/>} />
+        <Route path="/login" element={user.accessToken ? <Navigate to="/"/> : <Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/success" element={<Success />} />
-        <Route path="/admin" element={<Admin />}>
+        <Route path="/admin" element={user.isAdmin ? <Admin /> : <Home />}>
           <Route path="/admin" element={<AdminHome />}/>
           <Route path="/admin/users" element={<UserList />} />
           <Route path="/admin/users/:id" element={<SingleUser />} />
@@ -58,7 +62,7 @@ const App = () => {
           <Route path="/admin/products/:id" element={<EditProduct />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      </Routes>.
     </Router>
   );
 };
