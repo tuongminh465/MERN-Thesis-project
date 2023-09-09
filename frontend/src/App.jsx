@@ -62,7 +62,7 @@ const App = () => {
           <Route path="/admin/products/:id" element={<EditProduct />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>.
+      </Routes>
     </Router>
   );
 };

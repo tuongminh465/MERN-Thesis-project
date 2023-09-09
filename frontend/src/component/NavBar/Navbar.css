@@ -2,7 +2,7 @@
     height: 60px;
 }
 
-.wrapper {
+.navbar-ctn .wrapper {
     display: flex;
     align-items: center;
     padding: 10px 20px;

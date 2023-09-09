@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
 
-p, span, h2, h3, h4 {
+h1, h2, h3, h4, a, label {
+    font-family: 'Montserrat'
+}
+
+p, span, input {
     font-family: 'Roboto';
 }
+
