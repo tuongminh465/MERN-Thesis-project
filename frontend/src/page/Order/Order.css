@@ -23,12 +23,41 @@
     height: 50%;
     background-color: white;
     border-radius: 20px;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.23);
 }
 
 .order-ctn .filter-ctn .search-ctn,
 .order-ctn .filter-ctn .sort-ctn {
     flex: 1;
     padding: 15px;
+}
+
+.order-ctn .filter-ctn .search-ctn .field {
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.order-ctn .filter-ctn .search-ctn .field div {
+    height: 80%;
+}
+
+.order-ctn .filter-ctn .search-ctn .field input,
+.order-ctn .filter-ctn .search-ctn .field select {
+    height: 50%;
+    padding-left: 10px;
+}
+
+.order-ctn .filter-ctn .sort-ctn {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-ctn .filter-ctn .sort-ctn select {
+    height: 30%;
+    padding-left: 10px;
 }
 
 .order-ctn .order-list {
@@ -47,6 +76,7 @@
     min-height: 350px;
     background-color: white;
     border-radius: 10px;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.23); 
 }
 
 .order-ctn .order-list .order-item .header {
@@ -63,6 +93,10 @@
     justify-content: space-around;
     padding-left: 15px;
     padding-top: 5px;
+}
+
+.order-ctn .order-list .order-item .header .header-item h2{
+    font-size: 36px;
 }
 
 .order-ctn .order-list .order-item .header .header-item p {
@@ -103,7 +137,7 @@
     padding: 10px;
 }
 
-.order-ctn .order-list .order-item .footer button{
+.order-ctn .order-list .order-item .footer button {
     display: flex;
     justify-content: space-evenly;
     align-items: center;

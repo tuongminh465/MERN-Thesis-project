@@ -4,10 +4,14 @@ import {
 } from 'react-router-dom'
 import { userRequest } from '../../requestMethods';
 import { useSelector } from 'react-redux'
+import dayjs from 'dayjs';
 
 import './Order.css'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import Navbar from '../../component/NavBar/Navbar'
 import Announcement from '../../component/Announcement/Announcement'
@@ -21,16 +25,50 @@ function Order() {
 
   const [orders, setOrders] = useState([])
   const [sort, setSort] = useState("");
+  const [status, setStatus] = useState("")
+  const [search, setSearch] = useState("")
+  const [createdDate, setCreatedDate] = useState();
 
-  async function getOrders() {
-    const res = await userRequest.get(`/orders/find/${userState._id}`)
+  async function getOrders(query) {
+    const res = await userRequest.get(`/orders/find/${userState._id}?${query}`)
 
     setOrders(res.data)
   }
 
   useEffect(() => {
-    getOrders()
+    getOrders("")
   }, [])
+
+  function queryBuilder() {
+    let query = ""
+
+    if (status) {
+        query += `status=${status}&`
+    }
+
+    if (createdDate) {
+        query += `createdAt=${createdDate.toISOString()}&`
+    }
+
+    if (sort) {
+        const sortBy = sort.split('-')[0]
+        const sortOrder = sort.split("-")[1]
+
+        query += `sortBy=${sortBy}&sortOrder=${sortOrder}&`
+    }
+
+    if (search) {
+        query += `search=${search}&`
+    }
+    
+    return query
+  }
+
+  useEffect(() => {
+    const query = queryBuilder()
+
+    getOrders(query)
+  }, [status, createdDate, sort, search])
 
   function convertDateTimeToString(mongoDateTime) {
     const dateTime = new Date(mongoDateTime)
@@ -71,24 +109,36 @@ function Order() {
             <div className="left">
               <div className="filter-ctn">
                 <div className="search-ctn">
-                  <h2>Search order</h2>
-                  <div>
-                    <label>Search by created date</label>
-                    <input type='date'/>
+                  <h2 style={{ marginBottom: 15 }}>Search order</h2>
+                  <div className="field">
+                    <label>Search by Created Date</label>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        onChange={(newValue) => setCreatedDate(newValue)}
+                      />
+                    </LocalizationProvider>
                   </div>
-                  <div>
+                  <div className="field">
                     <label>Search by product name</label>
-                    <input type='text'/>
+                    <input type='text' onChange={(e) => setSearch(e.target.value)}/>
+                  </div>
+                  <div className="field">
+                    <label>Search by status</label>
+                    <select name="none" id="" onChange={(e) => setStatus(e.target.value)}>
+                    <option value="">None</option>
+                    <option value="pending">Pending</option>
+                    <option value="shipping">Shipping</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
                   </div>
                 </div>
                 <div className="sort-ctn">
-                  <h2>Sort order</h2>
+                  <h2 style={{ marginBottom: 15 }}>Sort order</h2>
                   <select name="none" id="" onChange={(e) => setSort(e.target.value)}>
-                    <option value="none">None</option>
-                    <option value="name-asc">Name (A-Z)</option>
-                    <option value="name-desc">Name (Z-A)</option>
-                    <option value="price-asc">Price (asc)</option>
-                    <option value="price-desc">Price (desc)</option>
+                    <option value="">None</option>
+                    <option value="createdAt-asc">Created Date (asc)</option>
+                    <option value="createdAt-desc">Created Date (desc)</option>
                   </select>
                 </div>
               </div>

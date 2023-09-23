@@ -61,19 +61,25 @@ router.get("/find/:id", async (req, res) => {
 router.get("/", async (req, res) => {
 
     try {
-        // let products = [];
-        
-        // if (req.query) { 
-        //     products =  await Product.find(req.query); 
-        // }
-        // else {
-        //     products = await Product.find();
-        // } 
-
-        const queryObj = { ...req.query }
-        const excludedFields = ['pageIndex', 'pageSize', 'sortBy', 'sortOrder']
+        let searchString = "."
+        let queryObj = { ...req.query }
+        const excludedFields = ['pageIndex', 'pageSize', 'sortBy', 'sortOrder', 'search']
 
         excludedFields.forEach(ef => delete queryObj[ef])
+
+        if (req.query.search) {
+            searchString = req.query.search
+
+            queryObj = {
+                ...queryObj,
+                name: { 
+                    $regex: searchString, 
+                    $options: "i" 
+                } 
+            }
+        }        
+
+        console.log
 
         let products = await Product.find(queryObj);
 
@@ -88,16 +94,6 @@ router.get("/", async (req, res) => {
                 if (propA > propB) return 1 * sortOrder;
                 return 0;
             });
-        }
-
-        const searchString = req.query.search
-
-        if (searchString) {
-            products = products.filter(product => 
-                product.name.includes(searchString) || 
-                product.name.includes(searchString.toUpperCase()) || 
-                product.name.includes(searchString.toLowerCase()) 
-            )
         }
 
         res.status(200).json(products);

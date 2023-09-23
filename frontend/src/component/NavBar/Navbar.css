@@ -9,38 +9,38 @@
     justify-content: space-between;
 }
 
-.left {
+.navbar-ctn .left {
     flex: 1;
     display: flex;
     align-items: center;
 }
 
-.language {
+.navbar-ctn .language {
     font-size: 14px;
     cursor: pointer;
 }
 
-.search-ctn input {
+.navbar-ctn .search-ctn input {
     border: none;
 }
 
-.center {
+.navbar-ctn .center {
     flex: 1;
     text-align: center;
 }
 
-.logo {
+.navbar-ctn .logo {
     font-weight: bold;
 }
 
-.right {
+.navbar-ctn .right {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
-.menu-items {
+.navbar-ctn .menu-items {
     font-size: 14px;
     font-weight: 400;
     cursor: pointer;
@@ -49,7 +49,7 @@
     
 }
 
-.menu-items:hover {
+.navbar-ctn .menu-items:hover {
     color: blue;
     font-weight: bold;
     font-size: 16px;

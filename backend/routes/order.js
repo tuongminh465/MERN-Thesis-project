@@ -65,10 +65,59 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 //get Order by user id
 router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
     try {
-        const orders = await Order.find({userId: req.params.userId});
+        let searchString = "."
+        let queryObj = { ...req.query, userId: req.params.userId }
+        const excludedFields = ['pageIndex', 'pageSize', 'sortBy', 'sortOrder', 'search']
+
+        excludedFields.forEach(ef => delete queryObj[ef])
+        
+        if (req.query.createdAt) {
+            const clientDate = new Date(req.query.createdAt); // Assuming it's in the client's timezone
+            const utcClientDate = new Date(clientDate.toUTCString());
+        
+            queryObj = {
+                ...queryObj,
+                createdAt: {
+                    $gte: utcClientDate, // Greater than or equal to the client's date
+                    $lt: new Date(utcClientDate.getTime() + 24 * 60 * 60 * 1000), // Less than the next day
+                },
+            };
+        }
+         
+        
+        if (req.query.search) {
+            searchString = req.query.search
+
+            queryObj = {
+                ...queryObj,
+                products: {
+                    $elemMatch: {
+                        name: { 
+                            $regex: searchString, 
+                            $options: "i" 
+                        }
+                    }
+                }
+            }
+        }
+
+        const orders = await Order.find(queryObj);
+
+        if (req.query.sortBy) {
+            const sortOrder = req.query.sortOrder === "desc" ? -1 : 1;
+
+            orders.sort((a, b) => {
+                const propA = a[req.query.sortBy];
+                const propB = b[req.query.sortBy];
+                
+                if (propA < propB) return -1 * sortOrder;
+                if (propA > propB) return 1 * sortOrder;
+                return 0;
+            });
+        }
 
         res.status(200).json(orders);
-    } catch {
+    } catch (err) {
         res.status(500).json(err)
     }
     

@@ -64,12 +64,12 @@
     margin: 10px 5px 10px 5px;
     height: 440px;
     width: 390px;
-    border: 1px solid black;
     border-radius: 10px;
     background-color: white;
     color: black;
     padding: 10px;
     transition-duration: 0.5s;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.23);
 }
 
 .pl-ctn .products-list .product-ctn:hover {

@@ -138,7 +138,7 @@ function ProductList() {
             <div className="filter">
                 <div>
                     <span>Filter products by type:</span>
-                    <select name="" id="" onChange={e => handleTypeChange(e)} defaultValue="">
+                    <select onChange={e => handleTypeChange(e)} defaultValue="">
                         { type === undefined || type === '' ? <option value="" selected>All</option> : <option value="">All</option> }
                         { type === "CPU" ? <option value="CPU" selected>CPU</option> : <option value="CPU" >CPU</option> }
                         { type === "GPU" ? <option value="GPU" selected>GPU</option> : <option value="GPU">GPU</option> }
@@ -150,8 +150,8 @@ function ProductList() {
             <div className="filter">
                 <div>
                     <span>Sort products:</span>
-                    <select name="none" id="" onChange={(e) => setSort(e.target.value)}>
-                        <option value="none">None</option>
+                    <select onChange={(e) => setSort(e.target.value)}>
+                        <option value="">None</option>
                         <option value="name-asc">Name (A-Z)</option>
                         <option value="name-desc">Name (Z-A)</option>
                         <option value="price-asc">Price (asc)</option>
