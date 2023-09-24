@@ -41,12 +41,12 @@
 }
 
 .navbar-ctn .menu-items {
+    font-family: 'Montserrat';
     font-size: 14px;
     font-weight: 400;
     cursor: pointer;
     margin-left: 25px;
     transition-duration: 0.3s;
-    
 }
 
 .navbar-ctn .menu-items:hover {

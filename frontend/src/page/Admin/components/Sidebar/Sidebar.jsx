@@ -81,7 +81,7 @@ function Sidebar() {
                     </li>
                 </ul>
             </div>
-            <div className="menu">
+            {/* <div className="menu">
                 <h3 className="title">
                     Notifications
                 </h3>
@@ -118,7 +118,7 @@ function Sidebar() {
                         Reports
                     </li>
                 </ul>
-            </div>
+            </div> */}
         </div>
     </div>
   )

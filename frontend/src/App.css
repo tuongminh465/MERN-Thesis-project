@@ -5,7 +5,7 @@ h1, h2, h3, h4, a, label {
     font-family: 'Montserrat'
 }
 
-p, span, input {
+p, span, input, li {
     font-family: 'Roboto';
 }
 

@@ -6,16 +6,18 @@ import { userRequest } from '../../requestMethods';
 import { useSelector } from 'react-redux'
 import dayjs from 'dayjs';
 
+
 import './Order.css'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from 'antd';
 
 import Navbar from '../../component/NavBar/Navbar'
 import Announcement from '../../component/Announcement/Announcement'
 import Footer from '../../component/Footer/Footer';
+
+const { RangePicker } = DatePicker;
+const dateFormat = 'YYYY-MM-DD';
 
 function Order() {
 
@@ -27,7 +29,8 @@ function Order() {
   const [sort, setSort] = useState("");
   const [status, setStatus] = useState("")
   const [search, setSearch] = useState("")
-  const [createdDate, setCreatedDate] = useState();
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
 
   async function getOrders(query) {
     const res = await userRequest.get(`/orders/find/${userState._id}?${query}`)
@@ -46,8 +49,8 @@ function Order() {
         query += `status=${status}&`
     }
 
-    if (createdDate) {
-        query += `createdAt=${createdDate.toISOString()}&`
+    if (startDate && endDate) {
+        query += `startDate=${startDate}&endDate=${endDate}&`
     }
 
     if (sort) {
@@ -68,7 +71,7 @@ function Order() {
     const query = queryBuilder()
 
     getOrders(query)
-  }, [status, createdDate, sort, search])
+  }, [status, startDate, endDate, sort, search])
 
   function convertDateTimeToString(mongoDateTime) {
     const dateTime = new Date(mongoDateTime)
@@ -112,11 +115,13 @@ function Order() {
                   <h2 style={{ marginBottom: 15 }}>Search order</h2>
                   <div className="field">
                     <label>Search by Created Date</label>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                        onChange={(newValue) => setCreatedDate(newValue)}
+                      <RangePicker
+                        style={{height: '80%'}}
+                        onChange={newValue => {
+                          setStartDate(dayjs(newValue[0]).format(dateFormat))
+                          setEndDate(dayjs(newValue[1]).format(dateFormat))
+                        }}
                       />
-                    </LocalizationProvider>
                   </div>
                   <div className="field">
                     <label>Search by product name</label>
@@ -147,7 +152,7 @@ function Order() {
               <div className="order-list">
               {
                 orders.map((order, index) => (
-                  <div className="order-item">
+                  <div className="order-item" key={order._id}>
                     <div className="header">
                       <div className="header-item">
                         <h2>Order ID</h2>

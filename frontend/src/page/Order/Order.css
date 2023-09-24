@@ -39,10 +39,6 @@
     margin-bottom: 10px;
 }
 
-.order-ctn .filter-ctn .search-ctn .field div {
-    height: 80%;
-}
-
 .order-ctn .filter-ctn .search-ctn .field input,
 .order-ctn .filter-ctn .search-ctn .field select {
     height: 50%;

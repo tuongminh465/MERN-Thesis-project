@@ -71,15 +71,15 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
 
         excludedFields.forEach(ef => delete queryObj[ef])
         
-        if (req.query.createdAt) {
-            const clientDate = new Date(req.query.createdAt); // Assuming it's in the client's timezone
-            const utcClientDate = new Date(clientDate.toUTCString());
-        
+        if (req.query.startDate && req.query.endDate) {
+            const endDate = new Date(req.query.endDate); // Convert the query string to a Date object
+            endDate.setDate(endDate.getDate() + 1);
+
             queryObj = {
                 ...queryObj,
                 createdAt: {
-                    $gte: utcClientDate, // Greater than or equal to the client's date
-                    $lt: new Date(utcClientDate.getTime() + 24 * 60 * 60 * 1000), // Less than the next day
+                    $gte: new Date(req.query.startDate),
+                    $lt: endDate
                 },
             };
         }
@@ -100,7 +100,7 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
                 }
             }
         }
-
+        
         const orders = await Order.find(queryObj);
 
         if (req.query.sortBy) {
@@ -120,7 +120,6 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
     } catch (err) {
         res.status(500).json(err)
     }
-    
 })
 
 //get all Order 
