@@ -59,17 +59,17 @@ function NewProduct() {
     }
 
     try {
-      const res = await userRequest.post("/products", newProduct)
-      console.log(res)
+      await userRequest.post("/products", newProduct)
+
       window.alert("New product successfully added!")
-    } catch (err) {
-      console.log(err)
+    } 
+    catch (err) {
       const errCode = err.response.data.code
+
       if (errCode === 11000 || errCode === "11000") {
         setError("Cannot have 2 products of the same name!")
       }
     }
-    console.log(newProduct)
   }
 
   return (

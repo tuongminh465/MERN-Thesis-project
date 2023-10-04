@@ -41,30 +41,6 @@ function EditProduct() {
               <h1>Edit Product</h1>
             </div>
             <div className='product-info'>
-              <div className="show">
-                <p>Product details</p>
-                <div className="top">
-                  <img src={productData.img} alt="" />
-                  <div className="info">
-                    <span>ID: {id}</span>
-                    <span>Name: {productData.name}</span>
-                    <span>Manufacturer: {productData.manufacturer}</span>
-                    <span>Type: {productData.type}</span>
-                    <span>Information:</span>
-                    <ul>
-                      {
-                        productData.info.map((item) => {
-                          return (
-                            <li><p>{item}</p></li>
-                          )
-                        })
-                      }
-                    </ul>
-                    <span>Price: ${productData.price}</span>
-                    <span>Release year: {productData.releaseYear}</span>
-                  </div>
-                </div>
-              </div>
               <div className="update">
                   <p>Edit</p>
                   <form action="">

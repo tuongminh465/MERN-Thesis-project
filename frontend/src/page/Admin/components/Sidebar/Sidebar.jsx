@@ -9,11 +9,11 @@ import PersonIcon from '@mui/icons-material/Person';
 import StoreMallDirectoryIcon from '@mui/icons-material/StoreMallDirectory';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import EmailIcon from '@mui/icons-material/Email';
-import ForumIcon from '@mui/icons-material/Forum';
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import ReportIcon from '@mui/icons-material/Report';
+// import EmailIcon from '@mui/icons-material/Email';
+// import ForumIcon from '@mui/icons-material/Forum';
+// import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+// import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+// import ReportIcon from '@mui/icons-material/Report';
 
 function Sidebar() {
 
@@ -71,10 +71,15 @@ function Sidebar() {
                             Products
                         </li>
                     </Link>
-                    <li>
-                        <ReceiptIcon className='icon'/>
-                        Transaction
-                    </li>
+                    <Link 
+                        style={{textDecoration: 'none', color: 'black'}} 
+                        to={`/admin/orders`}
+                    >
+                        <li className={active === 'orders' ? 'active' : ''}>
+                            <ReceiptIcon className='icon'/>
+                            Orders
+                        </li>
+                    </Link>
                     <li>
                         <BarChartIcon className='icon'/>
                         Report

@@ -55,7 +55,7 @@
 .user-list .action .edit {
     height: 30px;
     width: 60px;
-    background-color: limegreen;
+    background-color: green;
     color: white;
     border: hidden;
     border-radius: 5px;
@@ -67,7 +67,7 @@
 }
 
 .user-list .action .edit:hover {
-    background-color: green;
+    background-color: limegreen;
     border: 1px solid black;
 }
 

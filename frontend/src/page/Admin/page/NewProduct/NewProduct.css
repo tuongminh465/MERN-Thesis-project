@@ -8,6 +8,7 @@
 
 .new-product form {
     display: flex;
+    justify-content: space-between;
 }
 
 .new-product form .left,
@@ -16,6 +17,14 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: flex-start;
+}
+
+.new-product form .left {
+    flex: 2;
+}
+
+.new-product form .right {
+    flex: 1;
 }
 
 .new-product .field {

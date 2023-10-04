@@ -47,9 +47,6 @@
     font-size: 20px;
 }
 
-/* .edit-product .product-info .top .info ul {
-    margin-bottom: 10px;
-} */
 
 .edit-product .product-info .top .info ul p {
     font-size: 18px;
@@ -65,9 +62,11 @@
 
 .edit-product .product-info .update form {
     display: flex;
+    justify-content: space-between;
 }
 
 .edit-product .product-info .update .left {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -102,6 +101,13 @@
     border-bottom: 1px solid black;
 }
 
+.edit-product form .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .edit-product .product-info .update .right button {
     height: 40px;
     width: max-content;
@@ -121,12 +127,6 @@
     border: 1px solid black
 }
 
-.edit-product form .right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
 .edit-product form .right img {
     width: 400px;
     height: 400px;
@@ -134,7 +134,6 @@
 }
 
 .edit-product form .right label {
-    display: flex;
     align-items: center;
     font-size: 20px;
     font-weight: 600;

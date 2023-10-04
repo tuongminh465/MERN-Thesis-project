@@ -19,6 +19,7 @@ import SingleProduct from "./page/SingleProduct/SingleProduct";
 import Success from "./page/Success/Success";
 import Admin from "./page/Admin/Admin";
 import UserList from "./page/Admin/page/UserList/UserList";
+import OrderList from "./page/Admin/page/OrderList/OrderList";
 import SingleUser from "./page/Admin/page/SingleUser/SingleUser";
 import AdminHome from "./page/Admin/page/AdminHome/AdminHome";
 import NewUser from "./page/Admin/page/NewUser/NewUser";
@@ -31,6 +32,8 @@ import GPUProductList from "./page/ProductList/components/GPUProductList";
 import RAMProductList from "./page/ProductList/components/RAMProductList";
 import MainboardProductList from "./page/ProductList/components/MainboardProductList";
 import Order from "./page/Order/Order";
+import SingleOrder from "./page/Admin/page/SingleOrder/SingleOrder";
+
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
@@ -60,6 +63,8 @@ const App = () => {
           <Route path="/admin/products" element={<AdminProduct />} />
           <Route path="/admin/products/newProduct" element={<NewProduct />} />
           <Route path="/admin/products/:id" element={<EditProduct />} />
+          <Route path="/admin/orders" element={<OrderList />} />
+          <Route path="/admin/orders/:id" element={<SingleOrder />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

@@ -90,7 +90,7 @@ function AdminProduct() {
                   pageSize={10}
                   getRowId={(row) => row._id}
                   rowsPerPageOptions={[10]}
-                  checkboxSelection
+                  checkboxSelection={false}
                   getRowHeight={() => 'auto'}
                 />
             </div>

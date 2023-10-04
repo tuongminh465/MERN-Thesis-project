@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { DataGrid } from '@mui/x-data-grid';
-// import { userRows } from '../../mockData';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers, deleteUsers } from '../../../../redux/apiCalls';
 
@@ -76,7 +75,7 @@ function UserList() {
                 pageSize={10}
                 getRowId={(row) => row._id}
                 rowsPerPageOptions={[5]}
-                checkboxSelection
+                checkboxSelection={false}
               />
           </div>
         </div>

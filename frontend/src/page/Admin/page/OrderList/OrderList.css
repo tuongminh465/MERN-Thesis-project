@@ -1,0 +1,40 @@
+.order-list-table .pending {
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: yellow;
+    color: rgb(236, 154, 0);
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.order-list-table .cancelled {
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: pink;
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.order-list-table .shipping {
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: lightblue;
+    color: blue;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.order-list-table .delivered {
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(93, 252, 93);
+    color: green;
+    font-weight: bold;
+    font-size: 16px;
+}
+

@@ -125,12 +125,42 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
 //get all Order 
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
     try {
-        let orders = await Order.find()
-
+        let pipeline = [
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: 'userId', // Field in the Order collection
+                    foreignField: "_id",   // Field in the User collection
+                    as: 'user',
+                },
+            },
+            // {
+            //     $unwind: '$user',
+            // },
+            // {
+            //     $project: {
+            //         _id: 1,
+            //         username: '$user.username',
+            //     },
+            // },
+        ];
+    
+        const orders = await Order.aggregate(pipeline);
+    
         res.status(200).json(orders);
-    } catch {
-        res.status(500).json(err)
-    }
+    } catch (err) {
+        res.status(500).json(err);
+    }    
+})
+
+router.get("/:id", verifyTokenAndAdmin, async (req, res) => {
+    try {
+        const orders = await Order.findById(req.params.id);
+    
+        res.status(200).json(orders);
+    } catch (err) {
+        res.status(500).json(err);
+    }    
 })
 
 //get monthly income
