@@ -26,9 +26,7 @@
 
 .cati-ctn .title {
     color: darkorange;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
-    font-size: 40px;
+    font-size: 60px;
 }
 
 .cati-ctn button {

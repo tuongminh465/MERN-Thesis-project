@@ -13,7 +13,7 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
 function Cart() {
 
-  const KEY = "pk_test_51Lj02zFJySGvyCoSjWVG5uSB96KXgN8nErn1GdKHCjqWDpAzItECyLEPtHREprBI6WYT7RgBudS7zlsZXQUiV6Ym00q33dhdQ8";
+  const KEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY
 
   const cartState = useSelector(state => state.cart)  
   const userState = useSelector(state => state.user)

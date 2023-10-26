@@ -1,0 +1,55 @@
+.cs-main-container {
+    width: 289px;
+    height: 100%;
+    flex-direction: column;
+    border: none;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.cs-main-container header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: row;
+    height: 45px;
+    border: hidden;
+    border-radius: 20px 20px 0px 0px;
+    background-color: steelblue;
+    color: white;
+    padding: 5px 5px 0px 10px;
+}
+
+.cs-main-container header .left {
+    display: flex;
+    align-items: center;
+}
+
+.cs-main-container header .icon {
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.cs-main-container header .icon:hover {
+    border-bottom: 1px solid white;
+}
+
+.cs-main-container img {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+    background-color: aqua;
+    border-radius: 50px;
+} 
+
+.cs-main-container .status-ctn span {
+    font-size: 12px;
+}
+
+.cs-main-container .status-ctn .status-online {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: limegreen;
+    border-radius: 50px;
+    margin-right: 5px;
+}

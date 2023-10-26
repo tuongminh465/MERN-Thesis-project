@@ -10,6 +10,7 @@ import Slider from '../../component/Slider/Slider'
 import Category from '../../component/Category/Category'
 import Products from '../../component/Products/Products'
 import Footer from '../../component/Footer/Footer'
+import Chatbot from '../../component/Chatbot/Chatbot'
 
 
 function Home() {
@@ -17,8 +18,6 @@ function Home() {
   const dispatch = useDispatch()
 
   const userState = useSelector(state => state.user.currentUser)
-
-  console.log(userState)
   
   useEffect(() => {
     if(userState) {
@@ -45,6 +44,7 @@ function Home() {
       <Category />
       <Products />
       <Footer />
+      <Chatbot />
     </div>
   )
 }
