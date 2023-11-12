@@ -3,7 +3,7 @@
     background-color: teal;
     padding-top: 20px;
     border-top: 1px solid black;
-    color: white
+    color: white;
 }
 
 .spd-ctn .back-btn {
@@ -57,13 +57,11 @@
 }
 
 .spd-ctn .wrapper .info-ctn p{
-    font-size: 32px;
-    font-weight: bold;
+    font-size: 24px;
     margin-bottom: 15px;
 }
 
-.spd-ctn .wrapper .info-ctn .price,
-.spd-ctn .wrapper .info-ctn .type{
+.spd-ctn .wrapper .info-ctn .section-header {
     font-size: 32px;
     font-weight: 600;
     margin-bottom: 10px;
@@ -92,6 +90,9 @@
     align-items: center;
     font-weight: 700;
     font-size: 25px;
+    padding: 0 10px 0 10px;
+    border: 3px solid white;
+    border-radius: 10px;
 }
 
 .spd-ctn .wrapper .info-ctn .input-ctn .amount-ctn span {
