@@ -148,25 +148,31 @@ function SingleProduct() {
                 </div>
                 <div className="info-ctn">
                     <h1>{product.name}</h1>
-                    <p className="type">{product.type}</p>
-                    {/* <p className="desc"><b>Description:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate nam sit vero libero atque laudantium, totam hic inventore maiores at? Consectetur dolorem soluta placeat commodi inventore voluptatibus perspiciatis. Dicta, aut!</p> */}
-                    <p className="desc">Info:</p>
+                    <p className="section-header">${product.price}</p>
+                    <br />
+                    <p className="section-header">{product.type}</p>
+                    <p className="section-header">Info</p>
                     {
                         product.info ? 
                         <ul>
                             {
                                 product.info.map(item => (
                                     <li>
-                                        <p>{item}</p>
+                                        <p style={{ fontSize: 24 }}>{item}</p>
                                     </li>
                                 ))
                             }
                         </ul> :
                         ""
                     }
-                    <p className="year"><b>Release year:</b> {product.releaseYear}</p>
-                    <p className="price">${product.price}</p>
-                    <p className="stock"><b>Status:</b> In stock</p>
+                    <p>
+                        <span className="section-header">Release year: </span>
+                        {product.releaseYear}
+                    </p>
+                    <p>
+                        <span className="section-header">Status: </span>
+                        In stock
+                    </p>
                     <div className="input-ctn">
                         <div className="amount-ctn">
                             <RemoveIcon className='icon' onClick={() => handleChangeAmount(-1)}/>
