@@ -38,11 +38,10 @@ function EditProduct() {
         { !isLoading ? 
           <div>
             <div className="title-ctn">
-              <h1>Edit Product</h1>
+              <h1 style={{ color: 'white' }}>Edit Product</h1>
             </div>
             <div className='product-info'>
               <div className="update">
-                  <p>Edit</p>
                   <form action="">
                     <div className="left">
                       <div className="field">

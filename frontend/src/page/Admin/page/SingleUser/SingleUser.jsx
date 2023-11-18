@@ -63,7 +63,7 @@ function SingleUser() {
           <h1>Fetching data...</h1> :
           <div>
             <div className="title-ctn">
-              <h1>Edit User</h1>
+              <h1 style={{ color: 'white' }}>Edit User</h1>
             </div>
             <div className='user-info'>
               <div className="show">

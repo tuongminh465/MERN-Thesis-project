@@ -51,29 +51,29 @@ function NewUser() {
         <form action="">
             <div className="field">
                 <label>
-                    Username:
-                    <span style={{color: 'red'}}>*</span>
+                    Username
+                    <span style={{color: 'red'}}> *</span>
                 </label>
                 <input type="text" placeholder='Enter new username here...' ref={usernameRef} />
             </div>
             <div className="field">
                 <label>
-                    Email:
-                    <span style={{color: 'red'}}>*</span>
+                    Email
+                    <span style={{color: 'red'}}> *</span>
                 </label>
                 <input type="email" placeholder='Enter email here...' ref={emailRef} />
             </div>
             <div className="field">
                 <label>
-                    Password:
-                    <span style={{color: 'red'}}>*</span>
+                    Password 
+                    <span style={{color: 'red'}}> *</span>
                 </label>
                 <input type="password" placeholder='Enter new password here...' ref={passwordRef} />
             </div>
             <div className="field">
                 <label>
-                    Admin status    :
-                    <span style={{color: 'red'}}>*</span>
+                    Admin status 
+                    <span style={{color: 'red'}}> *</span>
                 </label>
                 <div className="admin-status">
                     <div>

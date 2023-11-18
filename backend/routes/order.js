@@ -125,24 +125,35 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
 //get all Order 
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
     try {
-        let pipeline = [
+        const pipeline = [
             {
-                $lookup: {
-                    from: 'users',
-                    localField: 'userId', // Field in the Order collection
-                    foreignField: "_id",   // Field in the User collection
-                    as: 'user',
-                },
+              $lookup: {
+                from: "users",
+                let: { userId: "$userId" },
+                pipeline: [
+                  {
+                    $match: {
+                      $expr: {
+                        $eq: ["$_id", { $toObjectId: "$$userId" }]
+                      }
+                    }
+                  }
+                ],
+                as: "user"
+              }
             },
-            // {
-            //     $unwind: '$user',
-            // },
-            // {
-            //     $project: {
-            //         _id: 1,
-            //         username: '$user.username',
-            //     },
-            // },
+            {
+              $unwind: "$user"
+            },
+            {
+              $project: {
+                "user.username": 1,
+                "user.email": 1,
+                "total": 1,
+                "status": 1,
+                "createdAt": 1,
+              }
+            }
         ];
     
         const orders = await Order.aggregate(pipeline);
@@ -153,11 +164,55 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
     }    
 })
 
+// get an Order by
 router.get("/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
-        const orders = await Order.findById(req.params.id);
+        const order = await Order.findById(req.params.id);
+
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+
+        const pipeline = [
+            {
+                $match: { _id: order._id }
+            },
+            {
+              $lookup: {
+                from: "users",
+                let: { userId: "$userId" },
+                pipeline: [
+                  {
+                    $match: {
+                      $expr: {
+                        $eq: ["$_id", { $toObjectId: "$$userId" }]
+                      }
+                    }
+                  }
+                ],
+                as: "user"
+              }
+            },
+            {
+              $unwind: "$user"
+            },
+            {
+              $project: {
+                "user.username": 1,
+                "user.email": 1,
+                "userId": 1,
+                "total": 1,
+                "status": 1,
+                "createdAt": 1,
+                "products": 1,
+                "address": 1
+              }
+            }
+        ];   
+
+        const aggregatedOrder = await Order.aggregate(pipeline);
     
-        res.status(200).json(orders);
+        res.status(200).json(aggregatedOrder);
     } catch (err) {
         res.status(500).json(err);
     }    

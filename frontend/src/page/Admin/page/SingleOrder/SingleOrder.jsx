@@ -36,8 +36,8 @@ function SingleOrder() {
       try {
         const res = await userRequest.get(`/orders/${id}`)
 
-        console.log(res.data)
-        setOrder(res.data)
+        console.log(res.data[0])
+        setOrder(res.data[0])
 
         setIsLoading(false)
       } catch (err) {
@@ -73,14 +73,14 @@ function SingleOrder() {
           <h1>Fetching data...</h1> 
           :
           <div>
-            <h1 style={{marginBottom: 20}}>Order details</h1>
+            <h1 style={{marginBottom: 20, color: 'white'}}>Order details</h1>
             <div className="details-ctn">
               <div className="left">
                 <h2>Products</h2>
                 <div className="products-ctn">
                     {
                       order.products.map(product => (
-                        <div className="product">
+                        <div className="product" key={product._id}>
                           <img src={product.img} alt={product.name}/>
                           <div className="product-details">
                             <p><b>Name</b>: {product.name}</p>
@@ -91,31 +91,43 @@ function SingleOrder() {
                       ))
                     }
                 </div>
+                <div className="total-ctn">
+                  <p><b>Total</b>: ${order.total.toFixed(2)}</p>
+                </div>
               </div>
               <div className="right">
                 <h2>Details</h2>
-                <div className="info-ctn">
-                  <p><b>Order Id</b>: {order._id}</p>
-                  <p><b>User Id</b>: {order.userId}</p>
-                  <p><b>Created date</b>: {convertDateTimeToString(order.createdAt)}</p>
-                  <div className='status-select-ctn'>
-                    <span style={{fontWeight: 600}}>Order status</span>: 
-                    <select 
-                      defaultValue={order.status}
-                      onClick={e => handleUpdateOrderStatus(e.target.value)}
-                    >
-                      {
-                        status.map(s => (
-                          <option value={s.value} 
-                            key={s.key}
-                          >
-                            {s.value}
-                          </option>
-                        ))
-                      }
-                    </select>
+                <div className="order-info-ctn">
+                  <div className="info-ctn">
+                    <p><b>Order Id</b>: {order._id}</p>
+                    <p><b>User Id</b>: {order.userId}</p>
+                    <p><b>Username</b>: {order.user.username}</p>
+                    <p><b>Email</b>: {order.user.email}</p>
+                    <p><b>Created date</b>: {convertDateTimeToString(order.createdAt)}</p>
+                    <div className='status-select-ctn'>
+                      <span style={{fontWeight: 600}}>Order status</span>: 
+                      <select 
+                        defaultValue={order.status}
+                        onClick={e => handleUpdateOrderStatus(e.target.value)}
+                      >
+                        {
+                          status.map(s => (
+                            <option value={s.value} 
+                              key={s.key}
+                            >
+                              {s.value}
+                            </option>
+                          ))
+                        }
+                      </select>
+                    </div>
                   </div>
-                  <p><b>Total</b>: ${order.total.toFixed(2)}</p>
+                  <div className="address-ctn">
+                    <p><b>Country</b>: {order.address.country}</p>
+                    <p><b>City</b>: {order.address.city}</p>
+                    <p><b>Address</b>: {order.address.line1}</p>
+                    <p><b>Postal code</b>: {order.address.postal_code}</p>
+                  </div>
                 </div>
               </div>
             </div>

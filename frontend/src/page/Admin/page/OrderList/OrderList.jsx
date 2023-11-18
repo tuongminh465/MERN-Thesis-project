@@ -14,6 +14,8 @@ function OrderList() {
   async function getOrders() {
     const res = await userRequest.get(`/orders/`)
 
+    console.log(res.data)
+
     setOrders(res.data)
   }
 
@@ -63,7 +65,18 @@ function OrderList() {
 
   const columns = [
     { field: '_id', headerName: 'ID', flex: 0.5 },
-    { field: 'userId', headerName: 'UserID', flex: 0.5 },
+    { field: 'username', headerName: 'Username', flex: 0.3, renderCell: (params) => {
+        return (
+          <p>{params.row.user.username}</p>
+        )
+      } 
+    },
+    { field: 'email', headerName: 'Email', flex: 0.5, renderCell: (params) => {
+        return (
+          <p>{params.row.user.email}</p>
+        )
+      } 
+    },
     { field: 'total', headerName: 'Total', flex: 0.2, renderCell: (params) => {
         return (
           <p>${parseFloat(params.row.total).toFixed(2)}</p>

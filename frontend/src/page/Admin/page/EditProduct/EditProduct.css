@@ -1,5 +1,7 @@
 .edit-product {
+    height: 100%;
     padding: 20px;
+    background-color: teal;
 }
 
 .edit-product .title-ctn {
@@ -11,6 +13,9 @@
 .edit-product .product-info {
     display: flex;
     margin-top: 20px;
+    box-shadow: 10px 10px 15px -10px rgba(0, 0, 0, 1);
+    background-color: white;
+    border-radius: 10px;
 }
 
 .edit-product .product-info .show {
