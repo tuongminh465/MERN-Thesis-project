@@ -1,21 +1,9 @@
 import React from 'react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 import './Chart.css'
 
-function Chart({ title, data, dataKey, grid}) {
-
-  const XLabel = () => {
-    return ( 
-      <text>Months</text>
-    )
-  }
-
-  const YLabel = () => {
-    return ( 
-        <text>Income (USD)</text>
-    )
-  }
+function Chart({ title, data, dataKey, grid }) {
 
   return (
     <div className="chart">

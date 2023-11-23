@@ -3,8 +3,6 @@ import './LargeWidget.css'
 import { userRequest } from '../../../../requestMethods'
 
 function LargeWidget() {
-
-  const [isLoading, setIsLoading] = useState(true)
   const [latestOrders, setLatestOrders] = useState([])
 
   async function getLatestOrders() {
@@ -19,9 +17,6 @@ function LargeWidget() {
         const res = await getLatestOrders()
 
         setLatestOrders(res)
-        console.log(res)
-
-        setIsLoading(false)
       } catch (err) {
         console.log(err)
       }
@@ -56,7 +51,7 @@ function LargeWidget() {
         </tr>
         {latestOrders.map(order => {
           return (
-            <tr>
+            <tbody key={order._id}>
               <td className='user'>
                 <img src="http://cdn.onlinewebfonts.com/svg/img_264570.png" alt="" />
                 <span>{order.user.username}</span>
@@ -66,7 +61,7 @@ function LargeWidget() {
               <td className="status">
                 <Button type={order.status}/>
               </td>
-            </tr>
+            </tbody>
           )
         })}
        </table>

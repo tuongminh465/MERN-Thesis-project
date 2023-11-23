@@ -9,7 +9,6 @@ import './AdminHome.css'
 import { userRequest } from '../../../../requestMethods'
 
 function AdminHome() {
-  const [isLoading, setIsLoading] = useState(true)
   const [incomeData, setIncomeData] = useState([])
 
   async function getIncome() {
@@ -24,7 +23,6 @@ function AdminHome() {
         const res = await getIncome()
 
         processIncomeData(res, 12)
-        setIsLoading(false)
       } catch (err) {
         console.log(err)
       }
@@ -79,7 +77,7 @@ function AdminHome() {
 
   return (
     <div className="admin-home">
-      <FeaturedInfo />
+      <FeaturedInfo incomeData={incomeData} />
       <Chart data={incomeData} title="Sales Analytics" dataKey={"sales"} grid/>
       <div className="widgets">
         <SmallWidget />
