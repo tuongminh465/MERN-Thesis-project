@@ -9,3 +9,8 @@
 .chart h3 {
     margin-bottom: 20px;
 }
+
+.recharts-yAxis tspan, 
+.recharts-xAxis tspan{
+    font-weight: bold;
+}

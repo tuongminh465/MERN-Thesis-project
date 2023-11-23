@@ -44,14 +44,42 @@
     font-weight: 600;
 }
 
-.lg-widget .status .approved-btn {
-    background-color: limegreen;
+.lg-widget .status .pending {
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: yellow;
+    color: rgb(236, 154, 0);
+    font-weight: bold;
+    font-size: 16px;
 }
 
-.lg-widget .status .declined-btn {
-    background-color: red;
+.lg-widget .status .cancelled {
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: pink;
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
 }
 
-.lg-widget .status .pending-btn {
-    background-color: steelblue;
+.lg-widget .status .shipping {
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: lightblue;
+    color: blue;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.lg-widget .status .delivered {
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(93, 252, 93);
+    color: green;
+    font-weight: bold;
+    font-size: 16px;
 }

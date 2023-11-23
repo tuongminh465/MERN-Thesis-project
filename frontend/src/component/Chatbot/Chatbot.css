@@ -1,12 +1,16 @@
 .cs-main-container {
-    width: 289px;
+    width: 290px;
     height: 100%;
     flex-direction: column;
     border: none;
-    border-radius: 20px 20px 0px 0px;
+    overflow-y: visible;
 }
 
-.cs-main-container header {
+.chatbot-ctn {
+    height: 88%;
+}
+
+.chatbot-ctn header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -19,21 +23,21 @@
     padding: 5px 5px 0px 10px;
 }
 
-.cs-main-container header .left {
+.chatbot-ctn header .left {
     display: flex;
     align-items: center;
 }
 
-.cs-main-container header .icon {
+.chatbot-ctn header .icon {
     cursor: pointer;
     transition-duration: 0.2s;
 }
 
-.cs-main-container header .icon:hover {
+.chatbot-ctn header .icon:hover {
     border-bottom: 1px solid white;
 }
 
-.cs-main-container img {
+.chatbot-ctn img {
     height: 30px;
     width: 30px;
     margin-right: 10px;
@@ -41,11 +45,11 @@
     border-radius: 50px;
 } 
 
-.cs-main-container .status-ctn span {
+.chatbot-ctn .status-ctn span {
     font-size: 12px;
 }
 
-.cs-main-container .status-ctn .status-online {
+.chatbot-ctn .status-ctn .status-online {
     display: inline-block;
     width: 10px;
     height: 10px;

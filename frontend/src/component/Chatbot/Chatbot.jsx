@@ -93,7 +93,7 @@ function Chatbot() {
         <div style={open ? openFull : minimize}>
             { 
                 open ? 
-                <MainContainer>
+                <div className='chatbot-ctn'>
                     <header>
                         <div className="left">
                             <img src="/assets/img/chatbot.png" alt="" />
@@ -109,26 +109,28 @@ function Chatbot() {
                             />
                         </div>
                     </header>
-                    <ChatContainer>
-                        <MessageList
-                            typingIndicator={
-                                typing ?
-                                <TypingIndicator content="Helpbot is generating a response" /> :
-                                null
-                            }
-                        >
-                            {messages.map((message, index) => (
-                                <Message key={index} model={message} />
-                            ))}
-                        </MessageList>
-                        <MessageInput 
-                            placeholder='Type your message here...'
-                            onSend={handleSendMessage}
-                        />
-                    </ChatContainer>
-                </MainContainer> 
+                    <MainContainer>
+                        <ChatContainer>
+                            <MessageList
+                                typingIndicator={
+                                    typing ?
+                                    <TypingIndicator content="Helpbot is generating a response" /> :
+                                    null
+                                }
+                            >
+                                {messages.map((message, index) => (
+                                    <Message key={index} model={message} />
+                                ))}
+                            </MessageList>
+                            <MessageInput 
+                                placeholder='Type your message here...'
+                                onSend={handleSendMessage}
+                            />
+                        </ChatContainer>
+                    </MainContainer> 
+                </div>
                 :
-                <MainContainer>
+                <div className='chatbot-ctn'>
                     <header>
                         <div className="left">
                             <img src="/assets/img/chatbot.png" alt="" />
@@ -145,7 +147,8 @@ function Chatbot() {
                             />
                         </div>
                     </header>
-                </MainContainer>
+                    <MainContainer />
+                </div>
             }
         </div>
     )
