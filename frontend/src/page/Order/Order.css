@@ -19,8 +19,8 @@
 .order-ctn .filter-ctn {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 50%;
+    width: 70%;
+    height: 500px;
     background-color: white;
     border-radius: 20px;
     box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.23);
@@ -33,27 +33,27 @@
 }
 
 .order-ctn .filter-ctn .search-ctn .field {
-    height: 30%;
+    height: 80px;
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
 .order-ctn .filter-ctn .search-ctn .field input,
-.order-ctn .filter-ctn .search-ctn .field select {
-    height: 50%;
+.order-ctn .filter-ctn .search-ctn .field select,
+.order-ctn .filter-ctn .sort-ctn select {
+    height: 40px;
     padding-left: 10px;
+    border-radius: 6px;
+}
+
+.order-ctn .filter-ctn .search-ctn .field input[type='text'] {
+    border: 1px solid black
 }
 
 .order-ctn .filter-ctn .sort-ctn {
-    margin-top: 20px;
     display: flex;
     flex-direction: column;
-}
-
-.order-ctn .filter-ctn .sort-ctn select {
-    height: 30%;
-    padding-left: 10px;
 }
 
 .order-ctn .order-list {

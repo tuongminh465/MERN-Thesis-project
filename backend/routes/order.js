@@ -67,7 +67,7 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
     try {
         let searchString = "."
         let queryObj = { ...req.query, userId: req.params.userId }
-        const excludedFields = ['pageIndex', 'pageSize', 'sortBy', 'sortOrder', 'search']
+        const excludedFields = ['pageIndex', 'pageSize', 'sortBy', 'sortOrder', 'search', 'startDate', 'endDate']
 
         excludedFields.forEach(ef => delete queryObj[ef])
         
@@ -83,7 +83,6 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
                 },
             };
         }
-         
         
         if (req.query.search) {
             searchString = req.query.search

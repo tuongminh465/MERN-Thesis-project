@@ -35,6 +35,8 @@ function Order() {
   async function getOrders(query) {
     const res = await userRequest.get(`/orders/find/${userState._id}?${query}`)
 
+    console.log(res.data)
+
     setOrders(res.data)
   }
 
@@ -63,6 +65,8 @@ function Order() {
     if (search) {
         query += `search=${search}&`
     }
+
+    console.log(query)
     
     return query
   }
@@ -116,7 +120,7 @@ function Order() {
                   <div className="field">
                     <label>Search by Created Date</label>
                       <RangePicker
-                        style={{height: '80%'}}
+                        style={{height: 40, borderColor: 'black'}}
                         onChange={newValue => {
                           setStartDate(dayjs(newValue[0]).format(dateFormat))
                           setEndDate(dayjs(newValue[1]).format(dateFormat))
