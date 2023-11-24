@@ -27,6 +27,16 @@ function UserList() {
     fetchData();
   }, [dispatch])
 
+  async function handleDeleteUser(id, dispatch) {
+    if (!window.confirm(`Are you sure you want to delete user ${id}?`)) {
+      return
+    }
+
+    deleteUsers(id, dispatch)
+
+    window.alert(`User ${id} was deleted successfully`)
+  }
+
   const columns = [
     { field: '_id', headerName: 'ID', flex: 0.5 },
     { field: 'username', headerName: 'Username', flex: 1, renderCell: (params) => {
@@ -46,7 +56,7 @@ function UserList() {
             <Link to={`/admin/users/${params.row._id}`}>
               <button className='edit'>Edit</button>
             </Link>
-            <button onClick={() => deleteUsers(params.row._id, dispatch)} className='delete'>Delete</button>
+            <button onClick={() => handleDeleteUser(params.row._id, dispatch)} className='delete'>Delete</button>
           </div>
         )
       }
