@@ -27,9 +27,19 @@ function AdminProduct() {
     fetchData();
   }, [dispatch])
 
+  async function handleDeleteProduct(id, dispatch) {
+    if (!window.confirm(`Are you sure you want to delete user ${id}?`)) {
+      return
+    }
+
+    deleteProducts(id, dispatch)
+
+    window.alert(`User ${id} was deleted successfully`)
+  }
+
   const columns = [
-    { field: '_id', headerName: 'ID', flex: 0.8 },
-    { field: 'img', headerName: 'Image', flex: 0.8, renderCell: (params) => {
+    { field: '_id', headerName: 'ID', flex: 0.7 },
+    { field: 'img', headerName: 'Image', flex: 0.6, renderCell: (params) => {
       return (
         <img src={params.row.img} alt=""/>
       )
@@ -55,14 +65,14 @@ function AdminProduct() {
         <p>${params.row.price}</p>
       )
     }},
-    { field: 'releaseYear', headerName: 'Release Year', flex: 0.25 },
+    { field: 'releaseYear', headerName: 'Release Year', flex: 0.3 },
     { field: 'action', headerName: 'Actions', flex: 0.5, renderCell: (params) => {
       return (
         <div className='action'>
           <Link to={`/admin/products/${params.row._id}`}>
             <button className='edit'>Edit</button>
           </Link>
-          <button onClick={() => deleteProducts(params.row._id, dispatch)} className='delete'>Delete</button>
+          <button onClick={() => handleDeleteProduct(params.row._id, dispatch)} className='delete'>Delete</button>
         </div>
       )
     }},
