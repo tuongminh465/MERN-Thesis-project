@@ -91,7 +91,8 @@
 }
 
 .edit-product .product-info .update .left .field input,
-.edit-product .product-info .update .right input{
+.edit-product .product-info .update .right input,
+.edit-product .product-info .update .left .field select{
     padding: 5px;
     font-size: 16px;
     width: 90%;
@@ -144,4 +145,9 @@
     font-weight: 600;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.edit-product #error {
+    color: red;
+    font-size: 20px;
 }

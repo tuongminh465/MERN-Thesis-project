@@ -44,7 +44,7 @@ function Home() {
       <Category />
       <Products />
       <Footer />
-      <Chatbot />
+      {/* <Chatbot /> */}
     </div>
   )
 }
