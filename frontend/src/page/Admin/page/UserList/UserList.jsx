@@ -48,9 +48,9 @@ function UserList() {
       )
     }},
     { field: 'email', headerName: 'Email', flex: 1 },
-    { field: 'isAdmin', headerName: 'Admin status', flex: 1 },
+    { field: 'isAdmin', headerName: 'Admin status', flex: 0.25 },
     {
-      field: 'action', headerName: 'Actions', flex: 1, renderCell: (params) => {
+      field: 'action', headerName: 'Actions', flex: 0.5, renderCell: (params) => {
         return (
           <div className='action'>
             <Link to={`/admin/users/${params.row._id}`}>

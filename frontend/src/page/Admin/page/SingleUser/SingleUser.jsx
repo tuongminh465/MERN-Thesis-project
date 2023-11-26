@@ -4,6 +4,8 @@ import { userRequest } from '../../../../requestMethods';
 
 import './SingleUser.css'
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 function SingleUser() {
 
   const [userData, setUserData] = useState("")
@@ -27,29 +29,37 @@ function SingleUser() {
     getUser();
   }, [id])
 
-  // useEffect(() => {
-  //   console.log(userData)
-  // })
-
   const usernameRef = useRef();
   const emailRef = useRef()
 
-  const updateUser = async () => {
+  const updateUser = async (e) => {
+    e.preventDefault();
+
     if (!usernameRef.current.value || !emailRef.current.value) {
       setError("Fields cannot be empty!")
+      return
     }
+
+    if (!emailRef.current.value.match(emailRegex)) {
+      setError("Invalid email")
+      return;
+  }
+
     const updatedUser = {
       username: usernameRef.current.value.trim(),
       email: emailRef.current.value.trim()
     }
 
     try {
-      const res = await userRequest.put(`/users/${id}`, updatedUser);
-      console.log(res)
+      await userRequest.put(`/users/${id}`, updatedUser);
+
       window.alert("User succesfully updated!")
+
+      setError("")
     } catch(err) {
       console.log(err)
       const errCode = err.response.data.code
+      
       if (errCode === 11000 || errCode === "11000") {
         setError("Cannot have 2 users of the same name!")
       }
@@ -91,8 +101,8 @@ function SingleUser() {
                       </div>
                     </div>
                     <div className="right">
-                      <button onClick={() => updateUser()}>Update</button>
-                      <p id='error'>{error}</p>
+                      <button onClick={(e) => updateUser(e)}>Update</button>
+                      <span id='error'>{error}</span>
                     </div>
                   </form>
               </div>

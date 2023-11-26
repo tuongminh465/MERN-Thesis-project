@@ -152,6 +152,11 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
                 "status": 1,
                 "createdAt": 1,
               }
+            },
+            {
+                $sort: { 
+                    "createdAt": 1, 
+                } 
             }
         ];
 
@@ -171,6 +176,11 @@ router.get("/income", verifyTokenAndAdmin, async (req, res) => {
     try {
         const income = await Order.aggregate(
             [
+                {
+                    $match: {
+                        status: { $ne: "cancelled" }
+                    }
+                },
                 {
                     $project: {
                         month: {

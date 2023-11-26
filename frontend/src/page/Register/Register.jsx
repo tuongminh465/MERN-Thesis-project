@@ -6,6 +6,8 @@ import './Register.css'
 import HomeIcon from '@mui/icons-material/Home';
 import { publicRequest } from '../../requestMethods';
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 function Register() {
 
   const usernameRef = useRef()
@@ -26,6 +28,11 @@ function Register() {
        !confirmPasswordRef.current.value) 
     {
       setError("Fields cannot be empty!")
+      return;
+    }
+
+    if (!emailRef.current.value.match(emailRegex)) {
+      setError("Invalid email")
       return;
     }
 

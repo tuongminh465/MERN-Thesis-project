@@ -3,6 +3,8 @@ import { userRequest } from '../../../../requestMethods';
 
 import './NewUser.css'
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 function NewUser() {
 
   const [error, setError] = useState("")
@@ -23,6 +25,16 @@ function NewUser() {
         setError("Fields cannot be empty")
         return;
     }
+
+    if (!emailRef.current.value.match(emailRegex)) {
+        setError("Invalid email")
+        return;
+    }
+
+    if (passwordRef.current.value.trim().length < 6) {
+        setError("Password must contains at least 6 characters!")
+        return;
+    }
     
     const newUser = {
         username: usernameRef.current.value.trim(),
@@ -34,8 +46,10 @@ function NewUser() {
     console.log(newUser);
     try {
         const res = await userRequest.post(`/auth/register`, newUser);
-        console.log(res)
+
         window.alert(`User successfully created! User id: ${res.data._id}`)
+
+        setError("")
     } catch (err) {
         console.log(err);
         const errCode = err.response.data.code

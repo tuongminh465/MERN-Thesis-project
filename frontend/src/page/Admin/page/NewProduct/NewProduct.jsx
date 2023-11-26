@@ -62,6 +62,8 @@ function NewProduct() {
       await userRequest.post("/products", newProduct)
 
       window.alert("New product successfully added!")
+     
+      setError("")
     } 
     catch (err) {
       const errCode = err.response.data.code
