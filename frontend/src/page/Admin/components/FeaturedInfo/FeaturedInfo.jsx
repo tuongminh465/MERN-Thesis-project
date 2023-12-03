@@ -15,7 +15,11 @@ function FeaturedInfo({ incomeData }) {
                 <span className='title'>Revenue</span>
                 <div className="revenue-ctn">
                     <span className="money">
-                        ${thisMonthSales - 420}
+                        {
+                            (thisMonthSales - 420) > 0 ? 
+                            `$${thisMonthSales - 420}` :
+                            `- $${(thisMonthSales - 420) * -1}`
+                        } 
                     </span>
                     {
                         lastMonthDiffInSales > 0 ? 
@@ -23,7 +27,7 @@ function FeaturedInfo({ incomeData }) {
                             + ${lastMonthDiffInSales - 420 + 69} <ArrowUpwardIcon className='icon' />
                         </span> :
                         <span className="rate">
-                            - ${lastMonthDiffInSales - 420 + 69 * -1} <ArrowDownwardIcon className='icon negative' />
+                            - ${(lastMonthDiffInSales - 420 + 69 ) * -1} <ArrowDownwardIcon className='icon negative' />
                         </span>
                     }
                 </div>

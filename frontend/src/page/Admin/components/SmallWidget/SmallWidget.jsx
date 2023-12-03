@@ -46,10 +46,6 @@ function SmallWidget() {
                       </span>
                     </div>
                   </div>
-                  <button className="display-btn">
-                    <VisibilityIcon style={{ marginRight: 5, color: "black", fontSize: 16}} />
-                    Display
-                  </button>
                 </li>
               )
             })}

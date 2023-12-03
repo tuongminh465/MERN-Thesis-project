@@ -53,29 +53,35 @@ function SingleProduct() {
   }
 
   const createNewCart = async () => {
-    const newCart = {
-        userId: userState._id,
-        products: [
-            {
-                productId: id,
-                name: product.name,
-                img: product.img,
-                manufacturer: product.manufacturer,
-                price: product.price,
-                quantity: amount
-            }
-        ],
-        quantity: amount,
-        total: product.price*amount
+    try {
+        const newCart = {
+            userId: userState._id,
+            products: [
+                {
+                    productId: id,
+                    name: product.name,
+                    img: product.img,
+                    manufacturer: product.manufacturer,
+                    price: product.price,
+                    quantity: amount
+                }
+            ],
+            quantity: amount,
+            total: product.price*amount
+        }
+
+        const res = await userRequest.post("/cart", newCart)
+
+        if (res) {
+            dispatch(getUserCartStatus(true))
+        }
+
+        dispatch(addProduct(newCart.products[0]))
+
+        window.alert(`Added ${newCart.products[0].quantity} ${newCart.products[0].name} to cart successfully!`)
+    } catch (error) {
+        console.log(error)
     }
-
-    const res = await userRequest.post("/cart", newCart)
-
-    if (res) {
-        dispatch(getUserCartStatus(true))
-    }
-
-    dispatch(addProduct(newCart.products[0]))
   }
 
   const addToCart = async () => {
@@ -89,48 +95,54 @@ function SingleProduct() {
         return;
     }
 
-    let updatedCart = {}
-    const newProduct = {
-        productId: id,
-        name: product.name,
-        img: product.img,
-        manufacturer: product.manufacturer,
-        price: product.price,
-        quantity: amount
-    }
-
-    const newTotal = parseFloat(cartState.total) + product.price*amount
-
-    //Check if product already exist in cart
-    const index = cartState.products.findIndex(product => product.productId === id)   
-
-    if (index === -1) { //if no, add new
-        updatedCart = {
-            userId: userState._id,
-            products: [...cartState.products, newProduct],
-            quantity: cartState.quantity + amount,
-            total: newTotal
+    try {
+        let updatedCart = {}
+        const newProduct = {
+            productId: id,
+            name: product.name,
+            img: product.img,
+            manufacturer: product.manufacturer,
+            price: product.price,
+            quantity: amount
         }
+
+        const newTotal = parseFloat(cartState.total) + product.price*amount
+
+        //Check if product already exist in cart
+        const index = cartState.products.findIndex(product => product.productId === id)   
+
+        if (index === -1) { //if no, add new
+            updatedCart = {
+                userId: userState._id,
+                products: [...cartState.products, newProduct],
+                quantity: cartState.quantity + amount,
+                total: newTotal
+            }
+        } 
+        else { //if yes, increase quantity of that product
+            let newProducts = [...cartState.products];
+
+            newProducts[index] = {
+                ...newProducts[index],
+                quantity: newProducts[index].quantity + amount,
+            };
+
+            updatedCart = {
+                userId: userState._id,
+                products: newProducts,
+                quantity: cartState.quantity + amount,
+                total: newTotal
+            };
+        }
+
+        await userRequest.put(`/cart/${userState._id}`, updatedCart)
+        dispatch(addProduct(newProduct))
+
+        window.alert(`Added ${newProduct.quantity} ${newProduct.name} to cart successfully!`)
     } 
-    else { //if yes, increase quantity of that product
-        let newProducts = [...cartState.products];
-
-        newProducts[index] = {
-            ...newProducts[index],
-            quantity: newProducts[index].quantity + amount,
-        };
-
-        updatedCart = {
-            userId: userState._id,
-            products: newProducts,
-            quantity: cartState.quantity + amount,
-            total: newTotal
-        };
+    catch (error) {
+        console.log(error)
     }
-
-    console.log(newTotal)
-    await userRequest.put(`/cart/${userState._id}`, updatedCart)
-    dispatch(addProduct(newProduct))
   }
 
   return (
