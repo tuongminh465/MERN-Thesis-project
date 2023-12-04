@@ -15,8 +15,13 @@ import './Chatbot.css'
 import MinimizeIcon from '@mui/icons-material/Minimize';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 
-const openFull = { position: 'fixed', bottom: '0%', right: '10%', height: "35%", zIndex: 3 }
+const openFull = { position: 'fixed', bottom: '0%', right: '10%', height: "45%", zIndex: 3 }
 const minimize = { position: 'fixed', bottom: '0%', right: '10%', height: 50, zIndex: 3 }
+
+const systemMessage = {
+    role: "system",
+    content: "Speak like a friendly and understanding shopkeeper. Be concise with your dialogue. Use short short sentences with easy to understand languages"
+}
 
 function Chatbot() {
     const chatGPTApiKey = process.env.REACT_APP_CHATGPT_API_KEY
@@ -29,6 +34,68 @@ function Chatbot() {
             sender: "HelpBot",
         }
     ])
+
+    function processMessage(messages) {
+        const apiMessages = messages.map(message => {
+            let role = ''
+
+            if (message.sender === 'HelpBot') {
+                role = 'assistant'
+            } 
+            else {
+                role = 'user'
+            }
+
+            return { role, content: message.message }
+        })
+
+        return apiMessages
+    }
+
+    function renderMessagesFromChatGPT(currentMessages, messageFromChatGPT) {
+        const newMessages = [
+            ...currentMessages,
+            {
+                message: messageFromChatGPT,
+                sender: 'Helpbot'
+            }
+        ]
+
+        setMessages(newMessages)
+        setTyping(false)
+    }
+
+    async function sendMessagesToChatGPT(apiRequestBody) {
+        const res = await axios.create({
+            baseURL: `https://api.openai.com/v1/`,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + chatGPTApiKey
+            }
+        })
+        .post(
+            `chat/completions`, 
+            JSON.stringify(apiRequestBody)
+        )
+
+        return res
+    }
+
+    async function processMessagesToChatGPT(newMessages) {
+        let apiMessages = processMessage(newMessages)
+
+        const apiRequestBody = {
+            "model": "gpt-3.5-turbo",
+            "messages": [
+                systemMessage,
+                ...apiMessages
+            ]
+        }
+
+        const res = await sendMessagesToChatGPT(apiRequestBody)
+
+        renderMessagesFromChatGPT(newMessages, res.data.choices[0].message.content)
+    }
 
     async function handleSendMessage(message) {
         const newMessage = {
@@ -43,50 +110,6 @@ function Chatbot() {
         setTyping(true)
 
         await processMessagesToChatGPT(newMessages)
-    }
-
-    async function processMessagesToChatGPT(messages) {
-        let apiMessages = messages.map(message => {
-            let role = ''
-
-            if (message.sender === 'HelpBot')
-            {
-                role = 'assistant'
-            } 
-            else 
-            {
-                role = 'user'
-            }
-
-            return { role, content: message.message }
-        })
-
-        const systemMessage = {
-            role: "system",
-            content: "speak like a friendly and understanding shopkeeper"
-        }
-
-        const apiRequestBody = {
-            "model": "gpt-3.5-turbo",
-            "messages": [
-                systemMessage,
-                ...apiMessages
-            ]
-        }
-
-        const res = await axios.create({
-            baseURL: `https://api.openai.com/v1/`,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + chatGPTApiKey
-            }
-        })
-        .post(
-            `chat/completions`, 
-            JSON.stringify(apiRequestBody)
-        )
-
-        console.log(res.data)
     }
 
     return (
