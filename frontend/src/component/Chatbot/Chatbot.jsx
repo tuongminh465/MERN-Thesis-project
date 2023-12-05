@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { 
     MainContainer, 
     ChatContainer, 
@@ -8,6 +8,7 @@ import {
     TypingIndicator 
 } from '@chatscope/chat-ui-kit-react'
 import axios from 'axios';
+import { publicRequest } from '../../requestMethods';
 
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
@@ -18,22 +19,44 @@ import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 const openFull = { position: 'fixed', bottom: '0%', right: '10%', height: "45%", zIndex: 3 }
 const minimize = { position: 'fixed', bottom: '0%', right: '10%', height: 50, zIndex: 3 }
 
-const systemMessage = {
-    role: "system",
-    content: "Speak like a friendly and understanding shopkeeper. Be concise with your dialogue. Use short short sentences with easy to understand languages"
-}
-
 function Chatbot() {
     const chatGPTApiKey = process.env.REACT_APP_CHATGPT_API_KEY
 
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(true)
     const [typing, setTyping] = useState(false)
     const [messages, setMessages] = useState([
         {
-            message: "Hello and welcome to FStore!",
+            message: "Hello and welcome to FStore! Feel free to talk to me If you need recommendations.",
             sender: "HelpBot",
         }
     ])
+    const [inventory, setInventory] = useState([]);
+
+    useEffect(() => {
+        async function getInventory() {
+            const res = await publicRequest.get(`/products`);
+            setInventory(res.data);
+        }
+
+        getInventory();
+    }, []);
+
+    const generateProductLinks = () => {
+        return inventory.map(product => (
+            `<a href="/product/${product._id} priceInUSD=${product.price} type=${product.type}">${product.name}</a>`
+        )).join(', ');
+    };
+
+    let systemMessage = {
+        role: "system",
+        content: `Speak like a friendly and understanding shopkeeper. Be concise with your dialogue. Use short sentences with easy to understand words. 
+        This is the store's inventory: ${generateProductLinks()}. Therefore, if you recommend a product, make sure it's from the store's inventory based on the user's inquiries.
+        Ask the user questions about their needs, budget, and other requirements before recommending products.
+        Make sure to recommend products with price that is within the user's budget (in USD) and fit the user's requirements.
+        When recommending a product, provide the user with the link to the product's details in the form of an HTML <a> tag with the href attribute's value being the route to that product.
+        The format should be: <a href="/product/:id">here</a> (:id is the product's _id, which can be found in the inventory collection).
+        Do not recommend products that are not in the given inventory. Do not provide a link with a different format.`
+    };
 
     function processMessage(messages) {
         const apiMessages = messages.map(message => {
@@ -121,7 +144,7 @@ function Chatbot() {
                         <div className="left">
                             <img src="/assets/img/chatbot.png" alt="" />
                             <div className='status-ctn'>
-                                <h3>HelpBot</h3>
+                                <h3>FBot</h3>
                                 <span><div className='status-online'/>Online</span>
                             </div>
                         </div>
@@ -158,7 +181,7 @@ function Chatbot() {
                         <div className="left">
                             <img src="/assets/img/chatbot.png" alt="" />
                             <div className='status-ctn'>
-                                <h3>HelpBot</h3>
+                                <h3>FBot</h3>
                                 <span><div className='status-online'/>Online</span>
                             </div>
                         </div>
